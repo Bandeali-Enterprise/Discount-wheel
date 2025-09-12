@@ -7,12 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
   <style>
     html, body {
-      margin: 0; padding: 0; min-height: 100vh; background: #111;
-      font-family: Arial, Helvetica, sans-serif; color: #fff;
+      margin: 0; padding: 0; min-height: 100vh;
+      background: #111;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #fff;
       display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
     }
     body::before {
-      content: ""; position: fixed; inset: 0;
+      content: "";
+      position: fixed; inset: 0;
       background: linear-gradient(270deg, #232932 0%, #171818 100%);
       background-size: 800% 800%;
       animation: gradientBG 30s ease infinite;
@@ -26,95 +29,188 @@
     .main-container {
       margin-top: 2vh;
       width: 100vw;
-      max-width: 430px;
+      max-width: 420px;
       display: flex; flex-direction: column; align-items: center; position:relative;
       user-select: none;
     }
     .logo-top {
-      max-width: 160px; margin-bottom: 20px;
-      filter: drop-shadow(0 0 22px #febc2922); user-select: none;
+      max-width: 170px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 22px #febc2922);
+      user-select: none;
     }
     .wheel-holder {
       width: 96vw;
-      max-width: 400px;
+      max-width: 410px;
       aspect-ratio: 1 / 1;
       position: relative;
-      box-shadow:0 0 12px 3px #febc29,0 0 38px 12px #febc29a2;
+      box-shadow:
+        0 0 12px 3px #febc29,
+        0 0 38px 12px #febc29a2;
       border-radius: 50%;
       background-color: #222;
       user-select: none;
     }
     .arrow-pointer {
-      position: absolute; top: -40px; left: 50%;
+      position: absolute;
+      top: -40px; left: 50%;
       transform: translateX(-50%);
       width: 56px; height: 56px; z-index: 10;
-      filter: drop-shadow(0 0 16px #febc29);
+      filter: drop-shadow(0 0 14px #febc29) drop-shadow(0 0 6px #ffffffbb);
       user-select: none;
     }
     svg#wheel {
-      width: 100%; height: 100%; border-radius: 50%; user-select: none;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      user-select: none;
     }
-    /* Main segment label style - horizontally centered, bold */
     .wheel-label {
       font-family: 'Orbitron', Arial, sans-serif;
       font-weight: 900;
-      font-size: 19px;
+      font-size: 15px;
       fill: #fff;
-      letter-spacing: 1.2px;
-      stroke: #333;
-      stroke-width: 0.2px;
-      filter: drop-shadow(0 0 6px #fff3);
+      letter-spacing: 1.3px;
+      stroke: #222;
+      stroke-width: 0.25px;
+      filter: drop-shadow(0 0 8px #fff7);
       dominant-baseline: middle;
-      user-select: none;
+      writing-mode: horizontal-tb;
+      text-orientation: mixed;
       text-anchor: middle;
-      pointer-events: none;
+      white-space: normal;
+      word-break: break-word;
+      user-select: none;
     }
     .spin-button-container {
-      margin-top: 28px; width: 190px; max-width: 90vw;
+      margin-top: 30px;
+      width: 190px;
+      max-width: 90vw;
     }
     .spin-btn {
-      width: 100%; padding: 14px 0;
+      width: 100%;
+      padding: 14px 0;
       background: #febc29;
       border-radius: 28px;
       border: none;
       font-weight: 700;
-      font-size: 1.33rem;
+      font-size: 1.35rem;
       letter-spacing: 3px;
       color: #111;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 0 32px #febc29cc;
-      filter: drop-shadow(0 0 10px #febc29cc);
+      box-shadow: 0 0 40px #febc29cc;
+      filter: drop-shadow(0 0 12px #febc29cc);
       user-select: none;
       transition: background 0.3s, transform 0.2s ease;
     }
-    .spin-btn:hover { background: #ffd152; transform: scale(1.07);}
-    .spin-btn:active { background: #b28b1a; color: #222;}
+    .spin-btn:hover {
+      background: #ffd152;
+      transform: scale(1.07);
+    }
+    .spin-btn:active {
+      background: #b28b1a;
+      transform: scale(1);
+      color: #222;
+    }
     .bandeali-footer {
-      font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700; color: #febc29; margin: 30px 0 14px 0; letter-spacing: 3px;
-      text-shadow:0 0 22px #febc29,0 0 8px #ffe066;user-select:none;text-align:center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #febc29;
+      margin-top: 28px;
+      margin-bottom: 20px;
+      letter-spacing: 2.6px;
+      text-shadow:
+        0 0 22px #febc29,
+        0 0 8px #ffe066;
+      user-select: none;
+      text-align: center;
     }
     #resultText {
-      position: absolute; top: -92px; left: 50%; transform: translateX(-50%);
-      font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.6rem; color: #febc29;text-shadow:0 0 18px #ffd152,0 0 14px #ffd152aa;
-      white-space: nowrap; letter-spacing: 1.5px; user-select: none; z-index: 20; pointer-events: none; width: 300px; text-align: center;
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.85rem;
+      color: #febc29;
+      text-shadow:
+        0 0 20px #ffd152,
+        0 0 15px #ffd152aa;
+      white-space: nowrap;
+      letter-spacing: 1.8px;
+      user-select: none;
+      z-index: 20;
+      pointer-events: none;
+      width: 340px;
+      text-align: center;
     }
-    #popup {position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:11000;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:46px;font-size:1.8rem;color:white;text-align:center;letter-spacing:1px;user-select:none;}
-    .popup-logo {max-width:140px;margin-bottom:32px;filter:drop-shadow(0 0 28px #febc29aa);}
-    #popupText {font-weight:700;line-height:1.4;text-shadow:0 0 12px #ffd152cc;margin:0 12px;}
-    #popup button {margin-top:40px;padding:18px 42px;font-size:1.3rem;background:#febc29;border:none;border-radius:18px;font-weight:700;box-shadow:0 0 28px #febc29aa;color:#111;cursor:pointer;user-select:none;transition:background 0.3s ease;}
-    #popup button:active {background: #a48815; color: #fff;}
-    #fireworksCanvas {position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:11100;user-select:none;}
-    @media (max-width:600px){
-      .main-container{max-width:96vw;}
-      .logo-top{max-width:100px;}
-      .wheel-holder{max-width:94vw;}
-      .arrow-pointer{width:44px;height:44px;top:-38px;}
-      .spin-button-container{width:94vw;}
-      .spin-btn{font-size:1.13rem;}
-      .bandeali-footer{font-size:1.25rem;}
-      #resultText{font-size:1.2rem;top:-68px;width:85vw;}
-      .wheel-label{font-size:14px;}
+    #popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.96);
+      z-index: 11000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 46px;
+      font-size: 1.9rem;
+      color: white;
+      text-align: center;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+    .popup-logo {
+      max-width: 140px;
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 28px #febc29aa);
+      user-select: none;
+    }
+    #popupText {
+      font-weight: 700;
+      line-height: 1.4;
+      text-shadow: 0 0 12px #ffd152cc;
+      margin: 0 12px;
+    }
+    #popup button {
+      margin-top: 40px;
+      padding: 16px 38px;
+      font-size: 1.4rem;
+      background: #febc29;
+      border: none;
+      border-radius: 18px;
+      font-weight: 700;
+      box-shadow: 0 0 28px #febc29aa;
+      color: #111;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    #popup button:active {
+      background: #a48815;
+      color: #fff;
+    }
+    #fireworksCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 11100;
+      user-select: none;
+    }
+    @media (max-width: 600px) {
+      .main-container { max-width: 96vw; }
+      .logo-top { max-width: 100px; margin-bottom: 18px; }
+      .wheel-holder { max-width: 94vw; }
+      .arrow-pointer { width: 48px; height: 48px; top: -40px; }
+      .spin-button-container { width: 94vw; }
+      .spin-btn { font-size: 1.2rem; font-weight: 700; }
+      .bandeali-footer { font-size: 1.4rem; }
+      #resultText { font-size: 1.5rem; top: -80px; width: 90vw; }
     }
   </style>
 </head>
@@ -123,29 +219,29 @@
     <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="logo-top" />
     <div class="wheel-holder" role="group" aria-describedby="resultText">
       <div id="resultText" aria-live="polite" aria-atomic="true"></div>
-      <svg class="arrow-pointer" aria-hidden="true" viewBox="0 0 56 56" role="presentation">
+      <svg class="arrow-pointer" aria-hidden="true" viewBox="0 0 56 56" role="presentation" aria-label="Pointer arrow">
         <circle cx="28" cy="16" r="10" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
         <polygon points="28,7 52,40 4,40" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
         <circle cx="28" cy="28" r="8" fill="#fff7aa" stroke="#b38d1d" stroke-width="2" />
       </svg>
       <svg id="wheel" viewBox="0 0 360 360" role="img" aria-label="Discount Wheel">
-        <g>
+        <g id="segments">
           <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336"/>
-          <text class="wheel-label" x="180" y="90">🔥 10% OFF (₹100)</text>
+          <text class="wheel-label" x="188" y="72" text-anchor="middle" transform="rotate(19 188 72)">🔥<tspan x="188" dy="1.5em">10% OFF</tspan><tspan x="188" dy="1.5em">(₹100)</tspan></text>
           <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800"/>
-          <text class="wheel-label" x="255" y="80">😔 TRY AGAIN</text>
+          <text class="wheel-label" x="300" y="92" text-anchor="middle" transform="rotate(65 300 92)">😔<tspan x="300" dy="1.5em">TRY AGAIN</tspan></text>
           <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50"/>
-          <text class="wheel-label" x="310" y="180">🎁 15% OFF (₹150)</text>
+          <text class="wheel-label" x="327" y="180" text-anchor="middle" transform="rotate(110 327 180)">🎁<tspan x="327" dy="1.5em">15% OFF</tspan><tspan x="327" dy="1.5em">(₹150)</tspan></text>
           <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3"/>
-          <text class="wheel-label" x="240" y="285">💸 FLAT ₹20 OFF</text>
+          <text class="wheel-label" x="263" y="308" text-anchor="middle" transform="rotate(155 263 308)">💸<tspan x="263" dy="1.5em">FLAT ₹20</tspan><tspan x="263" dy="1.5em">OFF</tspan></text>
           <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0"/>
-          <text class="wheel-label" x="180" y="300">🎉 20% OFF (₹200)</text>
+          <text class="wheel-label" x="190" y="343" text-anchor="middle" transform="rotate(205 190 343)">🎉<tspan x="190" dy="1.5em">20% OFF</tspan><tspan x="190" dy="1.5em">(₹200)</tspan></text>
           <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4"/>
-          <text class="wheel-label" x="80" y="260">💵 FLAT ₹30 OFF</text>
+          <text class="wheel-label" x="65" y="302" text-anchor="middle" transform="rotate(245 65 302)">💵<tspan x="65" dy="1.5em">FLAT ₹30</tspan><tspan x="65" dy="1.5em">OFF</tspan></text>
           <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107"/>
-          <text class="wheel-label" x="65" y="120">😓 TRY AGAIN</text>
+          <text class="wheel-label" x="42" y="176" text-anchor="middle" transform="rotate(290 42 176)">😓<tspan x="42" dy="1.5em">TRY AGAIN</tspan></text>
           <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a"/>
-          <text class="wheel-label" x="125" y="55">🎧 FREE EARPHONES</text>
+          <text class="wheel-label" x="72" y="65" text-anchor="middle" transform="rotate(335 72 65)">🎧<tspan x="72" dy="1.5em">FREE EARPHONES</tspan></text>
         </g>
       </svg>
     </div>
@@ -162,148 +258,148 @@
     <canvas id="fireworksCanvas"></canvas>
   </div>
 
-<script>
-  function resizeCanvas() {
-    const canvas = document.getElementById("fireworksCanvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resizeCanvas);
+  <script>
+    function resizeCanvas() {
+      const canvas = document.getElementById("fireworksCanvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
 
-  const wheelSVG = document.getElementById("wheel");
-  const spinBtn = document.getElementById("spinBtn");
-  const popup = document.getElementById("popup");
-  const popupTextElem = document.getElementById("popupText");
-  const closeBtn = document.getElementById("closePopupBtn");
-  const fireworksCanvas = document.getElementById("fireworksCanvas");
-  const ctx = fireworksCanvas.getContext("2d");
+    const wheelSVG = document.getElementById("wheel");
+    const spinBtn = document.getElementById("spinBtn");
+    const popup = document.getElementById("popup");
+    const popupTextElem = document.getElementById("popupText");
+    const closeBtn = document.getElementById("closePopupBtn");
+    const fireworksCanvas = document.getElementById("fireworksCanvas");
+    const ctx = fireworksCanvas.getContext("2d");
 
-  let spinning = false;
-  let totalDeg = 0;
+    let spinning = false;
+    let totalDeg = 0;
 
-  spinBtn.addEventListener("click", spin);
-  spinBtn.addEventListener("touchstart", spin);
-  closeBtn.addEventListener("click", closePopup);
-  closeBtn.addEventListener("touchstart", closePopup);
+    spinBtn.addEventListener("click", spin);
+    spinBtn.addEventListener("touchstart", spin);
+    closeBtn.addEventListener("click", closePopup);
+    closeBtn.addEventListener("touchstart", closePopup);
 
-  function spin() {
-    if (spinning) return;
-    spinning = true;
-    document.getElementById("resultText").textContent = "";
-    const extraSpins = 8;
-    const randomDeg = Math.floor(Math.random() * 360);
-    totalDeg += 360 * extraSpins + randomDeg;
+    function spin() {
+      if (spinning) return;
+      spinning = true;
+      document.getElementById("resultText").textContent = "";
+      const extraSpins = 8;
+      const randomDeg = Math.floor(Math.random() * 360);
+      totalDeg += 360 * extraSpins + randomDeg;
 
-    wheelSVG.style.transition = "transform 8s cubic-bezier(0.19, 0.75, 0.54, 0.99)";
-    wheelSVG.style.transform = `rotate(${totalDeg}deg)`;
+      wheelSVG.style.transition = "transform 8s cubic-bezier(0.19, 0.75, 0.54, 0.99)";
+      wheelSVG.style.transform = `rotate(${totalDeg}deg)`;
 
-    setTimeout(() => {
-      spinning = false;
-      let result = getResult(randomDeg);
-      showPopupResult(result);
-      launchFireworks();
-    }, 8200);
-  }
-  function getResult(angle) {
-    angle = angle % 360;
-    if (angle < 45) return "🔥 10% OFF (₹100)";
-    if (angle < 90) return "😔 TRY AGAIN";
-    if (angle < 135) return "🎁 15% OFF (₹150)";
-    if (angle < 180) return "💸 FLAT ₹20 OFF";
-    if (angle < 225) return "🎉 20% OFF (₹200)";
-    if (angle < 270) return "💵 FLAT ₹30 OFF";
-    if (angle < 315) return "😓 TRY AGAIN";
-    return "🎧 FREE EARPHONES";
-  }
-  function showPopupResult(text) {
-    popupTextElem.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
-    popup.style.display = "flex";
-  }
-  function closePopup() {
-    popup.style.display = "none";
-    fireworksObjs = [];
-    if (fireworksInterval) clearInterval(fireworksInterval);
-    ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    document.getElementById("resultText").textContent = "";
-  }
+      setTimeout(() => {
+        spinning = false;
+        let result = getResult(randomDeg);
+        showPopupResult(result);
+        launchFireworks();
+      }, 8200);
+    }
+    function getResult(angle) {
+      angle = angle % 360;
+      if (angle < 45) return "🔥 10% OFF (₹100)";
+      if (angle < 90) return "😔 TRY AGAIN";
+      if (angle < 135) return "🎁 15% OFF (₹150)";
+      if (angle < 180) return "💸 FLAT ₹20 OFF";
+      if (angle < 225) return "🎉 20% OFF (₹200)";
+      if (angle < 270) return "💵 FLAT ₹30 OFF";
+      if (angle < 315) return "😓 TRY AGAIN";
+      return "🎧 FREE EARPHONES";
+    }
+    function showPopupResult(text) {
+      popupTextElem.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
+      popup.style.display = "flex";
+    }
+    function closePopup() {
+      popup.style.display = "none";
+      fireworksObjs = [];
+      if (fireworksInterval) clearInterval(fireworksInterval);
+      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      document.getElementById("resultText").textContent = "";
+    }
 
-  let fireworksInterval = null;
-  let fireworksObjs = [];
+    let fireworksInterval = null;
+    let fireworksObjs = [];
 
-  function Firework() {
-    this.x = fireworksCanvas.width * (0.18 + 0.64 * Math.random());
-    this.y = fireworksCanvas.height;
-    this.targetY = fireworksCanvas.height * (0.33 + 0.47 * Math.random());
-    this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    this.particles = [];
-    this.exploded = false;
-    this.launchVY = -7 - Math.random() * 2;
-    this.vy = this.launchVY;
-  }
-  Firework.prototype.update = function () {
-    if (!this.exploded) {
-      this.y += this.vy;
-      this.vy += 0.13;
-      if (this.y <= this.targetY) {
-        this.exploded = true;
-        for (let i = 0; i < 38 + Math.random() * 28; i++) {
-          const angle = (Math.PI * 2 * i) / 60;
-          this.particles.push({
-            x: this.x,
-            y: this.y,
-            vx: Math.cos(angle) * (2.3 + Math.random() * 2.2),
-            vy: Math.sin(angle) * (2.3 + Math.random() * 2.2),
-            alpha: 1,
-            color: this.color,
-          });
+    function Firework() {
+      this.x = fireworksCanvas.width * (0.18 + 0.64 * Math.random());
+      this.y = fireworksCanvas.height;
+      this.targetY = fireworksCanvas.height * (0.33 + 0.47 * Math.random());
+      this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      this.particles = [];
+      this.exploded = false;
+      this.launchVY = -7 - Math.random() * 2;
+      this.vy = this.launchVY;
+    }
+    Firework.prototype.update = function () {
+      if (!this.exploded) {
+        this.y += this.vy;
+        this.vy += 0.13;
+        if (this.y <= this.targetY) {
+          this.exploded = true;
+          for (let i = 0; i < 38 + Math.random() * 28; i++) {
+            const angle = (Math.PI * 2 * i) / 60;
+            this.particles.push({
+              x: this.x,
+              y: this.y,
+              vx: Math.cos(angle) * (2.3 + Math.random() * 2.2),
+              vy: Math.sin(angle) * (2.3 + Math.random() * 2.2),
+              alpha: 1,
+              color: this.color,
+            });
+          }
         }
+      } else {
+        this.particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.05;
+          p.alpha -= 0.019 + Math.random() * 0.008;
+        });
+        this.particles = this.particles.filter((p) => p.alpha > 0);
       }
-    } else {
-      this.particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.05;
-        p.alpha -= 0.019 + Math.random() * 0.008;
-      });
-      this.particles = this.particles.filter((p) => p.alpha > 0);
-    }
-  };
-  Firework.prototype.draw = function (ctx) {
-    if (!this.exploded) {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 3.4, 0, Math.PI * 2);
-      ctx.fillStyle = "#fff";
-      ctx.fill();
-    } else {
-      this.particles.forEach((p) => {
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
+    };
+    Firework.prototype.draw = function (ctx) {
+      if (!this.exploded) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 2.7, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 3.4, 0, Math.PI * 2);
+        ctx.fillStyle = "#fff";
         ctx.fill();
-        ctx.globalAlpha = 1;
-      });
-    }
-  };
+      } else {
+        this.particles.forEach((p) => {
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.7, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+      }
+    };
 
-  function launchFireworks() {
-    resizeCanvas();
-    fireworksObjs = [];
-    if (fireworksInterval) clearInterval(fireworksInterval);
-    fireworksInterval = setInterval(() => {
-      fireworksObjs.push(new Firework());
-      if (fireworksObjs.length > 15) fireworksObjs.shift();
-    }, 700);
-    drawLoop();
-  }
-  function drawLoop() {
-    ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    fireworksObjs.forEach((fw) => {
-      fw.update();
-      fw.draw(ctx);
-    });
-    requestAnimationFrame(drawLoop);
-  }
-</script>
+    function launchFireworks() {
+      resizeCanvas();
+      fireworksObjs = [];
+      if (fireworksInterval) clearInterval(fireworksInterval);
+      fireworksInterval = setInterval(() => {
+        fireworksObjs.push(new Firework());
+        if (fireworksObjs.length > 15) fireworksObjs.shift();
+      }, 700);
+      drawLoop();
+    }
+    function drawLoop() {
+      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      fireworksObjs.forEach((fw) => {
+        fw.update();
+        fw.draw(ctx);
+      });
+      requestAnimationFrame(drawLoop);
+    }
+  </script>
 </body>
 </html>
