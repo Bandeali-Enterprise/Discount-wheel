@@ -5,169 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bandeali Enterprises Discount Wheel</title>
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
+      padding: 0;
       background: #000;
+      font-family: Arial, Helvetica, sans-serif;
       color: #fff;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
-
-    /* Animated background gradient */
     body::before {
       content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
       background: linear-gradient(270deg, #ff4e50, #1fddff, #28a745, #f9d423);
       background-size: 800% 800%;
       animation: gradientBG 20s ease infinite;
       z-index: -2;
     }
-
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
-
-    /* Floating particles */
+    #particles {position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1;}
     .particle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      animation: float 10s infinite;
-      z-index: -1;
+      position: absolute;border-radius:50%;background:rgba(255,255,255,0.4);
+      animation: float 8s infinite;
     }
     @keyframes float {
-      from { transform: translateY(100vh) scale(0.5); opacity: 0; }
-      50% { opacity: 1; }
-      to { transform: translateY(-10vh) scale(1); opacity: 0; }
+      from { transform: translateY(110vh) scale(0.6); opacity:0;}
+      20% { opacity:0.4;}
+      70% { opacity:1;}
+      to { transform: translateY(-10vh) scale(1.1); opacity:0;}
     }
-
     .wheel-container {
-      position: relative;
-      width: 420px;
-      height: 420px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 90vw; max-width: 420px; position:relative; aspect-ratio:1/1;
+      margin:auto;
     }
-
-    .wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 10px solid #fff;
-      overflow: hidden;
-      position: relative;
-      transition: transform 6s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-    }
-
-    .segment {
-      width: 50%;
-      height: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-origin: 0% 0%;
-      text-align: center;
-      line-height: 200px;
-      font-weight: bold;
-      font-size: 16px;
-      color: #fff;
-    }
-
-    /* 8 segments (360/8 = 45° each) */
-    .segment:nth-child(1) { transform: rotate(0deg) skewY(-45deg); background: #f44336; }
-    .segment:nth-child(2) { transform: rotate(45deg) skewY(-45deg); background: #ff9800; }
-    .segment:nth-child(3) { transform: rotate(90deg) skewY(-45deg); background: #4caf50; }
-    .segment:nth-child(4) { transform: rotate(135deg) skewY(-45deg); background: #2196f3; }
-    .segment:nth-child(5) { transform: rotate(180deg) skewY(-45deg); background: #9c27b0; }
-    .segment:nth-child(6) { transform: rotate(225deg) skewY(-45deg); background: #00bcd4; }
-    .segment:nth-child(7) { transform: rotate(270deg) skewY(-45deg); background: #ffc107; color: #000; }
-    .segment:nth-child(8) { transform: rotate(315deg) skewY(-45deg); background: #8bc34a; }
-
-    .center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      background: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 20px;
-      color: #333;
-      border: 4px solid #333;
-      box-shadow: 0 0 20px rgba(255,255,255,0.7);
-    }
-
-    .center:hover {
-      background: #333;
-      color: #fff;
-      transition: 0.3s;
-    }
-
     .pointer {
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 25px solid transparent;
-      border-right: 25px solid transparent;
-      border-bottom: 40px solid #fff;
+      position: absolute; top: -38px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 22px solid transparent;
+      border-right: 22px solid transparent;
+      border-bottom: 35px solid #fff;
+      z-index:3;
     }
-
-    /* Popup */
+    .wheel {
+      width: 88vw; height: 88vw; max-width: 400px; max-height: 400px;
+      border-radius:50%; border: 7px solid #fff; position:relative;
+      box-shadow:0 4px 40px 0 rgba(0,0,0,0.6);
+      transition: transform 5.3s cubic-bezier(0.19,0.75,0.54,0.99);
+      overflow: visible; background:#222;
+    }
+    .segment {
+      width: 50%; height: 50%;
+      position: absolute; top: 50%; left: 50%;
+      transform-origin: 0% 0%;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 0.5rem; font-weight: bold; font-size: 1.05rem;
+      color: #fff; user-select:none; box-sizing:border-box;
+      word-break: break-word;
+    }
+    .segment:nth-child(1) {background:#f44336;transform:rotate(0deg) skewY(-45deg);}
+    .segment:nth-child(2) {background:#ff9800;transform:rotate(45deg) skewY(-45deg);}
+    .segment:nth-child(3) {background:#4caf50;transform:rotate(90deg) skewY(-45deg);}
+    .segment:nth-child(4) {background:#2196f3;transform:rotate(135deg) skewY(-45deg);}
+    .segment:nth-child(5) {background:#9c27b0;transform:rotate(180deg) skewY(-45deg);}
+    .segment:nth-child(6) {background:#00bcd4;transform:rotate(225deg) skewY(-45deg);}
+    .segment:nth-child(7) {background:#ffc107;color:#222;transform:rotate(270deg) skewY(-45deg);}
+    .segment:nth-child(8) {background:#8bc34a;transform:rotate(315deg) skewY(-45deg);}
+    .center {
+      position: absolute; top:50%; left:50%; transform: translate(-50%, -50%);
+      width: 90px; height: 90px; background: #fff; color: #333; border-radius: 50%;
+      border: 4px solid #196;display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;font-weight: bold;cursor: pointer; z-index:2; box-shadow:0 0 15px #1968;
+      letter-spacing:1px;text-shadow:0 2px 8px #eee2;transition:all 0.2s;
+    }
+    .center:active,.center:hover {
+      background: #196;color: #fff;box-shadow:0 0 25px #fff8;border-color: #fff;scale:1.05;
+    }
+    /* Popup Fullscreen */
     .popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      font-size: 36px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      z-index: 1000;
-      flex-direction: column;
-      animation: fadeIn 0.5s ease;
+      position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.97);
+      color: #fff; z-index: 1100; display: none; justify-content: center; align-items: center;
+      flex-direction: column; text-align: center; font-size: 2.2rem; animation: fadeIn .5s ease;
+      overflow: hidden; padding:0;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
+    #fireworksCanvas {
+      position: absolute; left:0;top:0;width:100vw;height:100vh; pointer-events: none; z-index:1101;
+      display: block;
     }
-
     .popup button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 20px;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-      background: #fff;
-      color: #000;
-      font-weight: bold;
+      z-index:1102; position:relative;margin-top:2rem;font-size:1.1rem;padding:14px 36px;
+      border-radius:12px;background:#fff;color:#196;border:none;font-weight:bold;cursor:pointer;
+    }
+    @media (max-width:600px) {
+      .wheel-container {max-width:95vw;}
+      .wheel, .center { width:82vw;height:82vw;max-width:340px;max-height:340px;}
+      .center {width:65px;height:65px;font-size:1rem;}
+      .segment {font-size:0.87rem;}
+      .popup {font-size:1.25rem;}
     }
   </style>
 </head>
 <body>
-
   <!-- Particles -->
   <div id="particles"></div>
-
   <div class="wheel-container">
     <div class="pointer"></div>
     <div id="wheel" class="wheel">
@@ -180,38 +127,54 @@
       <div class="segment">Better Luck<br>Next Time</div>
       <div class="segment">🎧 Free Earphones</div>
     </div>
-    <div class="center" onclick="spin()">SPIN</div>
+    <div class="center" ontouchstart="spin()" onclick="spin()">SPIN</div>
   </div>
-
-  <!-- Popup -->
+  <!-- Fullscreen Popup with Fireworks -->
   <div id="popup" class="popup">
     <div id="popupText"></div>
-    <button onclick="closePopup()">OK</button>
-    <canvas id="confetti"></canvas>
+    <button onclick="closePopup()" ontouchstart="closePopup()">OK</button>
+    <canvas id="fireworksCanvas"></canvas>
   </div>
-
   <script>
+    // Responsive confetti/particles canvas sizing
+    function resizeFireworksCanvas(){
+      var canvas=document.getElementById("fireworksCanvas");
+      canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    }
+    window.addEventListener('resize',resizeFireworksCanvas);
+
+    // Particle BG
+    (() => {
+      const particleCount = window.innerWidth<600?20:40;
+      for (let i = 0; i < particleCount; i++) {
+        let p = document.createElement("div");
+        p.className = "particle";
+        let size = Math.random() * 8 + 4;
+        p.style.width = p.style.height = size + "px";
+        p.style.left = Math.random() * 96 + "vw";
+        p.style.top = "-10vh";
+        p.style.animationDuration = (5 + Math.random() * 7) + "s";
+        p.style.animationDelay = (Math.random() * 12) + "s";
+        document.getElementById("particles").appendChild(p);
+      }
+    })();
+
     let wheel = document.getElementById("wheel");
     let spinning = false;
-
     function spin() {
       if (spinning) return;
       spinning = true;
-
       let extraSpins = 5; 
       let randomDeg = Math.floor(Math.random() * 360);
       let finalDeg = 360 * extraSpins + randomDeg;
-
       wheel.style.transform = `rotate(${finalDeg}deg)`;
-
       setTimeout(() => {
         spinning = false;
         let result = getResult(randomDeg);
         showPopup(result);
-        startConfetti();
-      }, 6000);
+        launchFireworks();
+      }, 5300);
     }
-
     function getResult(angle) {
       let normalized = angle % 360;
       if (normalized >= 0 && normalized < 45) return "10% off (upto ₹100)";
@@ -224,72 +187,91 @@
       if (normalized >= 315 && normalized < 360) return "🎧 Free Earphones";
       return "Try Again";
     }
-
     function showPopup(result) {
-      document.getElementById("popupText").innerHTML = "🎉 Congratulations!<br>" + result;
+      document.getElementById("popupText").innerHTML = "🎉 <span style='font-size:1.3em;'>Congratulations!</span><br>" + result;
       document.getElementById("popup").style.display = "flex";
+      resizeFireworksCanvas();
     }
-
     function closePopup() {
       document.getElementById("popup").style.display = "none";
-      stopConfetti();
+      stopFireworks();
+      wheel.style.transform="";
     }
 
-    /* Floating particles background */
-    for (let i = 0; i < 40; i++) {
-      let p = document.createElement("div");
-      p.className = "particle";
-      p.style.width = p.style.height = Math.random() * 8 + "px";
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.animationDuration = (5 + Math.random() * 10) + "s";
-      document.getElementById("particles").appendChild(p);
-    }
+    // ===== Fireworks Animation =====
+    let fireworksInterval = null, fireworksObjs = [], fireworksCanvas = null, fireworksCtx = null;
+    function launchFireworks() {
+      fireworksCanvas = document.getElementById("fireworksCanvas");
+      resizeFireworksCanvas();
+      fireworksCtx = fireworksCanvas.getContext("2d");
+      fireworksObjs = [];
 
-    /* Confetti animation */
-    const confettiCanvas = document.getElementById("confetti");
-    const ctx = confettiCanvas.getContext("2d");
-    let confettiPieces = [];
-    confettiCanvas.width = window.innerWidth;
-    confettiCanvas.height = window.innerHeight;
-
-    function startConfetti() {
-      confettiPieces = [];
-      for (let i = 0; i < 200; i++) {
-        confettiPieces.push({
-          x: Math.random() * confettiCanvas.width,
-          y: Math.random() * confettiCanvas.height - confettiCanvas.height,
-          r: Math.random() * 6 + 2,
-          d: Math.random() * 200 + 50,
-          color: "hsl(" + Math.random() * 360 + ",100%,50%)",
-          tilt: Math.random() * 10 - 10,
-          tiltAngleIncremental: Math.random() * 0.07 + .05,
-          tiltAngle: 0
-        });
+      function Firework() {
+        this.x = fireworksCanvas.width * (0.15 + 0.7 * Math.random());
+        this.y = fireworksCanvas.height;
+        this.targetY = fireworksCanvas.height * (0.3 + 0.55 * Math.random());
+        this.color = `hsl(${Math.random()*360},100%,50%)`;
+        this.particles = []; this.exploded = false;
+        this.launchVY = -7 - Math.random()*2; this.vy = this.launchVY;
       }
-      requestAnimationFrame(drawConfetti);
-    }
+      Firework.prototype.update = function() {
+        if (!this.exploded) {
+          this.y += this.vy; this.vy += 0.13;
+          if (this.y <= this.targetY) {
+            this.exploded = true;
+            for (let i = 0; i < 40 + Math.random()*28; i++) {
+              let angle = (Math.PI * 2 * i)/60;
+              this.particles.push({
+                x: this.x, y: this.y,
+                vx: Math.cos(angle)* (2 + Math.random()*2.8),
+                vy: Math.sin(angle)* (2 + Math.random()*2.8),
+                alpha: 1, color: this.color
+              });
+            }
+          }
+        } else {
+          this.particles.forEach(p => {
+            p.x += p.vx;p.y += p.vy; p.vy += 0.05;
+            p.alpha -= 0.013 + Math.random()*0.008;
+          });
+          this.particles = this.particles.filter(p => p.alpha > 0);
+        }
+      };
+      Firework.prototype.draw = function(ctx) {
+        if (!this.exploded) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 3, 0, Math.PI*2);
+          ctx.fillStyle = '#fff'; ctx.fill();
+        } else {
+          this.particles.forEach(p=>{
+            ctx.globalAlpha = p.alpha;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2.6, 0, Math.PI*2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          });
+        }
+      };
+      if (fireworksInterval) clearInterval(fireworksInterval);
+      fireworksInterval = setInterval(()=>{
+        fireworksObjs.push(new Firework());
+        if (fireworksObjs.length > 10) fireworksObjs.shift();
+      }, 700);
 
-    function drawConfetti() {
-      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-      confettiPieces.forEach(p => {
-        p.tiltAngle += p.tiltAngleIncremental;
-        p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
-        p.x += Math.sin(0);
-        ctx.beginPath();
-        ctx.lineWidth = p.r;
-        ctx.strokeStyle = p.color;
-        ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
-        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
-        ctx.stroke();
-      });
-      confettiPieces = confettiPieces.filter(p => p.y < confettiCanvas.height);
-      if (confettiPieces.length > 0) {
-        requestAnimationFrame(drawConfetti);
+      function drawFrame() {
+        fireworksCtx.clearRect(0,0,fireworksCanvas.width,fireworksCanvas.height);
+        fireworksObjs.forEach(fw => {fw.update();fw.draw(fireworksCtx);});
+        requestAnimationFrame(drawFrame);
       }
+      drawFrame();
     }
 
-    function stopConfetti() {
-      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    function stopFireworks() {
+      if (fireworksInterval) clearInterval(fireworksInterval);
+      if (fireworksCtx && fireworksCanvas)
+        fireworksCtx.clearRect(0,0,fireworksCanvas.width,fireworksCanvas.height);
+      fireworksObjs=[];
     }
   </script>
 </body>
