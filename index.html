@@ -7,220 +7,289 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     body {
-      margin:0; padding:0;
+      margin: 0; padding: 0;
       background: linear-gradient(135deg, #1a1a1a, #2c3e50);
       font-family: 'Orbitron', sans-serif;
-      color: #fff;
+      color: white;
+      min-height: 100vh;
+      user-select: none;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      user-select: none;
+      text-align: center;
     }
     h1 {
-      margin: 20px 0 10px;
+      margin: 40px 20px 15px;
       font-size: 2rem;
-      color: #f9d71c;
-      text-shadow: 0 0 8px #f9d71c;
+      color: #fddd3d;
+      text-shadow: 0 0 10px #fddd3d;
+    }
+    #instructions {
+      margin: 0 20px 30px;
+      font-size: 1.25rem;
+      color: #ddd;
+      max-width: 600px;
+      line-height: 1.4;
+      user-select: none;
+    }
+    #Logo {
+      max-width: 140px;
+      margin-bottom: 20px;
+      user-select: none;
     }
     #game-container {
-      position: relative;
       width: 90vw;
-      max-width: 600px;
-      height: 400px;
-      margin-top: 10px;
+      max-width: 650px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px 40px;
+      justify-items: center;
+      user-select: none;
+      position: relative;
     }
     .box {
-      position: absolute;
-      width: 90px;
-      height: 120px;
       background: linear-gradient(145deg, #6b3e00, #3d2300);
-      border: 3px solid #f9d71c;
-      border-radius: 12px;
-      box-shadow: 0 0 8px #f9d71c inset;
+      border: 3px solid #fddd3d;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #fddd3d inset;
+      width: 110px;
+      height: 150px;
+      font-weight: 700;
+      font-size: 3.5rem;
+      color: white;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 3rem;
       transition: transform 0.3s ease;
+      outline: none;
+      user-select: none;
+      flex-direction: column;
+      text-align: center;
+      padding: 10px;
+      box-sizing: border-box;
     }
     .box.locked {
-      cursor: default;
       filter: grayscale(1);
-      opacity: 0.8;
+      opacity: 0.7;
+      cursor: default;
     }
     .box.opened {
-      background: #f9d71c;
-      color: #2d1a00;
+      background: #fddd3d;
+      color: #3a1f00;
+      box-shadow: 0 0 40px #fddd3d;
       cursor: default;
-      filter: none;
-      opacity: 1;
-      box-shadow: 0 0 16px #f9d71c;
       transform: scale(1.1);
     }
-    #instructions {
-      margin-top: 20px;
+    .box .line1 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    .box .line2 {
       font-size: 1.2rem;
-      color: #ddd;
-      text-align:center;
-      max-width: 600px;
+      font-weight: 700;
+      color: #3a1f00;
+      text-align: center;
+    }
+    #spin-button {
+      display: none;
+      margin: 30px auto 20px;
+      padding: 14px 38px;
+      font-size: 1.3rem;
+      border-radius: 30px;
+      background: #fddd3d;
+      color: #3a1f00;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 25px #fddd3d;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    #spin-button:hover {
+      background-color: #f3da3e;
+    }
+    #spin-button:active {
+      background-color: #b89e1e;
+      color: white;
+    }
+    #result-message {
+      margin: 15px auto;
+      font-size: 1.5rem;
+      color: #fddd3d;
+      text-shadow: 0 0 7px #fddd3d;
+      min-height: 50px;
+      user-select: none;
     }
     #popup {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.9);
-      display: none;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
-      flex-direction: column;
-      color: #fff;
+      color: white;
       font-size: 2rem;
       text-align: center;
-      padding: 20px;
+      padding: 30px;
+      z-index: 1000;
+      user-select: none;
     }
     #popup img {
-      max-width: 150px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 12px #f9d71c);
+      max-width: 140px;
+      margin-bottom: 25px;
+      filter: drop-shadow(0 0 10px #fddd3d);
+      user-select: none;
+    }
+    #popup .popup-text {
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: #fddd3d;
+      text-shadow: 0 0 15px #fddd3d;
     }
     #popup button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 1.2rem;
-      border-radius: 12px;
+      padding: 14px 36px;
+      font-size: 1.4rem;
+      border-radius: 10px;
+      background: #fddd3d;
       border: none;
-      background: #f9d71c;
-      color: #2d1a00;
-      font-weight: bold;
-      box-shadow: 0 0 12px #f9d71c;
       cursor: pointer;
+      font-weight: 700;
+      color: #3a1f00;
+      box-shadow: 0 0 15px #fddd3d;
+      user-select: none;
       transition: background-color 0.3s ease;
     }
     #popup button:hover {
-      background-color: #ddb700;
+      background-color: #e4d63e;
     }
-    @media(max-width:600px){
-      .box {
-        width: 70px;
-        height: 95px;
-        font-size: 2.2rem;
-      }
+    #popup button:active {
+      background-color: #bfa921;
+      color: white;
+    }
+    #popup.hidden {
+      display:none;
+    }
+    canvas#fireworks {
+      position: fixed;
+      top:0; left:0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1010;
+      pointer-events: none;
+      user-select: none;
+      display: none;
+    }
+    @media (max-width: 600px) {
       #game-container {
-        height: 320px;
+        grid-template-columns: repeat(3, minmax(90px,1fr));
+        grid-gap: 20px 25px;
+        height: 380px;
+        max-width: 350px;
+      }
+      .box {
+        width: 90px;
+        height: 130px;
+        font-size: 3rem;
       }
       h1 {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
       }
-      #instructions {
-        font-size: 1rem;
+      #spin-button {
+        font-size: 1.1rem;
+        padding: 12px 30px;
       }
       #popup {
         font-size: 1.6rem;
-        padding: 15px;
-      }
-      #popup img {
-        max-width: 120px;
-      }
-      #popup button {
-        font-size: 1rem;
-        padding: 10px 20px;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
+  <img id="Logo" src="Logo.jpg" alt="Bandeali Enterprises Logo" />
   <h1>Bandeali Enterprises Treasure Box</h1>
-  <div id="instructions">Choose one box and see what prize you win!</div>
-  <div id="game-container"></div>
+  <div id="instructions">Choose a treasure box below and test your luck!</div>
+  <div id="game-container" aria-live="polite" aria-label="Treasure boxes"></div>
+  <button id="spin-button" aria-hidden="true" aria-label="Reveal all boxes">Reveal All</button>
+  <div id="result-message" aria-live="polite" aria-atomic="true"></div>
 
-  <button id="spin-button" class="spin-btn" style="display:none; margin: 20px auto; border-radius: 24px; padding: 12px 36px; font-size: 1.2rem; background: #f9d71c; color: #2d1a00; border:none; box-shadow: 0 0 10px #f9d71c; cursor:pointer;">Reveal All</button>
-
-  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popupText">
-    <img src="treasure.png" alt="Treasure Chest Icon" />
-    <div id="popupText"></div>
-    <button id="popupClose">Got it!</button>
+  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-text" class="hidden">
+    <img src="treasure.png" alt="Treasure Chest" />
+    <div id="popup-text" class="popup-text"></div>
+    <button id="popup-close" aria-label="Close popup">Got It!</button>
   </div>
 
-  <canvas id="fireworks" style="position: fixed; top:0; left:0; width: 100vw; height: 100vh; pointer-events:none; display:none; z-index: 1010;"></canvas>
+  <canvas id="fireworks"></canvas>
 
   <script>
     const prizes = [
-      { text: '🔥 10% OFF (₹100)' },
-      { text: '😔 TRY AGAIN' },
-      { text: '🎁 15% OFF (₹150)' },
-      { text: '💸 FLAT ₹20 OFF' },
-      { text: '🎉 20% OFF (₹200)' },
-      { text: '💵 FLAT ₹30 OFF' },
-      { text: '😓 TRY AGAIN' },
-      { text: '🎧 FREE EARPHONES' }
+      "🔥 10% OFF",
+      "😔 Try Again",
+      "🎁 15% OFF",
+      "💸 Flat ₹20 Off",
+      "🎉 20% OFF",
+      "💵 Flat ₹30 Off",
+      "😔 Try Again",
+      "😔 Try Again",
+      "🎧 Free Earphones"
     ];
 
-    const boxesCount = prizes.length;
-    const gameContainer = document.getElementById('game-container');
-    const spinButton = document.getElementById('spin-button');
-    const popup = document.getElementById('popup');
-    const popupText = document.getElementById('popupText');
-    const popupClose = document.getElementById('popupClose');
-    const fireworksCanvas = document.getElementById('fireworks');
-    const ctx = fireworksCanvas.getContext('2d');
+    const gameContainer = document.getElementById("game-container");
+    const spinButton = document.getElementById("spin-button");
+    const resultMessage = document.getElementById("result-message");
+    const popup = document.getElementById("popup");
+    const popupText = document.getElementById("popup-text");
+    const popupClose = document.getElementById("popup-close");
+    const fireworksCanvas = document.getElementById("fireworks");
+    const fireworksCtx = fireworksCanvas.getContext("2d");
 
     let chosenIndex = null;
     let boxes = [];
-    let posOrder = [];
 
-    // generate random permutation of box positions
-    function shufflePositions(n) {
-      let arr = [];
-      for (let i = 0; i < n; i++) arr.push(i);
-      for(let i = n-1; i > 0; i--){
-        let j = Math.floor(Math.random()*(i+1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
+    const boxPositions = [
+      { left: "20%", top: "10%" }, { left: "50%", top: "10%" }, { left: "80%", top: "10%" },
+      { left: "20%", top: "45%" }, { left: "50%", top: "45%" }, { left: "80%", top: "45%" },
+      { left: "20%", top: "80%" }, { left: "50%", top: "80%" }, { left: "80%", top: "80%" }
+    ];
 
-    // positions in percent for placing boxes on circle
-    function getBoxPositions(n, radiusPercent = 40) {
-      const centerX = 50; // percent
-      const centerY = 50;
-      let positions = [];
-      for(let i = 0; i < n; i++){
-        let angle = (2 * Math.PI / n) * i - Math.PI / 2; // start from top center
-        let x = centerX + radiusPercent * Math.cos(angle);
-        let y = centerY + radiusPercent * Math.sin(angle);
-        positions.push({ x, y });
+    function shuffle(arr) {
+      let array = [...arr];
+      for (let i = array.length -1; i>0; i--) {
+        let j = Math.floor(Math.random() * (i+1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
-      return positions;
+      return array;
     }
 
     function createBoxes() {
       gameContainer.innerHTML = '';
+      chosenIndex = null;
+      spinButton.style.display = 'none';
+      resultMessage.textContent = 'Choose a treasure box below and test your luck!';
       boxes = [];
-      posOrder = shufflePositions(boxesCount);
-      let positions = getBoxPositions(boxesCount);
 
-      // Shuffle positions for randomness
-      let randomizedPositions = posOrder.map(i => positions[i]);
+      const shuffledPositions = shuffle(boxPositions);
 
-      for(let i = 0; i < boxesCount; i++){
-        let box = document.createElement('div');
+      for(let i=0; i<prizes.length; i++) {
+        const box = document.createElement('div');
         box.className = 'box';
-        box.style.left = randomizedPositions[i].x + '%';
-        box.style.top = randomizedPositions[i].y + '%';
-        box.style.transform = 'translate(-50%, -50%) scale(1)';
-
-        box.dataset.index = i;
-        box.title = 'Click to select this treasure box';
-        box.textContent = '❓'; // hidden before selection
-        box.tabIndex = 0;
+        box.style.left = shuffledPositions[i].left;
+        box.style.top = shuffledPositions[i].top;
+        box.textContent = '❓';
+        box.setAttribute('data-index', i);
+        box.setAttribute('tabindex', '0');
         box.setAttribute('role', 'button');
         box.setAttribute('aria-pressed', 'false');
+        box.title = "Click to select this box";
 
-        box.addEventListener('click', onBoxClick);
+        box.addEventListener('click', onBoxSelect);
         box.addEventListener('keydown', function(e){
-          if(e.key === 'Enter' || e.key === ' ') onBoxClick.call(this, e);
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onBoxSelect.call(this);
+          }
         });
 
         gameContainer.appendChild(box);
@@ -228,155 +297,165 @@
       }
     }
 
-    function onBoxClick(e) {
-      if(chosenIndex !== null) return; // already chosen
-      chosenIndex = Number(this.dataset.index);
-      boxes.forEach(b=>{
-        b.classList.add('locked');
-        b.setAttribute('aria-pressed', 'false');
+    function onBoxSelect(e) {
+      if(chosenIndex !== null) return;
+      chosenIndex = +this.getAttribute('data-index');
+
+      boxes.forEach((box, idx) => {
+        if(idx !== chosenIndex) {
+          box.classList.add('locked');
+          box.setAttribute('aria-pressed', 'false');
+          box.tabIndex = -1;
+        } else {
+          box.setAttribute('aria-pressed', 'true');
+          box.focus();
+        }
       });
-      this.classList.remove('locked');
-      this.setAttribute('aria-pressed', 'true');
 
       spinButton.style.display = 'block';
-      document.getElementById('instructions').textContent = 'Click "Reveal All" to open all treasure boxes!';
+      resultMessage.textContent = 'Click "Reveal All" to see what’s inside!';
     }
 
     function revealAll() {
-      boxes.forEach((box, i) => {
-        box.textContent = prizes[i].text;
-        box.style.fontSize = '1rem';
-        box.style.whiteSpace = 'normal';
-        box.classList.add('opened');
+      boxes.forEach((box, idx) => {
         box.classList.remove('locked');
-        box.style.cursor = 'default';
+        box.classList.add('opened');
+        box.setAttribute('aria-pressed', 'false');
+        box.tabIndex = -1;
+        box.textContent = prizes[idx];
+        box.style.fontSize = '1rem';
+        box.style.userSelect = 'none';
       });
+
       spinButton.style.display = 'none';
-      showPopup(prizes[chosenIndex].text);
+      showPopup(prizes[chosenIndex]);
     }
 
-    function showPopup(text){
-      popupText.textContent = '';
-      popupText.innerHTML = `🎉 <span style="color:#f9d71c; text-shadow: 0 0 10px #f9d71c;">Congratulations!</span><br>${text}`;
-      popup.style.display = 'flex';
+    function showPopup(prize) {
+      popupText.textContent = `🎉 Congratulations! You won: ${prize}`;
+      popup.classList.remove('hidden');
       launchFireworks();
     }
 
-    function closePopup(){
-      popup.style.display = 'none';
-      chosenIndex = null;
-      document.getElementById('instructions').textContent = 'Choose one box and see what prize you win!';
+    popupClose.addEventListener('click', () => {
+      popup.classList.add('hidden');
+      resultMessage.textContent = 'Choose a treasure box below and test your luck!';
+      clearFireworks();
       createBoxes();
-      stopFireworks();
-    }
-
-    popupClose.addEventListener('click', closePopup);
-
-    popupClose.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' ') closePopup();
     });
 
-    // Fireworks logic from previous code, simplified
-    let fireworksInterval;
-    let fireworksParticles = [];
+    popupClose.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        popupClose.click();
+      }
+    });
 
-    function launchFireworks(){
+    spinButton.addEventListener('click', revealAll);
+
+    // Fireworks animations
+    let fireworks = [];
+    let fireworksAnimationId;
+
+    function launchFireworks() {
       fireworksCanvas.style.display = 'block';
-      fireworksParticles = [];
-      fireworksInterval = setInterval(() => {
-        fireworksParticles.push(createFirework());
-        if(fireworksParticles.length > 20) fireworksParticles.shift();
-      }, 300);
-      requestAnimationFrame(drawFireworks);
-    }
+      fireworksCanvas.width = window.innerWidth;
+      fireworksCanvas.height = window.innerHeight;
+      fireworks = [];
 
-    function stopFireworks(){
-      fireworksCanvas.style.display = 'none';
-      clearInterval(fireworksInterval);
-      fireworksParticles = [];
-      clearCanvas();
-    }
-
-    function createFirework(){
-      let x = Math.random() * fireworksCanvas.width;
-      let y = fireworksCanvas.height + 10;
-      let targetY = Math.random() * fireworksCanvas.height / 2;
-      let color = `hsl(${Math.random() * 360}, 90%, 60%)`;
-      return {
-        x, y, targetY,
-        particles: [],
-        exploded: false,
-        vy: -8 - Math.random() * 2,
-        color,
-      };
-    }
-
-    function updateFirework(fw){
-      if(!fw.exploded){
-        fw.y += fw.vy;
-        fw.vy += 0.2;
-        if(fw.vy >= 0){
-          fw.exploded = true;
-          for(let i=0; i<30 + Math.random()*20; i++){
-            let angle = (2 * Math.PI / 30) * i;
-            fw.particles.push({
-              x: fw.x,
-              y: fw.y,
-              vx: Math.cos(angle) * (2 + Math.random()*2),
-              vy: Math.sin(angle) * (2 + Math.random()*2),
-              alpha: 1,
-              color: fw.color,
-            });
-          }
+      fireworksAnimationId = setInterval(() => {
+        if (fireworks.length < 30) {
+          fireworks.push(new Firework());
         }
-      } else {
-        fw.particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.vy += 0.05;
-          p.alpha -= 0.015;
-        });
-        fw.particles = fw.particles.filter(p => p.alpha > 0);
+      }, 300);
+
+      requestAnimationFrame(renderFireworks);
+    }
+
+    function clearFireworks() {
+      cancelAnimationFrame(fireworksAnimationId);
+      fireworks = [];
+      const ctx = fireworksCanvas.getContext('2d');
+      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      fireworksCanvas.style.display = 'none';
+    }
+
+    class Firework {
+      constructor() {
+        this.x = Math.random() * fireworksCanvas.width;
+        this.y = fireworksCanvas.height + 10;
+        this.targetY = Math.random() * fireworksCanvas.height / 2;
+        this.vy = -(7 + Math.random() * 3);
+        this.exploded = false;
+        this.particles = [];
+        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      }
+      update() {
+        if (!this.exploded) {
+          this.y += this.vy;
+          this.vy += 0.15;
+          if (this.vy >= 0) {
+            this.exploded = true;
+            for (let i = 0; i < 30; i++) {
+              const angle = (2 * Math.PI / 30) * i;
+              this.particles.push({
+                x: this.x,
+                y: this.y,
+                vx: Math.cos(angle) * (2 + Math.random() * 2),
+                vy: Math.sin(angle) * (2 + Math.random() * 2),
+                alpha: 1,
+                color: this.color,
+              });
+            }
+          }
+        } else {
+          this.particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.05;
+            p.alpha -= 0.02;
+          });
+          this.particles = this.particles.filter(p => p.alpha > 0);
+        }
+      }
+      draw(ctx) {
+        if (!this.exploded) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 3, 0, 2 * Math.PI);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        } else {
+          this.particles.forEach(p => {
+            ctx.globalAlpha = p.alpha;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          });
+        }
       }
     }
 
-    function drawFireworks(){
-      clearCanvas();
-      fireworksParticles.forEach(fw => {
-        updateFirework(fw);
-        drawFirework(fw);
-      });
-      requestAnimationFrame(drawFireworks);
-    }
-
-    function clearCanvas(){
+    function renderFireworks() {
+      let ctx = fireworksCanvas.getContext('2d');
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    }
 
-    function drawFirework(fw){
-      ctx.save();
-      fw.particles.forEach(p => {
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
-        ctx.fill();
+      fireworks.forEach(fw => {
+        fw.update();
+        fw.draw(ctx);
       });
-      ctx.restore();
+
+      requestAnimationFrame(renderFireworks);
     }
 
-    function resizeCanvas(){
+    window.addEventListener('resize', () => {
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
-    }
+    });
 
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    // Start the game
-    createBoxes();
-
-    spinButton.addEventListener('click', revealAll);
+    // Initialize the game
+    window.onload = createBoxes;
   </script>
 </body>
 </html>
