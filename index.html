@@ -29,32 +29,34 @@
     .main-container {
       margin-top: 2vh;
       width: 100vw;
-      max-width: 420px;
+      max-width: 450px;
       display: flex; flex-direction: column; align-items: center; position:relative;
       user-select: none;
     }
     .logo-top {
-      max-width: 160px;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 0 20px #febc2922);
+      max-width: 170px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 22px #febc2922);
+      user-select: none;
     }
     .wheel-holder {
       width: 96vw;
-      max-width: 400px;
+      max-width: 410px;
       aspect-ratio: 1 / 1;
       position: relative;
       box-shadow:
-        0 0 12px 2px #febc29,
-        0 0 26px 8px #febc29a2;
+        0 0 12px 3px #febc29,
+        0 0 38px 12px #febc29a2;
       border-radius: 50%;
       background-color: #222;
+      user-select: none;
     }
     .arrow-pointer {
       position: absolute;
       top: -40px; left: 50%;
       transform: translateX(-50%);
-      width: 55px; height: 55px; z-index: 10;
-      filter: drop-shadow(0 0 14px #febc29) drop-shadow(0 0 6px #ffffff88);
+      width: 60px; height: 60px; z-index: 10;
+      filter: drop-shadow(0 0 18px #febc29) drop-shadow(0 0 6px #ffffffbb);
       user-select: none;
     }
     svg#wheel {
@@ -66,12 +68,12 @@
     .wheel-label {
       font-family: 'Orbitron', Arial, sans-serif;
       font-weight: 900;
-      font-size: 14.5px;
+      font-size: 15px;
       fill: #fff;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.25px;
       stroke: #222;
-      stroke-width: 0.35px;
-      filter: drop-shadow(0 0 6px #fff7);
+      stroke-width: 0.3px;
+      filter: drop-shadow(0 0 8px #fff7);
       dominant-baseline: middle;
       writing-mode: tb;
       text-orientation: mixed;
@@ -80,8 +82,8 @@
       user-select: none;
     }
     .spin-button-container {
-      margin-top: 28px;
-      width: 180px;
+      margin-top: 30px;
+      width: 190px;
       max-width: 90vw;
     }
     .spin-btn {
@@ -91,13 +93,13 @@
       border-radius: 28px;
       border: none;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       letter-spacing: 3px;
       color: #111;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 0 32px #febc29cc;
-      filter: drop-shadow(0 0 10px #febc29cc);
+      box-shadow: 0 0 40px #febc29cc;
+      filter: drop-shadow(0 0 12px #febc29cc);
       user-select: none;
       transition: background 0.3s, transform 0.2s ease;
     }
@@ -117,34 +119,33 @@
       color: #febc29;
       margin-top: 28px;
       margin-bottom: 20px;
-      letter-spacing: 2.6px;
+      letter-spacing: 3px;
       text-shadow:
-        0 0 22px #febc29,
-        0 0 8px #ffe066;
+        0 0 28px #febc29,
+        0 0 9px #ffd152;
       user-select: none;
       text-align: center;
     }
     #resultText {
       position: absolute;
-      top: -98px;
+      top: -100px;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      font-size: 1.75rem;
+      font-size: 1.85rem;
       color: #febc29;
       text-shadow:
-        0 0 18px #ffd152,
-        0 0 14px #ffd152aa;
+        0 0 20px #ffd152,
+        0 0 15px #ffd152aa;
       white-space: nowrap;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.8px;
       user-select: none;
-      z-index: 10;
+      z-index: 20;
       pointer-events: none;
-      width: 300px;
+      width: 340px;
       text-align: center;
     }
-    /* Popup styles */
     #popup {
       position: fixed;
       inset: 0;
@@ -155,27 +156,28 @@
       align-items: center;
       justify-content: flex-start;
       padding-top: 46px;
-      user-select: none;
-      font-size: 1.85rem;
+      font-size: 1.9rem;
       color: white;
       text-align: center;
       letter-spacing: 1px;
+      user-select: none;
     }
     .popup-logo {
       max-width: 140px;
       margin-bottom: 32px;
-      filter: drop-shadow(0 0 22px #febc2980);
+      filter: drop-shadow(0 0 28px #febc29aa);
+      user-select: none;
     }
     #popupText {
       font-weight: 700;
-      line-height: 1.35;
-      text-shadow: 0 0 10px #ffd152cc;
+      line-height: 1.4;
+      text-shadow: 0 0 12px #ffd152cc;
       margin: 0 12px;
     }
     #popup button {
-      margin-top: 38px;
-      padding: 16px 38px;
-      font-size: 1.3rem;
+      margin-top: 40px;
+      padding: 18px 42px;
+      font-size: 1.4rem;
       background: #febc29;
       border: none;
       border-radius: 18px;
@@ -187,7 +189,7 @@
       transition: background 0.3s ease;
     }
     #popup button:active {
-      background: #997d16;
+      background: #a48815;
       color: #fff;
     }
     #fireworksCanvas {
@@ -197,16 +199,17 @@
       height: 100vh;
       pointer-events: none;
       z-index: 11100;
+      user-select: none;
     }
     @media (max-width: 600px) {
       .main-container { max-width: 96vw; }
-      .logo-top { max-width: 105px; margin-bottom: 18px; }
-      .wheel-holder { max-width: 94vw; }
-      .arrow-pointer { width: 43px; height: 43px; top: -36px; }
-      .spin-button-container { width: 94vw;}
-      .spin-btn { font-size: 1.15rem; font-weight: 700; }
-      .bandeali-footer { font-size: 1.4rem; }
-      #resultText { font-size: 1.35rem; top: -70px; width: 90vw; }
+      .logo-top { max-width: 100px; margin-bottom: 20px; }
+      .wheel-holder { max-width: 95vw; }
+      .arrow-pointer { width: 48px; height: 48px; top: -40px; }
+      .spin-button-container { width: 94vw; }
+      .spin-btn { font-size: 1.2rem; font-weight: 700; }
+      .bandeali-footer { font-size: 1.5rem; }
+      #resultText { font-size: 1.5rem; top: -80px; width: 90vw; }
     }
   </style>
 </head>
@@ -223,23 +226,23 @@
       <svg id="wheel" viewBox="0 0 360 360" role="img" aria-label="Discount Wheel">
         <g id="segments">
           <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336" />
-          <text class="wheel-label" x="185" y="75" text-anchor="middle" transform="rotate(20 185 75)">🔥<tspan x="185" dy="1.4em">10% OFF</tspan><tspan x="185" dy="1.4em">(₹100)</tspan></text>
+          <text class="wheel-label" x="188" y="75" text-anchor="middle" transform="rotate(20 188 75)">🔥<tspan x="188" dy="1.4em">10% OFF</tspan><tspan x="188" dy="1.4em">(₹100)</tspan></text>
           <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800" />
-          <text class="wheel-label" x="300" y="90" text-anchor="middle" transform="rotate(65 300 90)">😔<tspan x="300" dy="1.4em">TRY AGAIN</tspan></text>
+          <text class="wheel-label" x="298" y="87" text-anchor="middle" transform="rotate(65 298 87)">😔<tspan x="298" dy="1.4em">TRY AGAIN</tspan></text>
           <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50" />
           <text class="wheel-label" x="330" y="180" text-anchor="middle" transform="rotate(110 330 180)">🎁<tspan x="330" dy="1.4em">15% OFF</tspan><tspan x="330" dy="1.4em">(₹150)</tspan></text>
           <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3" />
-          <text class="wheel-label" x="265" y="305" text-anchor="middle" transform="rotate(155 265 305)">💸<tspan x="265" dy="1.4em">FLAT ₹20</tspan><tspan x="265" dy="1.4em">OFF</tspan></text>
+          <text class="wheel-label" x="265" y="310" text-anchor="middle" transform="rotate(155 265 310)">💸<tspan x="265" dy="1.4em">FLAT ₹20</tspan><tspan x="265" dy="1.4em">OFF</tspan></text>
           <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0" />
           <text class="wheel-label" x="190" y="340" text-anchor="middle" transform="rotate(200 190 340)">🎉<tspan x="190" dy="1.4em">20% OFF</tspan><tspan x="190" dy="1.4em">(₹200)</tspan></text>
           <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4" />
           <text class="wheel-label" x="60" y="300" text-anchor="middle" transform="rotate(245 60 300)">💵<tspan x="60" dy="1.4em">FLAT ₹30</tspan><tspan x="60" dy="1.4em">OFF</tspan></text>
           <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107" />
-          <text class="wheel-label" x="40" y="170" text-anchor="middle" transform="rotate(290 40 170)">😓<tspan x="40" dy="1.4em">TRY AGAIN</tspan></text>
+          <text class="wheel-label" x="43" y="173" text-anchor="middle" transform="rotate(290 43 173)">😓<tspan x="43" dy="1.4em">TRY AGAIN</tspan></text>
           <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a" />
-          <text class="wheel-label" x="78" y="60" text-anchor="middle" transform="rotate(335 78 60)">🎧<tspan x="78" dy="1.4em">FREE EARPHONES</tspan></text>
+          <text class="wheel-label" x="75" y="60" text-anchor="middle" transform="rotate(335 75 60)">🎧<tspan x="75" dy="1.4em">FREE EARPHONES</tspan></text>
         </g>
-        <circle cx="180" cy="180" r="46" fill="#fff" stroke="#febc29" stroke-width="7" filter="drop-shadow(0 0 20px #fdc206bb)" />
+        <circle cx="180" cy="180" r="46" fill="#fff" stroke="#febc29" stroke-width="7" filter="drop-shadow(0 0 22px #fdc206bb)" />
       </svg>
     </div>
     <div class="spin-button-container">
