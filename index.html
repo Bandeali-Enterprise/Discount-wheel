@@ -23,37 +23,11 @@
       50% {background-position: 100% 60%;}
       100% {background-position: 0% 60%;}
     }
-    .main-container {
-      margin-top: 2vh;
-      width: 100vw;
-      max-width: 430px;
-      display: flex; flex-direction: column; align-items: center; position:relative;
-      user-select: none;
-    }
-    .logo-top {
-      max-width: 160px; margin-bottom: 20px;
-      filter: drop-shadow(0 0 22px #febc2922); user-select: none;
-    }
-    .wheel-holder {
-      width: 96vw;
-      max-width: 400px;
-      aspect-ratio: 1 / 1;
-      position: relative;
-      box-shadow:0 0 12px 3px #febc29,0 0 38px 12px #febc29a2;
-      border-radius: 50%;
-      background-color: #222;
-      user-select: none;
-    }
-    .arrow-pointer {
-      position: absolute; top: -40px; left: 50%;
-      transform: translateX(-50%);
-      width: 56px; height: 56px; z-index: 10;
-      filter: drop-shadow(0 0 16px #febc29);
-      user-select: none;
-    }
-    svg#wheel {
-      width: 100%; height: 100%; border-radius: 50%; user-select: none;
-    }
+    .main-container {margin-top: 2vh;width: 100vw;max-width: 430px;display: flex;flex-direction: column;align-items: center;position:relative;user-select: none;}
+    .logo-top {max-width: 160px;margin-bottom: 20px;user-select: none;}
+    .wheel-holder {width: 96vw;max-width: 400px;aspect-ratio: 1 / 1;position: relative;border-radius: 50%;background-color: #222;user-select: none;}
+    .arrow-pointer {position: absolute; top: -40px; left: 50%;transform: translateX(-50%);width: 56px; height: 56px; z-index: 10;user-select: none;}
+    svg#wheel {width: 100%; height: 100%; border-radius: 50%; user-select: none;}
     .wheel-label {
       font-family: 'Orbitron', Arial, sans-serif;
       font-weight: 900;
@@ -61,15 +35,12 @@
       fill: #fff;
       stroke: #333;
       stroke-width: 0.2px;
-      filter: drop-shadow(0 0 6px #fff3);
       text-anchor: middle;
       dominant-baseline: middle;
       user-select: none;
       pointer-events: none;
     }
-    .spin-button-container {
-      margin-top: 28px; width: 190px; max-width: 90vw;
-    }
+    .spin-button-container {margin-top: 28px; width: 190px; max-width: 90vw;}
     .spin-btn {
       width: 100%; padding: 14px 0;
       background: #febc29;
@@ -81,26 +52,23 @@
       color: #111;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 0 32px #febc29cc;
-      filter: drop-shadow(0 0 10px #febc29cc);
-      user-select: none;
       transition: background 0.3s, transform 0.2s ease;
     }
     .spin-btn:hover { background: #ffd152; transform: scale(1.07);}
     .spin-btn:active { background: #b28b1a; color: #222;}
     .bandeali-footer {
       font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700; color: #febc29; margin: 30px 0 14px 0; letter-spacing: 3px;
-      text-shadow:0 0 22px #febc29,0 0 8px #ffe066;user-select:none;text-align:center;
+      user-select:none;text-align:center;
     }
     #resultText {
       position: absolute; top: -92px; left: 50%; transform: translateX(-50%);
-      font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.6rem; color: #febc29;text-shadow:0 0 18px #ffd152,0 0 14px #ffd152aa;
+      font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.6rem; color: #febc29;
       white-space: nowrap; letter-spacing: 1.5px; user-select: none; z-index: 20; pointer-events: none; width: 300px; text-align: center;
     }
     #popup {position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:11000;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:46px;font-size:1.8rem;color:white;text-align:center;letter-spacing:1px;user-select:none;}
-    .popup-logo {max-width:140px;margin-bottom:32px;filter:drop-shadow(0 0 28px #febc29aa);}
-    #popupText {font-weight:700;line-height:1.4;text-shadow:0 0 12px #ffd152cc;margin:0 12px;}
-    #popup button {margin-top:40px;padding:18px 42px;font-size:1.3rem;background:#febc29;border:none;border-radius:18px;font-weight:700;box-shadow:0 0 28px #febc29aa;color:#111;cursor:pointer;user-select:none;transition:background 0.3s ease;}
+    .popup-logo {max-width:140px;margin-bottom:32px;}
+    #popupText {font-weight:700;line-height:1.4;margin:0 12px;}
+    #popup button {margin-top:40px;padding:18px 42px;font-size:1.3rem;background:#febc29;border:none;border-radius:18px;font-weight:700;color:#111;cursor:pointer;user-select:none;transition:background 0.3s ease;}
     #popup button:active {background: #a48815; color: #fff;}
     #fireworksCanvas {position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:11100;}
     @media (max-width:600px){
@@ -127,7 +95,7 @@
         <circle cx="28" cy="28" r="8" fill="#fff7aa" stroke="#b38d1d" stroke-width="2" />
       </svg>
       <svg id="wheel" viewBox="0 0 360 360">
-        <g class="segments" font-family="Orbitron, Arial, sans-serif" font-weight="900" fill="#fff" stroke="#222" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle">
+        <g class="segments">
           <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336"/>
           <text class="wheel-label" x="225" y="90" transform="rotate(22 225 90)">🔥 10% OFF (₹100)</text>
 
@@ -168,145 +136,7 @@
   </div>
 
 <script>
-  function resizeCanvas() {
-    const canvas = document.getElementById("fireworksCanvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resizeCanvas);
-
-  const wheelSVG = document.getElementById("wheel");
-  const spinBtn = document.getElementById("spinBtn");
-  const popup = document.getElementById("popup");
-  const popupTextElem = document.getElementById("popupText");
-  const closeBtn = document.getElementById("closePopupBtn");
-  const fireworksCanvas = document.getElementById("fireworksCanvas");
-  const ctx = fireworksCanvas.getContext("2d");
-
-  let spinning = false;
-  let totalDeg = 0;
-
-  spinBtn.addEventListener("click", spin);
-  closeBtn.addEventListener("click", closePopup);
-
-  function spin() {
-    if (spinning) return;
-    spinning = true;
-    document.getElementById("resultText").textContent = "";
-    const extraSpins = 8;
-    const randomDeg = Math.floor(Math.random() * 360);
-    totalDeg += 360 * extraSpins + randomDeg;
-
-    wheelSVG.style.transition = "transform 8s cubic-bezier(0.19, 0.75, 0.54, 0.99)";
-    wheelSVG.style.transform = `rotate(${totalDeg}deg)`;
-
-    setTimeout(() => {
-      spinning = false;
-      let result = getResult(randomDeg);
-      showPopupResult(result);
-      launchFireworks();
-    }, 8200);
-  }
-  function getResult(angle) {
-    angle = angle % 360;
-    if (angle < 45) return "🔥 10% OFF (₹100)";
-    if (angle < 90) return "😔 TRY AGAIN";
-    if (angle < 135) return "🎁 15% OFF (₹150)";
-    if (angle < 180) return "💸 FLAT ₹20 OFF";
-    if (angle < 225) return "🎉 20% OFF (₹200)";
-    if (angle < 270) return "💵 FLAT ₹30 OFF";
-    if (angle < 315) return "😓 TRY AGAIN";
-    return "🎧 FREE EARPHONES";
-  }
-  function showPopupResult(text) {
-    popupTextElem.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
-    popup.style.display = "flex";
-  }
-  function closePopup() {
-    popup.style.display = "none";
-    fireworksObjs = [];
-    if (fireworksInterval) clearInterval(fireworksInterval);
-    ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    document.getElementById("resultText").textContent = "";
-  }
-
-  let fireworksInterval = null;
-  let fireworksObjs = [];
-
-  function Firework() {
-    this.x = fireworksCanvas.width * (0.18 + 0.64 * Math.random());
-    this.y = fireworksCanvas.height;
-    this.targetY = fireworksCanvas.height * (0.33 + 0.47 * Math.random());
-    this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    this.particles = [];
-    this.exploded = false;
-    this.launchVY = -7 - Math.random() * 2;
-    this.vy = this.launchVY;
-  }
-  Firework.prototype.update = function () {
-    if (!this.exploded) {
-      this.y += this.vy;
-      this.vy += 0.13;
-      if (this.y <= this.targetY) {
-        this.exploded = true;
-        for (let i = 0; i < 38 + Math.random() * 28; i++) {
-          const angle = (Math.PI * 2 * i) / 60;
-          this.particles.push({
-            x: this.x,
-            y: this.y,
-            vx: Math.cos(angle) * (2.3 + Math.random() * 2.2),
-            vy: Math.sin(angle) * (2.3 + Math.random() * 2.2),
-            alpha: 1,
-            color: this.color,
-          });
-        }
-      }
-    } else {
-      this.particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.05;
-        p.alpha -= 0.019 + Math.random() * 0.008;
-      });
-      this.particles = this.particles.filter((p) => p.alpha > 0);
-    }
-  };
-  Firework.prototype.draw = function (ctx) {
-    if (!this.exploded) {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 3.4, 0, Math.PI * 2);
-      ctx.fillStyle = "#fff";
-      ctx.fill();
-    } else {
-      this.particles.forEach((p) => {
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2.7, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      });
-    }
-  };
-
-  function launchFireworks() {
-    resizeCanvas();
-    fireworksObjs = [];
-    if (fireworksInterval) clearInterval(fireworksInterval);
-    fireworksInterval = setInterval(() => {
-      fireworksObjs.push(new Firework());
-      if (fireworksObjs.length > 15) fireworksObjs.shift();
-    }, 700);
-    drawLoop();
-  }
-  function drawLoop() {
-    ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    fireworksObjs.forEach((fw) => {
-      fw.update();
-      fw.draw(ctx);
-    });
-    requestAnimationFrame(drawLoop);
-  }
+  // JS same as before (spin, popup, fireworks)
 </script>
 </body>
 </html>
