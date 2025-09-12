@@ -6,22 +6,18 @@
   <title>Bandeali Enterprises Discount Wheel</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
   <style>
-    /* Base styles */
     html, body {
       margin: 0; padding: 0; min-height: 100vh;
       background: #111;
       font-family: Arial, Helvetica, sans-serif;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      overflow-x: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
     }
     body::before {
       content: "";
       position: fixed; inset: 0;
-      background: linear-gradient(270deg, #ffeb3b, #03a9f4, #e91e63, #9c27b0);
+      /* Slightly darker for neon to pop */
+      background: linear-gradient(270deg, #232932 0%, #212121 100%);
       background-size: 800% 800%;
       animation: gradientBG 30s ease infinite;
       z-index: -2;
@@ -34,201 +30,168 @@
     .main-container {
       margin-top: 2vh;
       width: 100vw;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
+      max-width: 410px;
+      display: flex; flex-direction: column; align-items: center; position:relative;
       user-select: none;
     }
     .logo-top {
-      max-width: 120px;
-      height: auto;
-      margin-bottom: 1.5rem;
-      filter: drop-shadow(0 3px 8px #000a);
+      display: block;
+      margin: 24px auto 18px auto;
+      max-width: 105px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 0 24px 4px #fc0a, 0 0 10px 0 #222;
+      object-fit: contain;
     }
     .wheel-holder {
       position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
+      width: 98vw;
+      max-width: 360px;
+      aspect-ratio: 1/1;
+      margin: auto;
     }
     .arrow-pointer {
-      position: absolute;
-      top: -40px;
-      left: 50%;
+      position: absolute; top: -36px; left: 50%;
       transform: translateX(-50%);
-      width: 56px;
-      height: 56px;
-      z-index: 10;
+      width: 55px; height: 55px; z-index: 4;
+      filter: drop-shadow(0 0 14px #fdc206) drop-shadow(0 0 4px #fff8);
     }
     .svg-wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: #222;
-      box-shadow: 0 0 32px 0 #000b, 0 0 0 8px #fff5;
-      outline: 5px solid #fdb913;
-      cursor: pointer;
-      user-select: none;
+      width: 100%; height: 100%; border-radius:50%;
+      background:#222;
+      /* Neon ring effect using filter and outlines */
+      box-shadow:
+        0 0 0 8px #fc0a,
+        0 0 28px 6px #fc0,
+        0 0 80px 30px #ffd70040;
+      outline: 6px solid #fc0;
+      filter: drop-shadow(0 0 25px #fdc206d0);
+      user-select:none;
       transition: transform 8s cubic-bezier(0.19, 0.75, 0.54, 0.99);
     }
     .spin-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 94px; height: 94px;
-      background: #fff; color: #222;
-      border-radius: 50%;
-      border: 5px solid #fdb913;
-      font-weight: 700;
-      font-size: 1.35rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      letter-spacing: 1.5px;
-      box-shadow: 0 0 16px #fdb913a0;
-      cursor: pointer;
-      z-index: 20;
-      user-select: none;
-      transition: scale 0.2s ease;
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 92px; height: 92px; background: #fff; color: #222;
+      border-radius: 50%; border: 6px solid #fc0;
+      font-weight: 800; font-size: 1.3rem; letter-spacing: 2px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 14px #fdb913bb, 0 0 40px #fc0a;
+      cursor: pointer; z-index: 10; user-select: none;
+      transition: scale 0.2s;
+      filter: drop-shadow(0 0 14px #fdc206d0);
     }
-    .spin-btn:hover {
-      background: #fdb913;
-      color: #222;
-      scale: 1.1;
+    .spin-btn:hover, .spin-btn:active {
+      background: #fc0; color: #222; scale: 1.08;
     }
     .bandeali-footer {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fdb913;
-      margin-top: 20px;
-      margin-bottom: 16px;
-      text-shadow: 0 0 8px #a36f00;
-      letter-spacing: 2px;
-      text-align: center;
-      user-select: none;
+      font-size: 2.1rem; font-weight: 700;
+      color: #fc0;
+      margin-top: 26px; margin-bottom: 18px;
+      letter-spacing: 3px;
+      text-shadow:
+         0 0 22px #ffd700,
+         0 0 8px #ffe066,
+         0 1px 4px #fb0e;
+      filter: drop-shadow(0 0 8px #fc0);
+      text-align: center; user-select: none;
+      outline: none;
     }
-    /* Popup styles */
+    /* Popup styles for result */
     #popup {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.95);
-      z-index: 10000;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 40px;
-      user-select: none;
-      color: white;
-      font-size: 1.8rem;
-      text-align: center;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.94); z-index: 10000; display: none;
+      flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 40px;
+      user-select: none; color: white; text-align: center; font-size: 1.6rem;
     }
     .popup-logo {
-      max-width: 120px;
-      margin-bottom: 25px;
-      filter: drop-shadow(0 2px 8px #000a);
+      max-width: 105px; margin-bottom: 28px; filter: drop-shadow(0 0 22px #fcc92780);
     }
     #popupText {
-      margin: 0 10px;
-      font-weight: bold;
-      line-height: 1.3;
+      margin: 0 10px; font-weight: bold; line-height: 1.3; text-shadow: 0 0 8px #ffd70080;
     }
     #popup button {
-      margin-top: 30px;
-      padding: 12px 38px;
-      font-size: 1.2rem;
-      background: #fdb913;
-      border: none;
-      border-radius: 14px;
-      font-weight: 700;
-      box-shadow: 0 0 14px #fdb913bb;
-      color: #222;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.3s ease;
+      margin-top: 40px; padding: 14px 38px; font-size: 1.1rem;
+      background: #fc0; border: none; border-radius: 14px;
+      font-weight: 700; box-shadow: 0 0 22px #fc0a;
+      color: #222; cursor: pointer; user-select: none;
+      transition: background 0.3s;
     }
-    #popup button:hover {
-      background: #ddb109;
-    }
-    #popup button:active {
-      background: #a58408;
-      color: #fff;
-    }
+    #popup button:active { background: #222; color: #fc0; }
     #fireworksCanvas {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 11001;
-      user-select: none;
+      position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 10001;
     }
     /* Responsive */
     @media (max-width: 600px) {
-      .logo-top { max-width: 80px; margin-bottom: 14px; }
-      .bandeali-footer { font-size: 1.5rem; }
-      .spin-btn { width: 70px; height: 70px; font-size: 1rem; }
+      .logo-top { max-width: 68px; margin-bottom: 12px; }
+      .wheel-holder { max-width: 96vw; }
+      .arrow-pointer { width: 34px; height: 34px; top: -13px; }
+      .spin-btn { width: 57px; height: 57px; font-size: .89rem; }
+      .bandeali-footer { font-size: 1.2rem; }
+    }
+    /* Wheel text styles */
+    .wheel-label {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.04rem;
+      fill: #fff;
+      letter-spacing: 1px;
+      stroke: #222;
+      stroke-width: 0.6px;
+      filter: drop-shadow(0 0 6px #fffa);
     }
   </style>
 </head>
 <body>
-  <div class="main-container" role="main">
-    <img src="logo.jpg" alt="Bandeali Enterprises Logo" class="logo-top" />
+  <div class="main-container">
+    <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="logo-top" />
     <div class="wheel-holder">
-      <!-- Pointer Arrow -->
-      <svg class="arrow-pointer" aria-hidden="true" viewBox="0 0 56 56" role="presentation">
-        <circle cx="28" cy="16" r="10" fill="#fcc927" stroke="#b38d1d" stroke-width="3"/>
-        <polygon points="28,7 52,40 4,40" fill="#fcc927" stroke="#b38d1d" stroke-width="3"/>
-        <circle cx="28" cy="28" r="7" fill="#fff2c2" stroke="#b38d1d" stroke-width="2"/>
+      <!-- Arrow Pointer Neon -->
+      <svg class="arrow-pointer" viewBox="0 0 56 56">
+        <circle cx="28" cy="16" r="10" fill="#fc0" stroke="#b38d1d" stroke-width="3"/>
+        <polygon points="28,7 52,40 4,40" fill="#fc0" stroke="#b38d1d" stroke-width="3"/>
+        <circle cx="28" cy="28" r="8" fill="#fff8c0" stroke="#b38d1d" stroke-width="2"/>
       </svg>
       <!-- SVG Wheel -->
-      <svg id="wheel" class="svg-wheel" viewBox="0 0 360 360" role="img" aria-label="Bandeali Enterprises Discount Wheel">
+      <svg id="wheel" class="svg-wheel" viewBox="0 0 360 360">
         <g id="segments">
           <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336"/>
-          <text x="220" y="65" font-size="18" fill="#fff" font-weight="700" text-anchor="middle" transform="rotate(22 220 65)">🔥 10% OFF</text>
-
+          <text class="wheel-label" x="220" y="65" text-anchor="middle" transform="rotate(22 220 65)">🔥 10% OFF (₹100)</text>
           <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800"/>
-          <text x="288" y="116" font-size="18" fill="#fff" font-weight="700" text-anchor="middle" transform="rotate(67 288 116)">😔 TRY AGAIN</text>
-
+          <text class="wheel-label" x="288" y="116" text-anchor="middle" transform="rotate(67 288 116)">😔 TRY AGAIN</text>
           <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50"/>
-          <text x="285" y="243" font-size="18" fill="#fff" font-weight="700" text-anchor="middle" transform="rotate(112 285 243)">🎁 15% OFF</text>
-
+          <text class="wheel-label" x="285" y="243" text-anchor="middle" transform="rotate(112 285 243)">🎁 15% OFF (₹150)</text>
           <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3"/>
-          <text x="220" y="315" font-size="18" fill="#fff" font-weight="700" text-anchor="middle" transform="rotate(157 220 315)">💸 ₹20 OFF</text>
-
+          <text class="wheel-label" x="220" y="315" text-anchor="middle" transform="rotate(157 220 315)">💸 FLAT ₹20 OFF</text>
           <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0"/>
-          <text x="140" y="315" font-size="18" fill="#fff" font-weight="700" text-anchor="middle" transform="rotate(202 140 315)">🎉 20% OFF</text>
-
+          <text class="wheel-label" x="140" y="315" text-anchor="middle" transform="rotate(202 140 315)">🎉 20% OFF (₹200)</text>
           <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4"/>
-          <text x="75" y="243" font-size="18" fill="#fff" font-weight="700" text-anchor="middle" transform="rotate(247 75 243)">💵 ₹30 OFF</text>
-
+          <text class="wheel-label" x="75" y="243" text-anchor="middle" transform="rotate(247 75 243)">💵 FLAT ₹30 OFF</text>
           <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107"/>
-          <text x="70" y="116" font-size="18" fill="#333" font-weight="700" text-anchor="middle" transform="rotate(292 70 116)">😓 TRY AGAIN</text>
-
+          <text class="wheel-label" x="70" y="116" text-anchor="middle" transform="rotate(292 70 116)">😓 TRY AGAIN</text>
           <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a"/>
-          <text x="137" y="63" font-size="18" fill="#fff" font-weight="700" text-anchor="middle" transform="rotate(337 137 63)">🎧 EARPHONES</text>
+          <text class="wheel-label" x="137" y="63" text-anchor="middle" transform="rotate(337 137 63)">🎧 FREE EARPHONES</text>
         </g>
-        <circle cx="180" cy="180" r="43" fill="#fff" stroke="#fdb913" stroke-width="6"/>
-        <text x="180" y="194" font-size="24" fill="#222" font-weight="800" text-anchor="middle" dominant-baseline="middle">SPIN</text>
+        <circle cx="180" cy="180" r="46" fill="#fff" stroke="#fc0" stroke-width="7"
+          filter="drop-shadow(0 0 14px #fdc206a0)" />
+        <text x="180" y="195" font-size="27" fill="#222" font-family="Arial" font-weight="900"
+          text-anchor="middle" alignment-baseline="middle">SPIN</text>
       </svg>
       <div class="spin-btn" id="spinBtn" role="button" aria-label="Spin the wheel" tabindex="0">SPIN</div>
     </div>
-    <div class="bandeali-footer" aria-label="Company name">BANDEALI ENTERPRISES</div>
+    <div class="bandeali-footer">BANDEALI ENTERPRISES</div>
   </div>
   
-  <!-- Popup -->
-  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popupText">
-    <img src="logo.jpg" alt="Bandeali Enterprises Logo" class="popup-logo" />
-    <div id="popupText" style="margin: 0 12px; font-weight: 700; font-size: 1.6rem; color: #fff;"></div>
-    <button id="closePopupBtn" aria-label="Close popup">OK</button>
+  <!-- Popup (Result & Fireworks) -->
+  <div id="popup">
+    <img src="Logo.jpg" alt="Logo" class="popup-logo" />
+    <div id="popupText"></div>
+    <button id="closePopupBtn" aria-label="Close result">OK</button>
     <canvas id="fireworksCanvas"></canvas>
   </div>
 
   <script>
-    /* Resize fireworks canvas */
+    /* Firework Canvas Resize */
     function resizeCanvas() {
       const canvas = document.getElementById("fireworksCanvas");
       canvas.width = window.innerWidth;
@@ -236,7 +199,6 @@
     }
     window.addEventListener("resize", resizeCanvas);
 
-    /* Wheel & spin logic */
     const wheelSVG = document.getElementById("wheel");
     const spinBtn = document.getElementById("spinBtn");
     const popup = document.getElementById("popup");
@@ -256,8 +218,7 @@
     function spin() {
       if (spinning) return;
       spinning = true;
-
-      const extraSpins = 8; // 8 rotations for nice animation
+      const extraSpins = 8;
       const randomDeg = Math.floor(Math.random() * 360);
       totalDeg += 360 * extraSpins + randomDeg;
 
@@ -269,24 +230,23 @@
         let result = getResult(randomDeg);
         showPopup(result);
         launchFireworks();
-      }, 8200); // firework start after animation ends (~8s)
+      }, 8200);
     }
 
     function getResult(angle) {
       angle = angle % 360;
-
-      if (angle < 45) return "🔥 10% OFF (upto ₹100)";
+      if (angle < 45) return "🔥 10% OFF (₹100)";
       if (angle < 90) return "😔 TRY AGAIN";
-      if (angle < 135) return "🎁 15% OFF (upto ₹150)";
+      if (angle < 135) return "🎁 15% OFF (₹150)";
       if (angle < 180) return "💸 FLAT ₹20 OFF";
-      if (angle < 225) return "🎉 20% OFF (upto ₹200)";
+      if (angle < 225) return "🎉 20% OFF (₹200)";
       if (angle < 270) return "💵 FLAT ₹30 OFF";
       if (angle < 315) return "😓 TRY AGAIN";
       return "🎧 FREE EARPHONES";
     }
 
     function showPopup(text) {
-      popupTextElem.innerHTML = "🎉 Congratulations!<br />" + text;
+      popupTextElem.innerHTML = "🎉 <span style='color:#fc0;text-shadow:0 0 12px #ffd700;'>Congratulations!</span><br>" + text;
       popup.style.display = "flex";
       resizeCanvas();
     }
@@ -303,10 +263,10 @@
     let fireworksObjs = [];
 
     function Firework() {
-      this.x = fireworksCanvas.width * (0.15 + 0.7 * Math.random());
+      this.x = fireworksCanvas.width * (0.18 + 0.64 * Math.random());
       this.y = fireworksCanvas.height;
-      this.targetY = fireworksCanvas.height * (0.3 + 0.55 * Math.random());
-      this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      this.targetY = fireworksCanvas.height * (0.33 + 0.47 * Math.random());
+      this.color = `hsl(${Math.random() * 360},100%,50%)`;
       this.particles = [];
       this.exploded = false;
       this.launchVY = -7 - Math.random() * 2;
@@ -318,13 +278,13 @@
         this.vy += 0.13;
         if (this.y <= this.targetY) {
           this.exploded = true;
-          for (let i = 0; i < 40 + Math.random() * 28; i++) {
+          for (let i = 0; i < 38 + Math.random() * 28; i++) {
             const angle = (Math.PI * 2 * i) / 60;
             this.particles.push({
               x: this.x,
               y: this.y,
-              vx: Math.cos(angle) * (2 + Math.random() * 2.8),
-              vy: Math.sin(angle) * (2 + Math.random() * 2.8),
+              vx: Math.cos(angle) * (2.3 + Math.random() * 2.2),
+              vy: Math.sin(angle) * (2.3 + Math.random() * 2.2),
               alpha: 1,
               color: this.color,
             });
@@ -335,7 +295,7 @@
           p.x += p.vx;
           p.y += p.vy;
           p.vy += 0.05;
-          p.alpha -= 0.013 + Math.random() * 0.008;
+          p.alpha -= 0.019 + Math.random() * 0.008;
         });
         this.particles = this.particles.filter((p) => p.alpha > 0);
       }
@@ -343,7 +303,7 @@
     Firework.prototype.draw = function (ctx) {
       if (!this.exploded) {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 3.4, 0, Math.PI * 2);
         ctx.fillStyle = "#fff";
         ctx.fill();
       } else {
@@ -351,7 +311,7 @@
           ctx.globalAlpha = p.alpha;
           ctx.fillStyle = p.color;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 2.6, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, 2.7, 0, Math.PI * 2);
           ctx.fill();
           ctx.globalAlpha = 1;
         });
@@ -364,7 +324,7 @@
       if (fireworksInterval) clearInterval(fireworksInterval);
       fireworksInterval = setInterval(() => {
         fireworksObjs.push(new Firework());
-        if (fireworksObjs.length > 12) fireworksObjs.shift();
+        if (fireworksObjs.length > 15) fireworksObjs.shift();
       }, 700);
       drawLoop();
     }
