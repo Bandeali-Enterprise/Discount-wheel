@@ -3,256 +3,206 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bandeali Enterprises Treasure Box Game</title>
+  <title>Bandeali Enterprises Treasure Box</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     body {
       margin: 0; padding: 0;
-      background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+      background: radial-gradient(circle at 60% 50%, #283445 0%, #181e27 100%);
       font-family: 'Orbitron', sans-serif;
       color: white;
       min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
       user-select: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+    }
+    .header-container {
+      width: 100%; text-align: center;
     }
     h1 {
-      margin: 40px 20px 15px;
-      font-size: 2rem;
-      color: #fddd3d;
-      text-shadow: 0 0 10px #fddd3d;
+      margin: 30px 0 12px; font-size: 2rem;
+      color: #fde260;
+      text-shadow: 0 0 12px #fde260, 0 2px 18px #000;
+      font-weight: bold;
+      letter-spacing: 2px;
     }
     #instructions {
-      margin: 0 20px 30px;
-      font-size: 1.25rem;
-      color: #ddd;
-      max-width: 600px;
-      line-height: 1.4;
-      user-select: none;
-    }
-    #Logo {
-      max-width: 140px;
-      margin-bottom: 20px;
-      user-select: none;
+      margin: 0 18px 32px 18px;
+      font-size: 1.15rem;
+      color: #efefef;
+      max-width: 500px;
+      line-height: 1.5;
+      text-align: center;
+      letter-spacing: 1px;
+      background: rgba(0,0,0,0.14);
+      border-radius: 15px;
+      padding: 8px 0;
     }
     #game-container {
-      width: 90vw;
-      max-width: 650px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-gap: 30px 40px;
+      grid-gap: 18px 14px;
       justify-items: center;
-      user-select: none;
-      position: relative;
+      width: 96vw;
+      max-width: 330px;
+      margin: 18px auto 0 auto;
+      min-height: 340px;
     }
     .box {
-      background: linear-gradient(145deg, #6b3e00, #3d2300);
-      border: 3px solid #fddd3d;
-      border-radius: 15px;
-      box-shadow: 0 0 15px #fddd3d inset;
-      width: 110px;
-      height: 150px;
-      font-weight: 700;
-      font-size: 3.5rem;
-      color: white;
+      width: 70px;
+      height: 90px;
+      background: linear-gradient(145deg, #6b3e00, #3d2300 92%);
+      border: 2.5px solid #fde260;
+      border-radius: 11px;
+      box-shadow: 0 0 13px #fde26075 inset, 0 2px 8px #000b;
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.3s ease;
+      font-size: 2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.22s;
       outline: none;
       user-select: none;
-      flex-direction: column;
-      text-align: center;
-      padding: 10px;
-      box-sizing: border-box;
+      position: relative;
+      color: #fde260;
+      font-weight: bold;
     }
     .box.locked {
-      filter: grayscale(1);
-      opacity: 0.7;
-      cursor: default;
+      filter: grayscale(1) blur(0.5px); opacity: 0.6; cursor: default;
     }
     .box.opened {
-      background: #fddd3d;
-      color: #3a1f00;
-      box-shadow: 0 0 40px #fddd3d;
+      background: #fde260;
+      color: #2d1a00;
       cursor: default;
-      transform: scale(1.1);
+      filter: none;
+      opacity: 1;
+      box-shadow: 0 0 25px #fde260cc;
+      transform: scale(1.06);
     }
-    .box .line1 {
-      font-size: 2.5rem;
-      margin-bottom: 8px;
+    .box .chest-img {
+      max-width: 42px; max-height: 44px; margin: 0 auto; display: block;
+      filter: drop-shadow(0 0 2px #fff98e) drop-shadow(0 0 6px #fde26093);
     }
-    .box .line2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #3a1f00;
-      text-align: center;
+    .box .result-text {
+      font-size: 0.72rem;
+      font-weight: 900;
+      color: #a67c07;
+      letter-spacing:.2px;
+      margin-top: 2px;
     }
     #spin-button {
       display: none;
-      margin: 30px auto 20px;
-      padding: 14px 38px;
-      font-size: 1.3rem;
-      border-radius: 30px;
-      background: #fddd3d;
-      color: #3a1f00;
+      margin: 26px auto 18px auto;
+      padding: 11px 30px;
+      font-size: 1.17rem;
+      border-radius: 24px;
+      background: #fde260;
+      color: #3a2b0d;
       border: none;
       cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 0 25px #fddd3d;
+      font-weight: 900;
+      box-shadow: 0 0 15px #fde260aa;
       user-select: none;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s;
+      letter-spacing: 1.2px;
     }
-    #spin-button:hover {
-      background-color: #f3da3e;
-    }
-    #spin-button:active {
-      background-color: #b89e1e;
-      color: white;
-    }
-    #result-message {
-      margin: 15px auto;
-      font-size: 1.5rem;
-      color: #fddd3d;
-      text-shadow: 0 0 7px #fddd3d;
-      min-height: 50px;
-      user-select: none;
-    }
+    #spin-button:hover { background: #fadc69;}
+    #spin-button:active { background: #bca219; color: #fff;}
     #popup {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.95);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.93);
+      display: none;
+      z-index: 1200;
       align-items: center;
+      flex-direction: column;
       color: white;
-      font-size: 2rem;
+      font-size: 1.5rem;
       text-align: center;
-      padding: 30px;
-      z-index: 1000;
-      user-select: none;
+      padding: 24px;
+      justify-content: center;
     }
     #popup img {
-      max-width: 140px;
-      margin-bottom: 25px;
-      filter: drop-shadow(0 0 10px #fddd3d);
+      max-width: 110px;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 0 10px #fde260);
       user-select: none;
     }
     #popup .popup-text {
-      margin-bottom: 30px;
+      color: #fde260;
       font-weight: 700;
-      color: #fddd3d;
-      text-shadow: 0 0 15px #fddd3d;
+      line-height: 1.25;
+      text-shadow: 0 0 12px #fde260;
+      margin-bottom: 15px;
+      font-size: 1.27rem;
     }
     #popup button {
-      padding: 14px 36px;
-      font-size: 1.4rem;
+      padding: 12px 32px;
+      font-size: 1rem;
       border-radius: 10px;
-      background: #fddd3d;
+      background: #fde260;
       border: none;
-      cursor: pointer;
-      font-weight: 700;
+      font-weight: bold;
       color: #3a1f00;
-      box-shadow: 0 0 15px #fddd3d;
-      user-select: none;
-      transition: background-color 0.3s ease;
+      box-shadow: 0 0 10px #fde260;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
-    #popup button:hover {
-      background-color: #e4d63e;
-    }
-    #popup button:active {
-      background-color: #bfa921;
-      color: white;
-    }
-    #popup.hidden {
-      display:none;
-    }
-    canvas#fireworks {
-      position: fixed;
-      top:0; left:0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 1010;
+    #popup button:hover { background-color: #ffe88e;}
+    #popup button:active { background-color: #bfa921; color: #222;}
+    #fireworks {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
       pointer-events: none;
-      user-select: none;
+      z-index: 1199;
       display: none;
     }
-    @media (max-width: 600px) {
-      #game-container {
-        grid-template-columns: repeat(3, minmax(90px,1fr));
-        grid-gap: 20px 25px;
-        height: 380px;
-        max-width: 350px;
-      }
-      .box {
-        width: 90px;
-        height: 130px;
-        font-size: 3rem;
-      }
-      h1 {
-        font-size: 1.7rem;
-      }
-      #spin-button {
-        font-size: 1.1rem;
-        padding: 12px 30px;
-      }
-      #popup {
-        font-size: 1.6rem;
-        padding: 20px;
-      }
+    @media (max-width:600px){
+      h1 { font-size: 1.15rem;}
+      #instructions { font-size: 1rem; }
+      #game-container { max-width: 97vw; grid-gap: 14px 6px; }
+      .box { width: 48px; height: 62px; font-size: 1.25rem; }
+      .box .result-text { font-size: 0.68rem;}
+      #popup { font-size: 1.05rem; padding: 13px;}
+      #popup img { max-width: 75px;}
     }
   </style>
 </head>
 <body>
-  <img id="Logo" src="Logo.jpg" alt="Bandeali Enterprises Logo" />
-  <h1>Bandeali Enterprises Treasure Box</h1>
-  <div id="instructions">Choose a treasure box below and test your luck!</div>
-  <div id="game-container" aria-live="polite" aria-label="Treasure boxes"></div>
-  <button id="spin-button" aria-hidden="true" aria-label="Reveal all boxes">Reveal All</button>
-  <div id="result-message" aria-live="polite" aria-atomic="true"></div>
-
-  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-text" class="hidden">
-    <img src="treasure.png" alt="Treasure Chest" />
-    <div id="popup-text" class="popup-text"></div>
-    <button id="popup-close" aria-label="Close popup">Got It!</button>
+  <div class="header-container">
+    <h1>Bandeali Enterprises Treasure Box</h1>
+    <div id="instructions">
+      Choose a treasure box below and test your luck!
+    </div>
   </div>
-
+  <div id="game-container" aria-live="polite" aria-label="Treasure boxes"></div>
+  <button id="spin-button" aria-label="Reveal all boxes">Reveal All</button>
+  <div id="popup" role="dialog" aria-modal="true">
+    <img src="treasure.png" alt="Treasure Chest" id="popup-img"/>
+    <div class="popup-text" id="popup-text"></div>
+    <button id="popup-close" aria-label="Close popup">OK</button>
+  </div>
   <canvas id="fireworks"></canvas>
-
   <script>
     const prizes = [
-      "🔥 10% OFF",
-      "😔 Try Again",
-      "🎁 15% OFF",
-      "💸 Flat ₹20 Off",
-      "🎉 20% OFF",
-      "💵 Flat ₹30 Off",
-      "😔 Try Again",
-      "😔 Try Again",
-      "🎧 Free Earphones"
+      {win:true, text:"🔥 10% OFF"},
+      {win:false, text:"Better luck next time!"},
+      {win:true, text:"🎁 15% OFF"},
+      {win:false, text:"Better luck next time!"},
+      {win:true, text:"💸 20% OFF"},
+      {win:false, text:"Better luck next time!"},
+      {win:true, text:"🎉 ₹30 OFF"},
+      {win:true, text:"🎧 Free Earphones"},
+      {win:true, text:"💵 ₹50 Cashback"}
     ];
 
     const gameContainer = document.getElementById("game-container");
     const spinButton = document.getElementById("spin-button");
-    const resultMessage = document.getElementById("result-message");
     const popup = document.getElementById("popup");
     const popupText = document.getElementById("popup-text");
     const popupClose = document.getElementById("popup-close");
+    const popupImg = document.getElementById("popup-img");
     const fireworksCanvas = document.getElementById("fireworks");
-    const fireworksCtx = fireworksCanvas.getContext("2d");
+    const ctx = fireworksCanvas.getContext("2d");
 
     let chosenIndex = null;
     let boxes = [];
-
-    const boxPositions = [
-      { left: "20%", top: "10%" }, { left: "50%", top: "10%" }, { left: "80%", top: "10%" },
-      { left: "20%", top: "45%" }, { left: "50%", top: "45%" }, { left: "80%", top: "45%" },
-      { left: "20%", top: "80%" }, { left: "50%", top: "80%" }, { left: "80%", top: "80%" }
-    ];
 
     function shuffle(arr) {
       let array = [...arr];
@@ -267,123 +217,112 @@
       gameContainer.innerHTML = '';
       chosenIndex = null;
       spinButton.style.display = 'none';
-      resultMessage.textContent = 'Choose a treasure box below and test your luck!';
       boxes = [];
+      // Shuffle prizes for randomness each round
+      const shuffledPrizes = shuffle(prizes);
 
-      const shuffledPositions = shuffle(boxPositions);
-
-      for(let i=0; i<prizes.length; i++) {
+      for(let i=0; i<shuffledPrizes.length; i++) {
         const box = document.createElement('div');
         box.className = 'box';
-        box.style.left = shuffledPositions[i].left;
-        box.style.top = shuffledPositions[i].top;
-        box.textContent = '❓';
+        box.innerHTML = '<span>?</span>';
         box.setAttribute('data-index', i);
-        box.setAttribute('tabindex', '0');
-        box.setAttribute('role', 'button');
-        box.setAttribute('aria-pressed', 'false');
-        box.title = "Click to select this box";
-
+        box.tabIndex = 0;
+        box.setAttribute('role','button');
+        box.setAttribute('aria-pressed','false');
         box.addEventListener('click', onBoxSelect);
         box.addEventListener('keydown', function(e){
-          if(e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onBoxSelect.call(this);
-          }
+          if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBoxSelect.call(this); }
         });
-
         gameContainer.appendChild(box);
-        boxes.push(box);
+        boxes.push({el:box, prize:shuffledPrizes[i]});
       }
     }
 
-    function onBoxSelect(e) {
+    function onBoxSelect() {
       if(chosenIndex !== null) return;
       chosenIndex = +this.getAttribute('data-index');
-
       boxes.forEach((box, idx) => {
         if(idx !== chosenIndex) {
-          box.classList.add('locked');
-          box.setAttribute('aria-pressed', 'false');
-          box.tabIndex = -1;
+          box.el.classList.add('locked');
+          box.el.setAttribute('aria-pressed','false');
+          box.el.tabIndex = -1;
         } else {
-          box.setAttribute('aria-pressed', 'true');
-          box.focus();
+          box.el.classList.remove('locked');
+          box.el.setAttribute('aria-pressed','true');
+          box.el.focus();
         }
       });
-
       spinButton.style.display = 'block';
-      resultMessage.textContent = 'Click "Reveal All" to see what’s inside!';
     }
-
-    function revealAll() {
-      boxes.forEach((box, idx) => {
-        box.classList.remove('locked');
-        box.classList.add('opened');
-        box.setAttribute('aria-pressed', 'false');
-        box.tabIndex = -1;
-        box.textContent = prizes[idx];
-        box.style.fontSize = '1rem';
-        box.style.userSelect = 'none';
-      });
-
-      spinButton.style.display = 'none';
-      showPopup(prizes[chosenIndex]);
-    }
-
-    function showPopup(prize) {
-      popupText.textContent = `🎉 Congratulations! You won: ${prize}`;
-      popup.classList.remove('hidden');
-      launchFireworks();
-    }
-
-    popupClose.addEventListener('click', () => {
-      popup.classList.add('hidden');
-      resultMessage.textContent = 'Choose a treasure box below and test your luck!';
-      clearFireworks();
-      createBoxes();
-    });
-
-    popupClose.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        popupClose.click();
-      }
-    });
 
     spinButton.addEventListener('click', revealAll);
 
-    // Fireworks animations
-    let fireworks = [];
-    let fireworksAnimationId;
-
-    function launchFireworks() {
-      fireworksCanvas.style.display = 'block';
-      fireworksCanvas.width = window.innerWidth;
-      fireworksCanvas.height = window.innerHeight;
-      fireworks = [];
-
-      fireworksAnimationId = setInterval(() => {
-        if (fireworks.length < 30) {
-          fireworks.push(new Firework());
+    function revealAll() {
+      boxes.forEach((box, idx) => {
+        box.el.classList.remove('locked');
+        box.el.classList.add('opened');
+        box.el.tabIndex = -1;
+        box.el.innerHTML = '';
+        if (box.prize.win) {
+          // Show treasure chest image and prize
+          const img = document.createElement('img');
+          img.src = 'treasure.png';
+          img.alt = 'Treasure Box';
+          img.className = 'chest-img';
+          box.el.appendChild(img);
+          const textDiv = document.createElement('div');
+          textDiv.className = 'result-text';
+          textDiv.textContent = box.prize.text;
+          box.el.appendChild(textDiv);
+        } else {
+          // Only show "Better luck next time!"
+          const textDiv = document.createElement('div');
+          textDiv.className = 'result-text';
+          textDiv.textContent = box.prize.text;
+          box.el.appendChild(textDiv);
         }
-      }, 300);
-
-      requestAnimationFrame(renderFireworks);
+      });
+      spinButton.style.display = 'none';
+      showPopup(boxes[chosenIndex].prize);
     }
 
-    function clearFireworks() {
-      cancelAnimationFrame(fireworksAnimationId);
+    function showPopup(prize) {
+      popupText.textContent = prize.text;
+      popupImg.style.display = prize.win ? 'block' : 'none';
+      popup.style.display = 'flex';
+      launchFireworks();
+    }
+
+    popupClose.onclick = () => {
+      popup.style.display = 'none';
+      clearFireworks();
+      createBoxes();
+    };
+
+    // Fireworks
+    let fireworks = [];
+    let fireworksAnim;
+    function launchFireworks() {
+      fireworksCanvas.width = window.innerWidth;
+      fireworksCanvas.height = window.innerHeight;
+      fireworksCanvas.style.display = 'block';
       fireworks = [];
-      const ctx = fireworksCanvas.getContext('2d');
+      clearInterval(fireworksAnim);
+      fireworksAnim = setInterval(() => {
+        if (fireworks.length < 24) fireworks.push(new Firework());
+      }, 250);
+      renderFireworks();
+    }
+    function clearFireworks() {
+      clearInterval(fireworksAnim);
+      fireworks = [];
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
       fireworksCanvas.style.display = 'none';
     }
-
     class Firework {
       constructor() {
         this.x = Math.random() * fireworksCanvas.width;
-        this.y = fireworksCanvas.height + 10;
+        this.y = fireworksCanvas.height + 15;
         this.targetY = Math.random() * fireworksCanvas.height / 2;
         this.vy = -(7 + Math.random() * 3);
         this.exploded = false;
@@ -393,11 +332,11 @@
       update() {
         if (!this.exploded) {
           this.y += this.vy;
-          this.vy += 0.15;
+          this.vy += 0.16;
           if (this.vy >= 0) {
             this.exploded = true;
-            for (let i = 0; i < 30; i++) {
-              const angle = (2 * Math.PI / 30) * i;
+            for (let i = 0; i < 24; i++) {
+              const angle = (2 * Math.PI / 24) * i;
               this.particles.push({
                 x: this.x,
                 y: this.y,
@@ -421,14 +360,14 @@
       draw(ctx) {
         if (!this.exploded) {
           ctx.beginPath();
-          ctx.arc(this.x, this.y, 3, 0, 2 * Math.PI);
+          ctx.arc(this.x, this.y, 2.6, 0, 2 * Math.PI);
           ctx.fillStyle = this.color;
           ctx.fill();
         } else {
           this.particles.forEach(p => {
             ctx.globalAlpha = p.alpha;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
+            ctx.arc(p.x, p.y, 1.5, 0, 2 * Math.PI);
             ctx.fillStyle = p.color;
             ctx.fill();
             ctx.globalAlpha = 1;
@@ -436,25 +375,19 @@
         }
       }
     }
-
     function renderFireworks() {
-      let ctx = fireworksCanvas.getContext('2d');
-      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-
+      ctx.clearRect(0,0,fireworksCanvas.width,fireworksCanvas.height);
       fireworks.forEach(fw => {
         fw.update();
         fw.draw(ctx);
       });
-
-      requestAnimationFrame(renderFireworks);
+      if (fireworksCanvas.style.display === 'block') requestAnimationFrame(renderFireworks);
     }
 
     window.addEventListener('resize', () => {
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
     });
-
-    // Initialize the game
     window.onload = createBoxes;
   </script>
 </body>
