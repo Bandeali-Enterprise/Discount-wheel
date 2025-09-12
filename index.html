@@ -11,37 +11,44 @@
       background: #111;
       font-family: Arial, Helvetica, sans-serif;
       color: #fff;
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     body::before {
       content: "";
-      position: fixed; inset: 0;
+      position: fixed;
+      inset: 0;
       background: linear-gradient(270deg, #232932 0%, #171818 100%);
       background-size: 800% 800%;
       animation: gradientBG 30s ease infinite;
       z-index: -2;
     }
     @keyframes gradientBG {
-      0% {background-position: 0% 60%;}
-      50% {background-position: 100% 60%;}
-      100% {background-position: 0% 60%;}
+      0% { background-position: 0% 60%; }
+      50% { background-position: 100% 60%; }
+      100% { background-position: 0% 60%; }
     }
     .main-container {
-      margin-top: 2vh;
+      margin-top: 1.8rem;
       width: 100vw;
       max-width: 420px;
-      display: flex; flex-direction: column; align-items: center; position:relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
       user-select: none;
     }
     .logo-top {
-      max-width: 170px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 22px #febc2922);
+      max-width: 110px;
+      margin: 22px auto 15px auto;
+      filter: drop-shadow(0 0 12px #febc2922);
       user-select: none;
     }
     .wheel-holder {
       width: 96vw;
-      max-width: 410px;
+      max-width: 400px;
       aspect-ratio: 1 / 1;
       position: relative;
       box-shadow:
@@ -53,35 +60,42 @@
     }
     .arrow-pointer {
       position: absolute;
-      top: -40px; left: 50%;
+      top: -38px;
+      left: 50%;
       transform: translateX(-50%);
-      width: 56px; height: 56px; z-index: 10;
+      width: 54px;
+      height: 54px;
+      z-index: 10;
       filter: drop-shadow(0 0 14px #febc29) drop-shadow(0 0 6px #ffffffbb);
       user-select: none;
     }
     svg#wheel {
-      width: 100%; height: 100%; border-radius: 50%; user-select: none;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      user-select: none;
     }
     .wheel-label {
       font-family: 'Orbitron', Arial, sans-serif;
       font-weight: 900;
       font-size: 16px;
       fill: #fff;
-      letter-spacing: 1.3px;
+      letter-spacing: 1.2px;
       stroke: #222;
-      stroke-width: 0.3px;
-      filter: drop-shadow(0 0 8px #fff7);
+      stroke-width: 0.3;
+      filter: drop-shadow(0 0 7px #fff);
       dominant-baseline: middle;
       writing-mode: horizontal-tb;
       text-orientation: mixed;
-      text-anchor: middle;
-      white-space: normal;
-      word-break: break-word;
       user-select: none;
     }
+    .wheel-label tspan {
+      display: block;
+      line-height: 1.2;
+    }
     .spin-button-container {
-      margin-top: 30px;
-      width: 190px;
+      margin: 30px 0 0 0;
+      width: 180px;
       max-width: 90vw;
     }
     .spin-btn {
@@ -91,13 +105,13 @@
       border-radius: 28px;
       border: none;
       font-weight: 700;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       letter-spacing: 3px;
       color: #111;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 0 40px #febc29cc;
-      filter: drop-shadow(0 0 12px #febc29cc);
+      box-shadow: 0 0 32px 4px #febc29cc;
+      filter: drop-shadow(0 0 10px #febc29cc);
       user-select: none;
       transition: background 0.3s, transform 0.2s ease;
     }
@@ -112,36 +126,35 @@
     }
     .bandeali-footer {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 700;
       color: #febc29;
-      margin-top: 28px;
-      margin-bottom: 20px;
-      letter-spacing: 2.6px;
+      margin: 28px 0 20px 0;
+      letter-spacing: 3px;
       text-shadow:
-        0 0 22px #febc29,
-        0 0 8px #ffe066;
+        0 0 26px #febc29,
+        0 0 10px #ffe569;
       user-select: none;
       text-align: center;
     }
     #resultText {
       position: absolute;
-      top: -100px;
+      top: -98px;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      font-size: 1.85rem;
+      font-size: 1.75rem;
       color: #febc29;
       text-shadow:
-        0 0 20px #ffd152,
-        0 0 15px #ffd152aa;
+        0 0 18px #ffd152,
+        0 0 11px #ffd152aa;
       white-space: nowrap;
-      letter-spacing: 1.8px;
+      letter-spacing: 1.4px;
       user-select: none;
       z-index: 20;
       pointer-events: none;
-      width: 340px;
+      width: 320px;
       text-align: center;
     }
     #popup {
@@ -153,7 +166,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding-top: 46px;
+      padding-top: 50px;
       font-size: 1.9rem;
       color: white;
       text-align: center;
@@ -162,33 +175,36 @@
     }
     .popup-logo {
       max-width: 140px;
-      margin-bottom: 32px;
-      filter: drop-shadow(0 0 28px #febc29aa);
+      margin-bottom: 30px;
       user-select: none;
+      filter: drop-shadow(0 0 20px #febc2922);
     }
     #popupText {
       font-weight: 700;
       line-height: 1.4;
-      text-shadow: 0 0 12px #ffd152cc;
-      margin: 0 12px;
+      margin: 0 15px;
+      text-shadow: 0 0 10px #ffd152;
     }
     #popup button {
-      margin-top: 40px;
-      padding: 16px 38px;
-      font-size: 1.4rem;
+      margin-top: 38px;
+      padding: 17px 44px;
+      font-size: 1.3rem;
       background: #febc29;
       border: none;
-      border-radius: 18px;
+      border-radius: 20px;
       font-weight: 700;
-      box-shadow: 0 0 28px #febc29aa;
+      box-shadow: 0 0 20px #febc29cc;
       color: #111;
       cursor: pointer;
       user-select: none;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
+    }
+    #popup button:hover {
+      background: #ffd658;
     }
     #popup button:active {
-      background: #a48815;
-      color: #fff;
+      background: #b39722;
+      color: #222;
     }
     #fireworksCanvas {
       position: fixed;
@@ -197,206 +213,247 @@
       height: 100vh;
       pointer-events: none;
       z-index: 11100;
-      user-select: none;
     }
     @media (max-width: 600px) {
-      .main-container { max-width: 96vw; }
-      .logo-top { max-width: 100px; margin-bottom: 18px; }
-      .wheel-holder { max-width: 94vw; }
-      .arrow-pointer { width: 48px; height: 48px; top: -40px; }
-      .spin-button-container { width: 94vw; }
-      .spin-btn { font-size: 1.2rem; font-weight: 700; }
-      .bandeali-footer { font-size: 1.4rem; }
-      #resultText { font-size: 1.5rem; top: -80px; width: 90vw; }
+      .main-container {
+        max-width: 96vw;
+      }
+      .logo-top {
+        max-width: 105px;
+        margin: 18px auto 14px auto;
+      }
+      .wheel-holder {
+        max-width: 390px;
+      }
+      .arrow-pointer {
+        width: 44px;
+        height: 44px;
+        top: -38px;
+      }
+      .spin-button-container {
+        width: 80vw;
+      }
+      .spin-btn {
+        font-size: 1.2rem;
+      }
+      .bandeali-footer {
+        font-size: 1.6rem;
+      }
+      #resultText {
+        font-size: 1.5rem;
+        width: 85vw;
+        top: -78px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="main-container" aria-label="Discount Wheel Game">
+    <!-- Logo -->
     <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="logo-top" />
+    <!-- Wheel and arrow -->
     <div class="wheel-holder" role="group" aria-describedby="resultText">
       <div id="resultText" aria-live="polite" aria-atomic="true"></div>
       <svg class="arrow-pointer" aria-hidden="true" viewBox="0 0 56 56" role="presentation" aria-label="Pointer arrow">
-        <circle cx="28" cy="16" r="10" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
-        <polygon points="28,7 52,40 4,40" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
-        <circle cx="28" cy="28" r="8" fill="#fff7aa" stroke="#b38d1d" stroke-width="2" />
+        <circle cx="28" cy="16" r="10" fill="#febc29" stroke="#b39118" stroke-width="3" />
+        <polygon points="28,7 52,40 4,40" fill="#febc16" stroke="#b39118" stroke-width="3" />
+        <circle cx="28" cy="28" r="8" fill="#fef3ac" stroke="#b39118" stroke-width="2" />
       </svg>
       <svg id="wheel" viewBox="0 0 360 360" role="img" aria-label="Discount Wheel">
-        <g id="segments">
-          <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336"/>
-          <text class="wheel-label" x="188" y="88" text-anchor="middle" transform="rotate(19 188 88)">🔥 10% OFF (₹100)</text>
-          <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800"/>
-          <text class="wheel-label" x="295" y="89" text-anchor="middle" transform="rotate(65 295 89)">😔 TRY AGAIN</text>
-          <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50"/>
-          <text class="wheel-label" x="325" y="178" text-anchor="middle" transform="rotate(110 325 178)">🎁 15% OFF (₹150)</text>
-          <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3"/>
-          <text class="wheel-label" x="270" y="301" text-anchor="middle" transform="rotate(155 270 301)">💸 FLAT ₹20 OFF</text>
-          <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0"/>
-          <text class="wheel-label" x="188" y="339" text-anchor="middle" transform="rotate(205 188 339)">🎉 20% OFF (₹200)</text>
-          <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4"/>
-          <text class="wheel-label" x="68" y="307" text-anchor="middle" transform="rotate(250 68 307)">💵 FLAT ₹30 OFF</text>
-          <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107"/>
-          <text class="wheel-label" x="55" y="170" text-anchor="middle" transform="rotate(300 55 170)">😓 TRY AGAIN</text>
-          <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a"/>
-          <text class="wheel-label" x="78" y="65" text-anchor="middle" transform="rotate(335 78 65)">🎧 FREE EARPHONES</text>
+        <g id="segments" font-family="Orbitron, Arial" font-weight="bold" fill="#fff" stroke="#222" stroke-width="0.3" filter="drop-shadow(0 0 6px #fff)">
+          <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336" />
+          <text class="wheel-label" x="198" y="75">🔥 10% OFF</text>
+          <text class="wheel-label" x="198" y="90">(₹100)</text>
+          <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800" />
+          <text class="wheel-label" x="280" y="80">😔 TRY AGAIN</text>
+          <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50" />
+          <text class="wheel-label" x="320" y="180">🎁 15% OFF</text>
+          <text class="wheel-label" x="320" y="195">(₹150)</text>
+          <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3" />
+          <text class="wheel-label" x="250" y="305">💸 FLAT</text>
+          <text class="wheel-label" x="250" y="320">₹20 OFF</text>
+          <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0" />
+          <text class="wheel-label" x="190" y="335">🎉 20% OFF</text>
+          <text class="wheel-label" x="190" y="350">(₹200)</text>
+          <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4" />
+          <text class="wheel-label" x="70" y="300">💵 FLAT</text>
+          <text class="wheel-label" x="70" y="315">₹30 OFF</text>
+          <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107" />
+          <text class="wheel-label" x="55" y="170">😓 TRY</text>
+          <text class="wheel-label" x="55" y="185">AGAIN</text>
+          <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a" />
+          <text class="wheel-label" x="80" y="60">🎧 FREE</text>
+          <text class="wheel-label" x="80" y="75">EARPHONES</text>
         </g>
       </svg>
     </div>
     <div class="spin-button-container">
       <button class="spin-btn" id="spinBtn" aria-label="Spin the wheel">SPIN</button>
     </div>
-    <div class="bandeali-footer" aria-label="Brand name">BANDEALI ENTERPRISES</div>
+    <div class="bandeali-footer">BANDEALI ENTERPRISES</div>
+
+    <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popupText">
+      <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="popup-logo" />
+      <div id="popupText"></div>
+      <button id="closePopupBtn" aria-label="Close popup">OK</button>
+      <canvas id="fireworksCanvas"></canvas>
+    </div>
   </div>
 
-  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popupText">
-    <img src="Logo.jpg" alt="Logo" class="popup-logo" />
-    <div id="popupText"></div>
-    <button id="closePopupBtn" aria-label="Close popup">OK</button>
-    <canvas id="fireworksCanvas"></canvas>
-  </div>
+  <script>
+    function resizeCanvas() {
+      const canvas = document.getElementById("fireworksCanvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
 
-<script>
-  function resizeCanvas() {
-    const canvas = document.getElementById("fireworksCanvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resizeCanvas);
+    const wheelSVG = document.getElementById("wheel");
+    const spinBtn = document.getElementById("spinBtn");
+    const popup = document.getElementById("popup");
+    const popupTextElem = document.getElementById("popupText");
+    const closeBtn = document.getElementById("closePopupBtn");
+    const fireworksCanvas = document.getElementById("fireworksCanvas");
+    const ctx = fireworksCanvas.getContext("2d");
 
-  const wheelSVG = document.getElementById("wheel");
-  const spinBtn = document.getElementById("spinBtn");
-  const popup = document.getElementById("popup");
-  const popupTextElem = document.getElementById("popupText");
-  const closeBtn = document.getElementById("closePopupBtn");
-  const fireworksCanvas = document.getElementById("fireworksCanvas");
-  const ctx = fireworksCanvas.getContext("2d");
+    let spinning = false;
+    let totalDeg = 0;
 
-  let spinning = false;
-  let totalDeg = 0;
+    spinBtn.addEventListener("click", spin);
+    spinBtn.addEventListener("touchstart", spin);
+    closeBtn.addEventListener("click", closePopup);
+    closeBtn.addEventListener("touchstart", closePopup);
 
-  spinBtn.addEventListener("click", spin);
-  spinBtn.addEventListener("touchstart", spin);
-  closeBtn.addEventListener("click", closePopup);
-  closeBtn.addEventListener("touchstart", closePopup);
+    function spin() {
+      if (spinning) return;
+      spinning = true;
+      document.getElementById("resultText").textContent = "";
+      const extraSpins = 8;
+      const randomDeg = Math.floor(Math.random() * 360);
+      totalDeg += 360 * extraSpins + randomDeg;
 
-  function spin() {
-    if (spinning) return;
-    spinning = true;
-    document.getElementById("resultText").textContent = "";
-    const extraSpins = 8;
-    const randomDeg = Math.floor(Math.random() * 360);
-    totalDeg += 360 * extraSpins + randomDeg;
+      wheelSVG.style.transition = "transform 8s cubic-bezier(0.19, 0.75, 0.54, 0.99)";
+      wheelSVG.style.transform = `rotate(${totalDeg}deg)`;
 
-    wheelSVG.style.transition = "transform 8s cubic-bezier(0.19, 0.75, 0.54, 0.99)";
-    wheelSVG.style.transform = `rotate(${totalDeg}deg)`;
+      setTimeout(() => {
+        spinning = false;
+        const result = getResult(randomDeg);
+        showPopupResult(result);
+        launchFireworks();
+      }, 8200);
+    }
+    function getResult(angle) {
+      angle = angle % 360;
+      if (angle < 45) return "🔥 10% OFF";
+      if (angle < 90) return "😔 TRY AGAIN";
+      if (angle < 135) return "🎁 15% OFF";
+      if (angle < 180) return "💸 FLAT ₹20 OFF";
+      if (angle < 225) return "🎉 20% OFF";
+      if (angle < 270) return "💵 FLAT ₹30 OFF";
+      if (angle < 315) return "😓 TRY AGAIN";
+      return "🎧 FREE EARPHONES";
+    }
+    function showPopupResult(text) {
+      const popupText = document.getElementById("popupText");
+      popupText.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
+      popup.style.display = "flex";
+    }
+    function closePopup() {
+      popup.style.display = "none";
+      fireworksObjs = [];
+      if (fireworksInterval) clearInterval(fireworksInterval);
+      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      document.getElementById("resultText").textContent = "";
+    }
 
-    setTimeout(() => {
-      spinning = false;
-      let result = getResult(randomDeg);
-      showPopupResult(result);
-      launchFireworks();
-    }, 8200);
-  }
-  function getResult(angle) {
-    angle = angle % 360;
-    if (angle < 45) return "🔥 10% OFF (₹100)";
-    if (angle < 90) return "😔 TRY AGAIN";
-    if (angle < 135) return "🎁 15% OFF (₹150)";
-    if (angle < 180) return "💸 FLAT ₹20 OFF";
-    if (angle < 225) return "🎉 20% OFF (₹200)";
-    if (angle < 270) return "💵 FLAT ₹30 OFF";
-    if (angle < 315) return "😓 TRY AGAIN";
-    return "🎧 FREE EARPHONES";
-  }
-  function showPopupResult(text) {
-    popupTextElem.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
-    popup.style.display = "flex";
-  }
-  function closePopup() {
-    popup.style.display = "none";
-    fireworksObjs = [];
-    if (fireworksInterval) clearInterval(fireworksInterval);
-    ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    document.getElementById("resultText").textContent = "";
-  }
+    let fireworksInterval;
+    let fireworksObjs = [];
 
-  let fireworksInterval = null;
-  let fireworksObjs = [];
+    function Firework() {
+      this.x = Math.random() * fireworksCanvas.width;
+      this.y = fireworksCanvas.height + 10;
+      this.targetY = Math.random() * fireworksCanvas.height / 2;
+      this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      this.particles = [];
+      this.exploded = false;
+      this.vy = -8 - Math.random() * 2;
+    }
 
-  function Firework() {
-    this.x = fireworksCanvas.width * (0.18 + 0.64 * Math.random());
-    this.y = fireworksCanvas.height;
-    this.targetY = fireworksCanvas.height * (0.33 + 0.47 * Math.random());
-    this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    this.particles = [];
-    this.exploded = false;
-    this.launchVY = -7 - Math.random() * 2;
-    this.vy = this.launchVY;
-  }
-  Firework.prototype.update = function () {
-    if (!this.exploded) {
-      this.y += this.vy;
-      this.vy += 0.13;
-      if (this.y <= this.targetY) {
-        this.exploded = true;
-        for (let i = 0; i < 38 + Math.random() * 28; i++) {
-          const angle = (Math.PI * 2 * i) / 60;
-          this.particles.push({
-            x: this.x,
-            y: this.y,
-            vx: Math.cos(angle) * (2.3 + Math.random() * 2.2),
-            vy: Math.sin(angle) * (2.3 + Math.random() * 2.2),
-            alpha: 1,
-            color: this.color,
-          });
+    Firework.prototype.update = function () {
+      if (!this.exploded) {
+        this.y += this.vy;
+        this.vy += 0.2;
+
+        if (this.vy >= 0) {
+          this.exploded = true;
+          for (let i = 0; i < 30 + Math.random() * 20; i++) {
+            const angle = (Math.PI * 2 * i) / 20;
+            this.particles.push({
+              x: this.x,
+              y: this.y,
+              vx: Math.cos(angle) * (2 + Math.random() * 2),
+              vy: Math.sin(angle) * (2 + Math.random() * 2),
+              alpha: 1,
+              color: this.color,
+            });
+          }
         }
+      } else {
+        this.particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.05;
+          p.alpha -= 0.015;
+        });
+        this.particles = this.particles.filter(p => p.alpha > 0);
       }
-    } else {
-      this.particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.05;
-        p.alpha -= 0.019 + Math.random() * 0.008;
-      });
-      this.particles = this.particles.filter((p) => p.alpha > 0);
-    }
-  };
-  Firework.prototype.draw = function (ctx) {
-    if (!this.exploded) {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 3.4, 0, Math.PI * 2);
-      ctx.fillStyle = "#fff";
-      ctx.fill();
-    } else {
-      this.particles.forEach((p) => {
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2.7, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      });
-    }
-  };
+    };
 
-  function launchFireworks() {
-    resizeCanvas();
-    fireworksObjs = [];
-    if (fireworksInterval) clearInterval(fireworksInterval);
-    fireworksInterval = setInterval(() => {
-      fireworksObjs.push(new Firework());
-      if (fireworksObjs.length > 15) fireworksObjs.shift();
-    }, 700);
-    drawLoop();
-  }
-  function drawLoop() {
-    ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    fireworksObjs.forEach((fw) => {
-      fw.update();
-      fw.draw(ctx);
-    });
-    requestAnimationFrame(drawLoop);
-  }
-</script>
+    Firework.prototype.draw = function (ctx) {
+      if (!this.exploded) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      } else {
+        this.particles.forEach(p => {
+          ctx.globalAlpha = p.alpha;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+      }
+    };
+
+    function launchFireworks() {
+      resizeCanvas();
+      fireworksObjs = [];
+      if (fireworksInterval) clearInterval(fireworksInterval);
+      fireworksInterval = setInterval(() => {
+        fireworksObjs.push(new Firework());
+        if (fireworksObjs.length > 15) fireworksObjs.shift();
+      }, 500);
+      drawLoop();
+    }
+
+    function drawLoop() {
+      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      fireworksObjs.forEach(fw => {
+        fw.update();
+        fw.draw(ctx);
+      });
+      requestAnimationFrame(drawLoop);
+    }
+
+    function resizeCanvas() {
+      const canvas = document.getElementById("fireworksCanvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+  </script>
 </body>
 </html>
