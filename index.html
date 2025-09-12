@@ -16,8 +16,7 @@
     body::before {
       content: "";
       position: fixed; inset: 0;
-      /* Slightly darker for neon to pop */
-      background: linear-gradient(270deg, #232932 0%, #212121 100%);
+      background: linear-gradient(270deg, #232932 0%, #171818 100%);
       background-size: 800% 800%;
       animation: gradientBG 30s ease infinite;
       z-index: -2;
@@ -36,11 +35,11 @@
     }
     .logo-top {
       display: block;
-      margin: 24px auto 18px auto;
-      max-width: 105px;
-      border-radius: 20px;
+      margin: 22px auto 22px auto;
+      max-width: 120px;
+      border-radius: 14px;
       background: #fff;
-      box-shadow: 0 0 24px 4px #fc0a, 0 0 10px 0 #222;
+      box-shadow: 0 0 22px 5px #fc0a;
       object-fit: contain;
     }
     .wheel-holder {
@@ -53,17 +52,16 @@
     .arrow-pointer {
       position: absolute; top: -36px; left: 50%;
       transform: translateX(-50%);
-      width: 55px; height: 55px; z-index: 4;
+      width: 54px; height: 54px; z-index: 4;
       filter: drop-shadow(0 0 14px #fdc206) drop-shadow(0 0 4px #fff8);
     }
     .svg-wheel {
       width: 100%; height: 100%; border-radius:50%;
       background:#222;
-      /* Neon ring effect using filter and outlines */
       box-shadow:
         0 0 0 8px #fc0a,
         0 0 28px 6px #fc0,
-        0 0 80px 30px #ffd70040;
+        0 0 80px 30px #ffd70030;
       outline: 6px solid #fc0;
       filter: drop-shadow(0 0 25px #fdc206d0);
       user-select:none;
@@ -125,25 +123,27 @@
     @media (max-width: 600px) {
       .logo-top { max-width: 68px; margin-bottom: 12px; }
       .wheel-holder { max-width: 96vw; }
-      .arrow-pointer { width: 34px; height: 34px; top: -13px; }
-      .spin-btn { width: 57px; height: 57px; font-size: .89rem; }
+      .arrow-pointer { width: 29px; height: 29px; top: -9px; }
+      .spin-btn { width: 57px; height: 57px; font-size: .97rem; }
       .bandeali-footer { font-size: 1.2rem; }
     }
     /* Wheel text styles */
     .wheel-label {
       font-family: 'Orbitron', Arial, sans-serif;
-      font-weight: bold;
-      font-size: 1.04rem;
+      font-weight: 900;
+      font-size: 1.09rem;
       fill: #fff;
-      letter-spacing: 1px;
-      stroke: #222;
-      stroke-width: 0.6px;
-      filter: drop-shadow(0 0 6px #fffa);
+      letter-spacing: 1.7px;
+      stroke: #000;
+      stroke-width: 0.4px;
+      filter: drop-shadow(0 0 7px #ffc922a8);
+      dominant-baseline: middle;
     }
   </style>
 </head>
 <body>
   <div class="main-container">
+    <!-- Use file name Logo.jpg EXACTLY as shown in file -->
     <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="logo-top" />
     <div class="wheel-holder">
       <!-- Arrow Pointer Neon -->
@@ -152,30 +152,37 @@
         <polygon points="28,7 52,40 4,40" fill="#fc0" stroke="#b38d1d" stroke-width="3"/>
         <circle cx="28" cy="28" r="8" fill="#fff8c0" stroke="#b38d1d" stroke-width="2"/>
       </svg>
-      <!-- SVG Wheel -->
+      <!-- SVG Wheel with curved/adjusted text positions -->
       <svg id="wheel" class="svg-wheel" viewBox="0 0 360 360">
         <g id="segments">
           <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336"/>
-          <text class="wheel-label" x="220" y="65" text-anchor="middle" transform="rotate(22 220 65)">🔥 10% OFF (₹100)</text>
+          <text class="wheel-label" x="185" y="72" text-anchor="middle" transform="rotate(20 185 72)">🔥 10% OFF (₹100)</text>
+          
           <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800"/>
-          <text class="wheel-label" x="288" y="116" text-anchor="middle" transform="rotate(67 288 116)">😔 TRY AGAIN</text>
+          <text class="wheel-label" x="290" y="75" text-anchor="middle" transform="rotate(65 290 75)">😔 TRY AGAIN</text>
+          
           <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50"/>
-          <text class="wheel-label" x="285" y="243" text-anchor="middle" transform="rotate(112 285 243)">🎁 15% OFF (₹150)</text>
+          <text class="wheel-label" x="335" y="180" text-anchor="middle" transform="rotate(110 335 180)">🎁 15% OFF (₹150)</text>
+          
           <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3"/>
-          <text class="wheel-label" x="220" y="315" text-anchor="middle" transform="rotate(157 220 315)">💸 FLAT ₹20 OFF</text>
+          <text class="wheel-label" x="270" y="305" text-anchor="middle" transform="rotate(155 270 305)">💸 FLAT ₹20 OFF</text>
+          
           <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0"/>
-          <text class="wheel-label" x="140" y="315" text-anchor="middle" transform="rotate(202 140 315)">🎉 20% OFF (₹200)</text>
+          <text class="wheel-label" x="185" y="338" text-anchor="middle" transform="rotate(200 185 338)">🎉 20% OFF (₹200)</text>
+          
           <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4"/>
-          <text class="wheel-label" x="75" y="243" text-anchor="middle" transform="rotate(247 75 243)">💵 FLAT ₹30 OFF</text>
+          <text class="wheel-label" x="60" y="300" text-anchor="middle" transform="rotate(245 60 300)">💵 FLAT ₹30 OFF</text>
+          
           <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107"/>
-          <text class="wheel-label" x="70" y="116" text-anchor="middle" transform="rotate(292 70 116)">😓 TRY AGAIN</text>
+          <text class="wheel-label" x="40" y="170" text-anchor="middle" transform="rotate(290 40 170)">😓 TRY AGAIN</text>
+          
           <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a"/>
-          <text class="wheel-label" x="137" y="63" text-anchor="middle" transform="rotate(337 137 63)">🎧 FREE EARPHONES</text>
+          <text class="wheel-label" x="70" y="60" text-anchor="middle" transform="rotate(335 70 60)">🎧 FREE EARPHONES</text>
         </g>
         <circle cx="180" cy="180" r="46" fill="#fff" stroke="#fc0" stroke-width="7"
           filter="drop-shadow(0 0 14px #fdc206a0)" />
         <text x="180" y="195" font-size="27" fill="#222" font-family="Arial" font-weight="900"
-          text-anchor="middle" alignment-baseline="middle">SPIN</text>
+          text-anchor="middle">SPIN</text>
       </svg>
       <div class="spin-btn" id="spinBtn" role="button" aria-label="Spin the wheel" tabindex="0">SPIN</div>
     </div>
