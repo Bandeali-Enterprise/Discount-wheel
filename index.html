@@ -1,55 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Bandeali Enterprises Discount Wheel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet"/>
   <style>
     html, body {
-      margin: 0; padding: 0; min-height: 100vh;
+      margin:0; padding:0; min-height: 100vh;
       background: #111;
       font-family: Arial, Helvetica, sans-serif;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
     }
     body::before {
       content: "";
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: linear-gradient(270deg, #232932 0%, #171818 100%);
       background-size: 800% 800%;
       animation: gradientBG 30s ease infinite;
       z-index: -2;
     }
     @keyframes gradientBG {
-      0% { background-position: 0% 60%; }
-      50% { background-position: 100% 60%; }
-      100% { background-position: 0% 60%; }
+      0% {background-position: 0% 60%;}
+      50% {background-position: 100% 60%;}
+      100% {background-position: 0% 60%;}
     }
     .main-container {
-      margin-top: 1.8rem;
+      margin-top: 2vh;
       width: 100vw;
       max-width: 420px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      user-select: none;
-    }
-    .logo-top {
-      max-width: 110px;
-      margin: 22px auto 15px auto;
-      filter: drop-shadow(0 0 12px #febc2922);
+      display: flex; flex-direction: column; align-items: center; position: relative;
       user-select: none;
     }
     .wheel-holder {
       width: 96vw;
-      max-width: 400px;
-      aspect-ratio: 1 / 1;
+      max-width: 410px;
+      aspect-ratio: 1/1;
       position: relative;
       box-shadow:
         0 0 12px 3px #febc29,
@@ -60,20 +47,14 @@
     }
     .arrow-pointer {
       position: absolute;
-      top: -38px;
-      left: 50%;
+      top: -40px; left: 50%;
       transform: translateX(-50%);
-      width: 54px;
-      height: 54px;
-      z-index: 10;
+      width: 56px; height: 56px; z-index: 10;
       filter: drop-shadow(0 0 14px #febc29) drop-shadow(0 0 6px #ffffffbb);
       user-select: none;
     }
     svg#wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      user-select: none;
+      width: 100%; height: 100%; border-radius: 50%; user-select: none;
     }
     .wheel-label {
       font-family: 'Orbitron', Arial, sans-serif;
@@ -87,6 +68,9 @@
       dominant-baseline: middle;
       writing-mode: horizontal-tb;
       text-orientation: mixed;
+      text-anchor: middle;
+      white-space: normal;
+      word-break: break-word;
       user-select: none;
     }
     .wheel-label tspan {
@@ -95,7 +79,7 @@
     }
     .spin-button-container {
       margin: 30px 0 0 0;
-      width: 180px;
+      width: 190px;
       max-width: 90vw;
     }
     .spin-btn {
@@ -105,13 +89,13 @@
       border-radius: 28px;
       border: none;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       letter-spacing: 3px;
       color: #111;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 0 32px 4px #febc29cc;
-      filter: drop-shadow(0 0 10px #febc29cc);
+      box-shadow: 0 0 40px #febc29cc;
+      filter: drop-shadow(0 0 12px #febc29cc);
       user-select: none;
       transition: background 0.3s, transform 0.2s ease;
     }
@@ -133,22 +117,22 @@
       letter-spacing: 3px;
       text-shadow:
         0 0 26px #febc29,
-        0 0 10px #ffe569;
+        0 0 8px #ffe066;
       user-select: none;
       text-align: center;
     }
     #resultText {
       position: absolute;
-      top: -98px;
+      top: -100px;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      font-size: 1.75rem;
+      font-size: 1.85rem;
       color: #febc29;
       text-shadow:
-        0 0 18px #ffd152,
-        0 0 11px #ffd152aa;
+        0 0 20px #ffd152,
+        0 0 15px #ffd152aa;
       white-space: nowrap;
       letter-spacing: 1.4px;
       user-select: none;
@@ -213,17 +197,17 @@
       height: 100vh;
       pointer-events: none;
       z-index: 11100;
+      user-select: none;
     }
     @media (max-width: 600px) {
       .main-container {
         max-width: 96vw;
       }
       .logo-top {
-        max-width: 105px;
-        margin: 18px auto 14px auto;
+        display: none; /* Hide logo as per request */
       }
       .wheel-holder {
-        max-width: 390px;
+        max-width: 94vw;
       }
       .arrow-pointer {
         width: 44px;
@@ -231,69 +215,62 @@
         top: -38px;
       }
       .spin-button-container {
-        width: 80vw;
+        width: 94vw;
       }
       .spin-btn {
         font-size: 1.2rem;
+        font-weight: 700;
       }
       .bandeali-footer {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
       }
       #resultText {
         font-size: 1.5rem;
-        width: 85vw;
-        top: -78px;
+        top: -80px;
+        width: 90vw;
       }
     }
   </style>
 </head>
 <body>
   <div class="main-container" aria-label="Discount Wheel Game">
-    <!-- Logo -->
-    <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="logo-top" />
-    <!-- Wheel and arrow -->
+    <!-- Logo removed as per request -->
+
     <div class="wheel-holder" role="group" aria-describedby="resultText">
       <div id="resultText" aria-live="polite" aria-atomic="true"></div>
       <svg class="arrow-pointer" aria-hidden="true" viewBox="0 0 56 56" role="presentation" aria-label="Pointer arrow">
-        <circle cx="28" cy="16" r="10" fill="#febc29" stroke="#b39118" stroke-width="3" />
-        <polygon points="28,7 52,40 4,40" fill="#febc16" stroke="#b39118" stroke-width="3" />
-        <circle cx="28" cy="28" r="8" fill="#fef3ac" stroke="#b39118" stroke-width="2" />
+        <circle cx="28" cy="16" r="10" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
+        <polygon points="28,7 52,40 4,40" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
+        <circle cx="28" cy="28" r="8" fill="#fff7aa" stroke="#b38d1d" stroke-width="2" />
       </svg>
       <svg id="wheel" viewBox="0 0 360 360" role="img" aria-label="Discount Wheel">
         <g id="segments" font-family="Orbitron, Arial" font-weight="bold" fill="#fff" stroke="#222" stroke-width="0.3" filter="drop-shadow(0 0 6px #fff)">
           <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336" />
-          <text class="wheel-label" x="198" y="75">🔥 10% OFF</text>
-          <text class="wheel-label" x="198" y="90">(₹100)</text>
+          <text class="wheel-label" x="188" y="88" text-anchor="middle" transform="rotate(19 188 88)">🔥 <tspan x="188" dy="1.5em">10% OFF</tspan> <tspan x="188" dy="1.5em">(₹100)</tspan></text>
           <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800" />
-          <text class="wheel-label" x="280" y="80">😔 TRY AGAIN</text>
+          <text class="wheel-label" x="295" y="89" text-anchor="middle" transform="rotate(65 295 89)">😔 <tspan x="295" dy="1.5em">TRY AGAIN</tspan></text>
           <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50" />
-          <text class="wheel-label" x="320" y="180">🎁 15% OFF</text>
-          <text class="wheel-label" x="320" y="195">(₹150)</text>
+          <text class="wheel-label" x="327" y="178" text-anchor="middle" transform="rotate(110 327 178)">🎁 <tspan x="327" dy="1.5em">15% OFF</tspan> <tspan x="327" dy="1.5em">(₹150)</tspan></text>
           <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3" />
-          <text class="wheel-label" x="250" y="305">💸 FLAT</text>
-          <text class="wheel-label" x="250" y="320">₹20 OFF</text>
+          <text class="wheel-label" x="263" y="308" text-anchor="middle" transform="rotate(155 263 308)">💸 <tspan x="263" dy="1.5em">FLAT ₹20 OFF</tspan></text>
           <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0" />
-          <text class="wheel-label" x="190" y="335">🎉 20% OFF</text>
-          <text class="wheel-label" x="190" y="350">(₹200)</text>
+          <text class="wheel-label" x="190" y="343" text-anchor="middle" transform="rotate(205 190 343)">🎉 <tspan x="190" dy="1.5em">20% OFF</tspan> <tspan x="190" dy="1.5em">(₹200)</tspan></text>
           <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4" />
-          <text class="wheel-label" x="70" y="300">💵 FLAT</text>
-          <text class="wheel-label" x="70" y="315">₹30 OFF</text>
+          <text class="wheel-label" x="65" y="302" text-anchor="middle" transform="rotate(250 65 302)">💵 <tspan x="65" dy="1.5em">FLAT ₹30 OFF</tspan></text>
           <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107" />
-          <text class="wheel-label" x="55" y="170">😓 TRY</text>
-          <text class="wheel-label" x="55" y="185">AGAIN</text>
+          <text class="wheel-label" x="45" y="175" text-anchor="middle" transform="rotate(300 45 175)">😓 <tspan x="45" dy="1.5em">TRY AGAIN</tspan></text>
           <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a" />
-          <text class="wheel-label" x="80" y="60">🎧 FREE</text>
-          <text class="wheel-label" x="80" y="75">EARPHONES</text>
+          <text class="wheel-label" x="75" y="65" text-anchor="middle" transform="rotate(335 75 65)">🎧 <tspan x="75" dy="1.5em">FREE EARPHONES</tspan></text>
         </g>
       </svg>
     </div>
     <div class="spin-button-container">
       <button class="spin-btn" id="spinBtn" aria-label="Spin the wheel">SPIN</button>
     </div>
-    <div class="bandeali-footer">BANDEALI ENTERPRISES</div>
+    <div class="bandeali-footer" aria-label="Brand name">BANDEALI ENTERPRISES</div>
 
     <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popupText">
-      <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="popup-logo" />
+      <img src="Logo.jpg" alt="Logo" class="popup-logo" />
       <div id="popupText"></div>
       <button id="closePopupBtn" aria-label="Close popup">OK</button>
       <canvas id="fireworksCanvas"></canvas>
@@ -354,8 +331,7 @@
       return "🎧 FREE EARPHONES";
     }
     function showPopupResult(text) {
-      const popupText = document.getElementById("popupText");
-      popupText.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
+      popupTextElem.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
       popup.style.display = "flex";
     }
     function closePopup() {
@@ -452,7 +428,6 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-
     window.addEventListener("resize", resizeCanvas);
   </script>
 </body>
