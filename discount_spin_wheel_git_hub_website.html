@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discount Spin Wheel</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    header img {
+      max-width: 180px;
+      margin: 20px auto;
+      display: block;
+    }
+    #wheelCanvas {
+      background: transparent;
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    }
+    #spinBtn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      font-size: 20px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #ff0099, #ffcc00);
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(255,255,255,0.6);
+      transition: transform 0.2s;
+    }
+    #spinBtn:hover {
+      transform: scale(1.05);
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #0f0;
+      text-shadow: 0 0 8px #0f0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Logo.jpg" alt="Shop Logo">
+  </header>
+
+  <canvas id="wheelCanvas" width="400" height="400"></canvas>
+  <button id="spinBtn">SPIN</button>
+  <div id="result"></div>
+
+  <script>
+    const options = [
+      { text: "10% off (upto ₹100)", weight: 2 },
+      { text: "15% off (upto ₹150)", weight: 2 },
+      { text: "20% off (upto ₹200)", weight: 2 },
+      { text: "Flat ₹20 off", weight: 2 },
+      { text: "Flat ₹30 off", weight: 2 },
+      { text: "Free Earphone", weight: 0.5 }, // rare
+      { text: "Lucky Draw Entry", weight: 2 },
+      { text: "Better Luck Next Time", weight: 2 },
+      { text: "Better Luck Next Time", weight: 2 }
+    ];
+
+    const wheelCanvas = document.getElementById("wheelCanvas");
+    const ctx = wheelCanvas.getContext("2d");
+    const spinBtn = document.getElementById("spinBtn");
+    const resultDiv = document.getElementById("result");
+
+    const totalWeight = options.reduce((acc, o) => acc + o.weight, 0);
+    const arcSize = (2 * Math.PI) / totalWeight;
+    let startAngle = 0;
+
+    function drawWheel() {
+      ctx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
+      let currentAngle = startAngle;
+
+      options.forEach(opt => {
+        const angle = arcSize * opt.weight;
+        ctx.beginPath();
+        ctx.moveTo(200, 200);
+        ctx.arc(200, 200, 200, currentAngle, currentAngle + angle);
+        ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        ctx.fill();
+        ctx.save();
+        ctx.translate(200, 200);
+        ctx.rotate(currentAngle + angle / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#fff";
+        ctx.font = "16px Arial";
+        ctx.fillText(opt.text, 180, 10);
+        ctx.restore();
+        currentAngle += angle;
+      });
+    }
+
+    function spinWheel() {
+      const spinAngle = Math.random() * totalWeight;
+      let cumulative = 0;
+      let selected;
+      for (const opt of options) {
+        cumulative += opt.weight;
+        if (spinAngle <= cumulative) {
+          selected = opt;
+          break;
+        }
+      }
+      resultDiv.textContent = `🎉 ${selected.text} 🎉`;
+    }
+
+    spinBtn.addEventListener("click", () => {
+      spinWheel();
+    });
+
+    drawWheel();
+  </script>
+</body>
+</html>
