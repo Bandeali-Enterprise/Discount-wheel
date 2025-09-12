@@ -27,56 +27,58 @@
       100% {background-position: 0% 60%;}
     }
     .main-container {
-      margin-top: 1.8rem;
+      margin-top: 2vh;
       width: 100vw;
-      max-width: 410px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
+      max-width: 420px;
+      display: flex; flex-direction: column; align-items: center; position:relative;
       user-select: none;
     }
     .logo-top {
-      display: block;
-      margin: 28px auto 22px auto;
-      max-width: 140px;
-      border-radius: 14px;
-      background: #fff;
-      box-shadow: 0 0 28px 6px #fc0a;
-      object-fit: contain;
+      max-width: 160px;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 0 20px #febc2922);
     }
     .wheel-holder {
-      position: relative;
       width: 96vw;
-      max-width: 360px;
+      max-width: 400px;
       aspect-ratio: 1 / 1;
-      margin: auto;
+      position: relative;
+      box-shadow:
+        0 0 12px 2px #febc29,
+        0 0 26px 8px #febc29a2;
+      border-radius: 50%;
+      background-color: #222;
     }
     .arrow-pointer {
       position: absolute;
-      top: -38px;
-      left: 50%;
+      top: -40px; left: 50%;
       transform: translateX(-50%);
-      width: 56px;
-      height: 56px;
-      z-index: 4;
-      filter: drop-shadow(0 0 14px #fdc206) drop-shadow(0 0 4px #fff8);
+      width: 55px; height: 55px; z-index: 10;
+      filter: drop-shadow(0 0 14px #febc29) drop-shadow(0 0 6px #ffffff88);
+      user-select: none;
     }
-    .svg-wheel {
+    svg#wheel {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: #222;
-      box-shadow:
-        0 0 0 8px #fc0a,
-        0 0 28px 6px #fc0,
-        0 0 80px 30px #ffd70030;
-      outline: 6px solid #fc0;
-      filter: drop-shadow(0 0 25px #fdc206d0);
       user-select: none;
-      transition: transform 8s cubic-bezier(0.19, 0.75, 0.54, 0.99);
     }
-    /* Spin button below wheel */
+    .wheel-label {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 900;
+      font-size: 14.5px;
+      fill: #fff;
+      letter-spacing: 1.2px;
+      stroke: #222;
+      stroke-width: 0.35px;
+      filter: drop-shadow(0 0 6px #fff7);
+      dominant-baseline: middle;
+      writing-mode: tb;
+      text-orientation: mixed;
+      white-space: normal;
+      word-break: break-word;
+      user-select: none;
+    }
     .spin-button-container {
       margin-top: 28px;
       width: 180px;
@@ -85,131 +87,108 @@
     .spin-btn {
       width: 100%;
       padding: 14px 0;
-      background: #fc0;
-      border-radius: 24px;
+      background: #febc29;
+      border-radius: 28px;
       border: none;
       font-weight: 700;
       font-size: 1.3rem;
       letter-spacing: 3px;
-      color: #222;
+      color: #111;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 0 32px #fdb913cc;
-      filter: drop-shadow(0 0 10px #fdb911cc);
+      box-shadow: 0 0 32px #febc29cc;
+      filter: drop-shadow(0 0 10px #febc29cc);
       user-select: none;
       transition: background 0.3s, transform 0.2s ease;
     }
     .spin-btn:hover {
-      background: #fdd835;
+      background: #ffd152;
       transform: scale(1.07);
     }
     .spin-btn:active {
-      background: #c6a800;
+      background: #b28b1a;
       transform: scale(1);
-      color: #000;
+      color: #222;
     }
     .bandeali-footer {
-      font-family: "Orbitron", sans-serif;
-      font-size: 2.1rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
       font-weight: 700;
-      color: #fc0;
+      color: #febc29;
       margin-top: 28px;
-      margin-bottom: 18px;
-      letter-spacing: 3px;
+      margin-bottom: 20px;
+      letter-spacing: 2.6px;
       text-shadow:
-        0 0 22px #ffd700,
-        0 0 8px #ffe066,
-        0 1px 4px #fb0e;
-      filter: drop-shadow(0 0 8px #fc0);
-      text-align: center;
+        0 0 22px #febc29,
+        0 0 8px #ffe066;
       user-select: none;
-      outline: none;
+      text-align: center;
     }
-    /* Result text near arrow */
     #resultText {
       position: absolute;
-      top: -92px;
+      top: -98px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: "Orbitron", sans-serif;
-      font-weight: 800;
-      font-size: 1.65rem;
-      color: #fc0;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.75rem;
+      color: #febc29;
       text-shadow:
-        0 0 18px #ffd700,
-        0 0 14px #ffd70055;
+        0 0 18px #ffd152,
+        0 0 14px #ffd152aa;
       white-space: nowrap;
       letter-spacing: 1.5px;
       user-select: none;
-      z-index: 20;
+      z-index: 10;
       pointer-events: none;
-      width: 280px;
-    }
-    /* Wheel text styles (vertical) */
-    .wheel-label {
-      font-family: "Orbitron", Arial, sans-serif;
-      font-weight: 900;
-      font-size: 1.15rem;
-      fill: #fff;
-      letter-spacing: 1.8px;
-      stroke: #111;
-      stroke-width: 0.45px;
-      filter: drop-shadow(0 0 7px #ffc922a8);
-      dominant-baseline: central;
-      writing-mode: tb;
-      text-orientation: mixed;
-      /* Important to avoid overlap */
-      white-space: normal;
-      word-break: break-word;
+      width: 300px;
+      text-align: center;
     }
     /* Popup styles */
     #popup {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 10000;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.96);
+      z-index: 11000;
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding-top: 48px;
+      padding-top: 46px;
       user-select: none;
+      font-size: 1.85rem;
       color: white;
       text-align: center;
-      font-size: 1.7rem;
       letter-spacing: 1px;
     }
     .popup-logo {
       max-width: 140px;
-      margin-bottom: 30px;
-      filter: drop-shadow(0 0 22px #fcc92780);
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 22px #febc2980);
     }
     #popupText {
-      margin: 0 10px;
       font-weight: 700;
-      line-height: 1.3;
-      text-shadow: 0 0 9px #ffd700bb;
+      line-height: 1.35;
+      text-shadow: 0 0 10px #ffd152cc;
+      margin: 0 12px;
     }
     #popup button {
       margin-top: 38px;
-      padding: 15px 38px;
-      font-size: 1.2rem;
-      background: #fc0;
+      padding: 16px 38px;
+      font-size: 1.3rem;
+      background: #febc29;
       border: none;
-      border-radius: 16px;
+      border-radius: 18px;
       font-weight: 700;
-      box-shadow: 0 0 24px #fc0a;
-      color: #222;
+      box-shadow: 0 0 28px #febc29aa;
+      color: #111;
       cursor: pointer;
       user-select: none;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
     #popup button:active {
-      background: #222;
-      color: #fc0;
+      background: #997d16;
+      color: #fff;
     }
     #fireworksCanvas {
       position: fixed;
@@ -217,80 +196,50 @@
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 10001;
+      z-index: 11100;
     }
-    /* Responsive */
     @media (max-width: 600px) {
-      .logo-top {
-        max-width: 110px;
-        margin-bottom: 14px;
-      }
-      .wheel-holder {
-        max-width: 96vw;
-      }
-      .arrow-pointer {
-        width: 38px;
-        height: 38px;
-        top: -34px;
-      }
-      .spin-button-container {
-        width: 92vw;
-      }
-      .spin-btn {
-        font-size: 1.07rem;
-        font-weight: 700;
-      }
-      .bandeali-footer {
-        font-size: 1.55rem;
-      }
-      #resultText {
-        font-size: 1.25rem;
-        top: -70px;
-        width: 95vw;
-      }
+      .main-container { max-width: 96vw; }
+      .logo-top { max-width: 105px; margin-bottom: 18px; }
+      .wheel-holder { max-width: 94vw; }
+      .arrow-pointer { width: 43px; height: 43px; top: -36px; }
+      .spin-button-container { width: 94vw;}
+      .spin-btn { font-size: 1.15rem; font-weight: 700; }
+      .bandeali-footer { font-size: 1.4rem; }
+      #resultText { font-size: 1.35rem; top: -70px; width: 90vw; }
     }
   </style>
 </head>
 <body>
-  <div class="main-container" aria-label="Bandeali Enterprises Discount Wheel Game">
+  <div class="main-container" aria-label="Discount Wheel Game">
     <img src="Logo.jpg" alt="Bandeali Enterprises Logo" class="logo-top" />
-    <div class="wheel-holder" role="group" aria-labelledby="spinButton">
+    <div class="wheel-holder" role="group" aria-describedby="resultText">
       <div id="resultText" aria-live="polite" aria-atomic="true"></div>
-      <!-- Arrow Pointer -->
       <svg class="arrow-pointer" aria-hidden="true" viewBox="0 0 56 56" role="presentation" aria-label="Pointer arrow">
-        <circle cx="28" cy="16" r="10" fill="#fc0" stroke="#b38d1d" stroke-width="3" />
-        <polygon points="28,7 52,40 4,40" fill="#fc0" stroke="#b38d1d" stroke-width="3" />
-        <circle cx="28" cy="28" r="8" fill="#fff8c0" stroke="#b38d1d" stroke-width="2" />
+        <circle cx="28" cy="16" r="10" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
+        <polygon points="28,7 52,40 4,40" fill="#febc29" stroke="#b38d1d" stroke-width="3" />
+        <circle cx="28" cy="28" r="8" fill="#fff7aa" stroke="#b38d1d" stroke-width="2" />
       </svg>
-      <!-- SVG Wheel -->
-      <svg id="wheel" class="svg-wheel" viewBox="0 0 360 360" role="img" aria-label="Discount Wheel">
+      <svg id="wheel" viewBox="0 0 360 360" role="img" aria-label="Discount Wheel">
         <g id="segments">
           <path d="M180,180 L180,30 A150,150 0 0,1 271.2,60.6 Z" fill="#f44336" />
-          <text class="wheel-label" x="220" y="75" text-anchor="middle" transform="rotate(20 220 75)">🔥 10% OFF (₹100)</text>
+          <text class="wheel-label" x="185" y="75" text-anchor="middle" transform="rotate(20 185 75)">🔥<tspan x="185" dy="1.4em">10% OFF</tspan><tspan x="185" dy="1.4em">(₹100)</tspan></text>
           <path d="M180,180 L271.2,60.6 A150,150 0 0,1 330,150 Z" fill="#ff9800" />
-          <text class="wheel-label" x="290" y="85" text-anchor="middle" transform="rotate(65 290 85)">😔 TRY AGAIN</text>
+          <text class="wheel-label" x="300" y="90" text-anchor="middle" transform="rotate(65 300 90)">😔<tspan x="300" dy="1.4em">TRY AGAIN</tspan></text>
           <path d="M180,180 L330,150 A150,150 0 0,1 271.2,299.4 Z" fill="#4caf50" />
-          <text class="wheel-label" x="330" y="180" text-anchor="middle" transform="rotate(110 330 180)">🎁 15% OFF (₹150)</text>
+          <text class="wheel-label" x="330" y="180" text-anchor="middle" transform="rotate(110 330 180)">🎁<tspan x="330" dy="1.4em">15% OFF</tspan><tspan x="330" dy="1.4em">(₹150)</tspan></text>
           <path d="M180,180 L271.2,299.4 A150,150 0 0,1 180,330 Z" fill="#2196f3" />
-          <text class="wheel-label" x="265" y="310" text-anchor="middle" transform="rotate(155 265 310)">💸 FLAT ₹20 OFF</text>
+          <text class="wheel-label" x="265" y="305" text-anchor="middle" transform="rotate(155 265 305)">💸<tspan x="265" dy="1.4em">FLAT ₹20</tspan><tspan x="265" dy="1.4em">OFF</tspan></text>
           <path d="M180,180 L180,330 A150,150 0 0,1 88.8,299.4 Z" fill="#9c27b0" />
-          <text class="wheel-label" x="185" y="340" text-anchor="middle" transform="rotate(200 185 340)">🎉 20% OFF (₹200)</text>
+          <text class="wheel-label" x="190" y="340" text-anchor="middle" transform="rotate(200 190 340)">🎉<tspan x="190" dy="1.4em">20% OFF</tspan><tspan x="190" dy="1.4em">(₹200)</tspan></text>
           <path d="M180,180 L88.8,299.4 A150,150 0 0,1 30,150 Z" fill="#00bcd4" />
-          <text class="wheel-label" x="60" y="300" text-anchor="middle" transform="rotate(245 60 300)">💵 FLAT ₹30 OFF</text>
+          <text class="wheel-label" x="60" y="300" text-anchor="middle" transform="rotate(245 60 300)">💵<tspan x="60" dy="1.4em">FLAT ₹30</tspan><tspan x="60" dy="1.4em">OFF</tspan></text>
           <path d="M180,180 L30,150 A150,150 0 0,1 88.8,60.6 Z" fill="#ffc107" />
-          <text class="wheel-label" x="40" y="175" text-anchor="middle" transform="rotate(290 40 175)">😓 TRY AGAIN</text>
+          <text class="wheel-label" x="40" y="170" text-anchor="middle" transform="rotate(290 40 170)">😓<tspan x="40" dy="1.4em">TRY AGAIN</tspan></text>
           <path d="M180,180 L88.8,60.6 A150,150 0 0,1 180,30 Z" fill="#8bc34a" />
-          <text class="wheel-label" x="70" y="60" text-anchor="middle" transform="rotate(335 70 60)">🎧 FREE EARPHONES</text>
+          <text class="wheel-label" x="78" y="60" text-anchor="middle" transform="rotate(335 78 60)">🎧<tspan x="78" dy="1.4em">FREE EARPHONES</tspan></text>
         </g>
-        <circle
-          cx="180" cy="180" r="46" fill="#fff" stroke="#fc0" stroke-width="7"
-          filter="drop-shadow(0 0 17px #fdc206a0)" />
-        <text
-          x="180" y="195" font-size="28" fill="#222" font-family="Arial" font-weight="900"
-          text-anchor="middle"
-          alignment-baseline="middle"
-          style="user-select: none;"
-          >SPIN</text>
+        <circle cx="180" cy="180" r="46" fill="#fff" stroke="#febc29" stroke-width="7" filter="drop-shadow(0 0 20px #fdc206bb)" />
       </svg>
     </div>
     <div class="spin-button-container">
@@ -330,12 +279,10 @@
     closeBtn.addEventListener("click", closePopup);
     closeBtn.addEventListener("touchstart", closePopup);
 
-    const resultText = document.getElementById("resultText");
-
     function spin() {
       if (spinning) return;
       spinning = true;
-      resultText.textContent = "";
+      document.getElementById("resultText").textContent = "";
       const extraSpins = 8;
       const randomDeg = Math.floor(Math.random() * 360);
       totalDeg += 360 * extraSpins + randomDeg;
@@ -346,11 +293,10 @@
       setTimeout(() => {
         spinning = false;
         let result = getResult(randomDeg);
-        showResult(result);
+        showPopupResult(result);
         launchFireworks();
       }, 8200);
     }
-
     function getResult(angle) {
       angle = angle % 360;
       if (angle < 45) return "🔥 10% OFF (₹100)";
@@ -362,16 +308,17 @@
       if (angle < 315) return "😓 TRY AGAIN";
       return "🎧 FREE EARPHONES";
     }
-
-    function showResult(text) {
-      resultText.textContent = text;
+    function showPopupResult(text) {
+      const popupText = document.getElementById("popupText");
+      popupText.innerHTML = "🎉 <span style='color:#febc29; text-shadow: 0 0 10px #ffd152;'>Congratulations!</span><br>" + text;
+      popup.style.display = "flex";
     }
-
     function closePopup() {
       popup.style.display = "none";
       fireworksObjs = [];
       if (fireworksInterval) clearInterval(fireworksInterval);
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      document.getElementById("resultText").textContent = "";
     }
 
     let fireworksInterval = null;
