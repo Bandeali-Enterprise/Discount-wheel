@@ -3,128 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discount Spin Wheel</title>
+  <title>Discount Wheel</title>
   <style>
     body {
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
-      background: #000;
-      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(270deg, #ff7eb3, #65d6ce, #f6d365, #fda085);
+      background-size: 800% 800%;
+      animation: bgAnimate 15s ease infinite;
       font-family: Arial, sans-serif;
-      overflow: hidden;
     }
-    header img {
-      max-width: 180px;
-      margin: 20px auto;
-      display: block;
+
+    @keyframes bgAnimate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    #wheelCanvas {
-      background: transparent;
+
+    .wheel-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    .wheel {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      border: 10px solid #fff;
+      overflow: hidden;
+      position: relative;
+      transition: transform 6s cubic-bezier(0.33, 1, 0.68, 1);
     }
-    #spinBtn {
-      margin-top: 25px;
-      padding: 12px 25px;
+
+    .segment {
+      width: 50%;
+      height: 50%;
+      background: red;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: 0% 0%;
+      text-align: center;
+      line-height: 200px;
+      color: white;
+      font-weight: bold;
       font-size: 20px;
-      border: none;
-      border-radius: 50px;
-      background: linear-gradient(45deg, #ff0099, #ffcc00);
-      color: #000;
+    }
+
+    .segment:nth-child(1) { transform: rotate(0deg) skewY(-60deg); background: #f44336; }
+    .segment:nth-child(2) { transform: rotate(60deg) skewY(-60deg); background: #ff9800; }
+    .segment:nth-child(3) { transform: rotate(120deg) skewY(-60deg); background: #ffeb3b; color:#000; }
+    .segment:nth-child(4) { transform: rotate(180deg) skewY(-60deg); background: #4caf50; }
+    .segment:nth-child(5) { transform: rotate(240deg) skewY(-60deg); background: #2196f3; }
+    .segment:nth-child(6) { transform: rotate(300deg) skewY(-60deg); background: #9c27b0; }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       font-weight: bold;
-      box-shadow: 0 0 15px rgba(255,255,255,0.6);
-      transition: transform 0.2s;
     }
-    #spinBtn:hover {
-      transform: scale(1.05);
-    }
-    #result {
-      margin-top: 20px;
-      font-size: 22px;
-      font-weight: bold;
-      color: #0f0;
-      text-shadow: 0 0 8px #0f0;
+
+    .pointer {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid #fff;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="Logo.jpg" alt="Shop Logo">
-  </header>
-
-  <canvas id="wheelCanvas" width="400" height="400"></canvas>
-  <button id="spinBtn">SPIN</button>
-  <div id="result"></div>
+  <div class="wheel-container">
+    <div class="pointer"></div>
+    <div id="wheel" class="wheel">
+      <div class="segment">10%</div>
+      <div class="segment">20%</div>
+      <div class="segment">30%</div>
+      <div class="segment">40%</div>
+      <div class="segment">50%</div>
+      <div class="segment">Try Again</div>
+    </div>
+    <div class="center" onclick="spin()">SPIN</div>
+  </div>
 
   <script>
-    const options = [
-      { text: "10% off (upto ₹100)", weight: 2 },
-      { text: "15% off (upto ₹150)", weight: 2 },
-      { text: "20% off (upto ₹200)", weight: 2 },
-      { text: "Flat ₹20 off", weight: 2 },
-      { text: "Flat ₹30 off", weight: 2 },
-      { text: "Free Earphone", weight: 0.5 }, // rare
-      { text: "Lucky Draw Entry", weight: 2 },
-      { text: "Better Luck Next Time", weight: 2 },
-      { text: "Better Luck Next Time", weight: 2 }
-    ];
+    let wheel = document.getElementById("wheel");
+    let spinning = false;
 
-    const wheelCanvas = document.getElementById("wheelCanvas");
-    const ctx = wheelCanvas.getContext("2d");
-    const spinBtn = document.getElementById("spinBtn");
-    const resultDiv = document.getElementById("result");
+    function spin() {
+      if (spinning) return;
+      spinning = true;
 
-    const totalWeight = options.reduce((acc, o) => acc + o.weight, 0);
-    const arcSize = (2 * Math.PI) / totalWeight;
-    let startAngle = 0;
+      // Random angle (multiple of 360 + offset for result)
+      let extraSpins = 5; // fast spins
+      let randomDeg = Math.floor(Math.random() * 360);
+      let finalDeg = 360 * extraSpins + randomDeg;
 
-    function drawWheel() {
-      ctx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
-      let currentAngle = startAngle;
+      wheel.style.transform = `rotate(${finalDeg}deg)`;
 
-      options.forEach(opt => {
-        const angle = arcSize * opt.weight;
-        ctx.beginPath();
-        ctx.moveTo(200, 200);
-        ctx.arc(200, 200, 200, currentAngle, currentAngle + angle);
-        ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        ctx.fill();
-        ctx.save();
-        ctx.translate(200, 200);
-        ctx.rotate(currentAngle + angle / 2);
-        ctx.textAlign = "right";
-        ctx.fillStyle = "#fff";
-        ctx.font = "16px Arial";
-        ctx.fillText(opt.text, 180, 10);
-        ctx.restore();
-        currentAngle += angle;
-      });
+      setTimeout(() => {
+        spinning = false;
+        alert("🎉 Wheel stopped! Check your discount.");
+      }, 6000);
     }
-
-    function spinWheel() {
-      const spinAngle = Math.random() * totalWeight;
-      let cumulative = 0;
-      let selected;
-      for (const opt of options) {
-        cumulative += opt.weight;
-        if (spinAngle <= cumulative) {
-          selected = opt;
-          break;
-        }
-      }
-      resultDiv.textContent = `🎉 ${selected.text} 🎉`;
-    }
-
-    spinBtn.addEventListener("click", () => {
-      spinWheel();
-    });
-
-    drawWheel();
   </script>
 </body>
 </html>
