@@ -6,236 +6,77 @@
   <title>Bandeali Enterprises Treasure Box Game</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-    body {
-      margin: 0; padding: 0;
-      background: radial-gradient(circle at 60% 50%, #283445 0%, #181e27 100%);
-      font-family: 'Orbitron', sans-serif;
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      user-select: none;
-      text-align: center;
+    body { background:radial-gradient(circle at 60% 50%, #283445 0%, #181e27 100%); font-family:'Orbitron',sans-serif; color:white; min-height:100vh; margin:0; padding:0; display:flex; flex-direction:column; align-items:center; user-select:none; text-align:center;}
+    #logo { max-width: 160px; margin: 25px auto 10px auto; user-select: none;}
+    .header-container { max-width:600px; margin-bottom:10px;}
+    .header-container h1 {margin:0;font-size:3rem;color:#fde14b;text-shadow: 0 0 20px #fde14b, 0 0 40px #f8d530;font-weight:900;letter-spacing:6px;}
+    .header-container h2 {margin:8px 0 0 0;font-size:2rem;color:#fbe74b;text-shadow:0 0 16px #fbe74b;font-weight:700;letter-spacing:4px;}
+    #instructions { font-size:1.25rem; max-width:450px; margin:20px auto 30px auto; color:#eee;}
+
+    #game-container { display: grid; grid-template-columns:repeat(3,1fr); gap:16px 14px; justify-items:center; width:320px; max-width:95vw; min-height:380px; margin-bottom:14px; user-select:none;}
+    .box { width:100px; height:130px; background: linear-gradient(145deg, #6b3e00, #3f2400 92%); border:3px solid #fde14b; border-radius:16px; box-shadow:0 0 18px #fde14baa inset,0 3px 10px #000b; font-weight:900; color:#fde14b; font-size:2.8rem; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; transition:transform 0.3s ease; outline:none; position:relative;}
+    .box.locked { filter:grayscale(1); opacity:0.6; cursor:default;}
+    .box.active {border-color:#fff44c; box-shadow:0 0 30px #fff44c inset,0 0 15px #fff44c; transform:scale(1.07);color:#4b3700;}
+    .box.opened {background:#fde14b;color:#4b3700;cursor:default;filter:none;opacity:1;box-shadow:0 0 48px #fee452;transform:scale(1.1);}
+    .box img {max-width:44px;max-height:44px;margin-bottom:6px;filter:drop-shadow(0 0 6px #c1a834);}
+    .box .text {font-size:1rem; user-select:none; text-align:center; line-height:1.2;}
+    #spin-button { display:none; margin:0 auto 28px auto; padding:14px 42px; font-size:1.25rem; background:#fde14b; border-radius:28px; border:none; color:#4b3700; cursor:pointer; font-weight:900; box-shadow:0 0 25px #fde14bcc; letter-spacing:4px;}
+    #spin-button:hover { background-color:#fff856;}
+    #spin-button:active {background-color:#b6951a;color:#fff;}
+    #result-message { font-size:1.6rem; min-height:28px; margin-bottom:16px; color:#fde14b; text-shadow:0 0 12px #fde14b;}
+    #popup {position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.93);display:none;flex-direction:column;justify-content:center;align-items:center;color:white;font-size:2.25rem;padding:30px;z-index:2000;text-align:center;}
+    #popup img {max-width:140px;margin-bottom:28px;}
+    #popup .popup-text {margin-bottom:30px;color:#fde14b;font-weight:900;text-shadow:0 0 22px #fde14b;}
+    #popup .popup-follow-row { display: flex; align-items: center; gap: 12px; justify-content: center; margin-bottom: 16px;}
+    #popup .insta-icon { display:inline-block; width:30px;height:30px;border-radius:7px; background:radial-gradient(circle at 30% 110%, #ffdb8b 0%, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc 100%);}
+    #popup .insta-icon-inner {position:relative; top:5px; left:5px; width:20px; height:20px; border:3px solid #fff; border-radius:6px;}
+    #popup .insta-circle {position:absolute; top:9px; left:9px; width:6px; height:6px; border:2px solid #fff; border-radius:50%;}
+    #popup .insta-dot {position:absolute; top:5px; left:15px; width:3px; height:3px; background:#fff; border-radius:50%;}
+    #popup #follow-btn { padding:12px 24px;font-size:1.1rem;border:none; border-radius:8px; font-weight:700; display:flex; align-items:center; gap:10px; cursor:pointer; background:linear-gradient(90deg,#833ab4 0,#fd1d1d 51%,#fcb045 100%); color:#fff; transition:filter 0.2s;}
+    #popup #follow-btn:hover { filter:brightness(1.1);}
+    #popup #done-follow-btn {margin-top:10px;padding:11px 25px;font-size:1.04rem;background:#25d366;color:white;border:none;border-radius:8px;font-weight:800;cursor:pointer;}
+    #popup #claim-btn {margin-top:18px;font-size:1.25rem;padding:13px 40px;background:#b3b3b3;border-radius: 30px; border:none;color:#606060; font-weight:900;opacity:0.75;cursor:not-allowed;transition:background 0.2s,color 0.2s,opacity 0.2s;}
+    #popup #claim-btn.enabled {opacity:1.0;cursor:pointer;background: #fde14b; color:#4b3700; box-shadow:0 0 25px #fde14bcc;}
+    canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
+
+    @media (max-width:600px){
+      #logo {max-width:110px;margin:25px auto 10px auto;}
+      .header-container h1 {font-size:2rem;}
+      .header-container h2 {font-size:1.5rem;}
+      #instructions {font-size:1.1rem;margin-bottom:28px;padding:0 10px;}
+      #game-container {width:290px;gap:10px 7px;}
+      .box {width:80px;height:110px;font-size:2.3rem;}
+      #spin-button {padding:12px 27px;font-size:1.1rem;}
+      #result-message {font-size:1.3rem;margin-bottom:14px;}
+      #popup {font-size:1.7rem;padding:20px;}
+      #popup img {max-width:100px;margin-bottom:20px;}
+      #popup #claim-btn {padding:12px 20px; font-size:1.08rem;}
+      #popup .insta-icon {width:22px;height:22px;}
+      #popup .insta-icon-inner {width:14px; height: 14px; border-radius:4px;}
     }
-    #logo {
-      max-width: 160px;
-      margin: 25px auto 10px auto;
-      user-select: none;
-    }
-    .header-container {
-      max-width: 600px;
-      margin-bottom: 10px;
-    }
-    .header-container h1 {
-      margin: 0;
-      font-size: 3rem;
-      color: #fde14b;
-      text-shadow: 0 0 20px #fde14b, 0 0 40px #f8d530;
-      font-weight: 900;
-      letter-spacing: 6px;
-    }
-    .header-container h2 {
-      margin: 8px 0 0 0;
-      font-size: 2rem;
-      color: #fbe74b;
-      text-shadow: 0 0 16px #fbe74b;
-      font-weight: 700;
-      letter-spacing: 4px;
-    }
-    #instructions {
-      font-size: 1.25rem;
-      max-width: 450px;
-      margin: 20px auto 30px auto;
-      color: #eee;
-      user-select: none;
-    }
-    #game-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px 14px;
-      justify-items: center;
-      width: 320px;
-      max-width: 95vw;
-      min-height: 380px;
-      margin-bottom: 14px;
-      user-select: none;
-      position: relative;
-    }
-    .box {
-      width: 100px;
-      height: 130px;
-      background: linear-gradient(145deg, #6b3e00, #3f2400 92%);
-      border: 3px solid #fde14b;
-      border-radius: 16px;
-      box-shadow: 0 0 18px #fde14baa inset, 0 3px 10px #000b;
-      font-weight: 900;
-      color: #fde14b;
-      font-size: 2.8rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      outline: none;
-      position: relative;
-    }
-    .box.locked {
-      filter: grayscale(1);
-      opacity: 0.6;
-      cursor: default;
-    }
-    .box.active {
-      border-color: #fff44c;
-      box-shadow: 0 0 30px #fff44c inset, 0 0 15px #fff44c;
-      transform: scale(1.07);
-      color: #4b3700;
-    }
-    .box.opened {
-      background: #fde14b;
-      color: #4b3700;
-      cursor: default;
-      filter: none;
-      opacity: 1;
-      box-shadow: 0 0 48px #fee452;
-      transform: scale(1.1);
-    }
-    .box img {
-      max-width: 44px;
-      max-height: 44px;
-      margin-bottom: 6px;
-      filter: drop-shadow(0 0 6px #c1a834);
-      user-select: none;
-    }
-    .box .text {
-      font-size: 1rem;
-      user-select: none;
-      text-align: center;
-      line-height: 1.2;
-    }
-    #spin-button {
-      display: none;
-      margin: 0 auto 28px auto;
-      padding: 14px 42px;
-      font-size: 1.25rem;
-      background: #fde14b;
-      border-radius: 28px;
-      border: none;
-      color: #4b3700;
-      cursor: pointer;
-      font-weight: 900;
-      box-shadow: 0 0 25px #fde14bcc;
-      user-select: none;
-      letter-spacing: 4px;
-      transition: background-color 0.3s ease;
-    }
-    #spin-button:hover {
-      background-color: #fff856;
-    }
-    #spin-button:active {
-      background-color: #b6951a;
-      color: #fff;
-    }
-    #result-message {
-      font-size: 1.6rem;
-      min-height: 28px;
-      margin-bottom: 16px;
-      color: #fde14b;
-      user-select: none;
-      text-shadow: 0 0 12px #fde14b;
-    }
-    #popup {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.93);
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 2.25rem;
-      padding: 30px;
-      z-index: 2000;
-      user-select: none;
-      text-align: center;
-    }
-    #popup img {
-      max-width: 140px;
-      margin-bottom: 28px;
-      user-select: none;
-    }
-    #popup .popup-text {
-      margin-bottom: 30px;
-      color: #fde14b;
-      font-weight: 900;
-      text-shadow: 0 0 22px #fde14b;
-    }
-    canvas#fireworks {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      display: none;
-      z-index: 2100;
-    }
-    @media (max-width: 600px) {
-      #logo {
-        max-width: 110px;
-        margin: 25px auto 10px auto;
-      }
-      .header-container h1 {
-        font-size: 2rem;
-      }
-      .header-container h2 {
-        font-size: 1.5rem;
-      }
-      #instructions {
-        font-size: 1.1rem;
-        margin-bottom: 28px;
-        padding: 0 10px;
-      }
-      #game-container {
-        width: 290px;
-        gap: 10px 7px;
-      }
-      .box {
-        width: 80px;
-        height: 110px;
-        font-size: 2.3rem;
-      }
-      #spin-button {
-        padding: 12px 27px;
-        font-size: 1.1rem;
-      }
-      #result-message {
-        font-size: 1.3rem;
-        margin-bottom: 14px;
-      }
-      #popup {
-        font-size: 1.7rem;
-        padding: 20px;
-      }
-      #popup img {
-        max-width: 100px;
-        margin-bottom: 20px;
-      }
+    /* BUTTON DISABLED STATE */
+    #popup #claim-btn:disabled,
+    #popup #claim-btn[disabled] {
+      background: #b3b3b3 !important;
+      color: #606060 !important;
+      opacity: 0.75 !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
     }
   </style>
 </head>
 <body>
   <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
-  <div class="header-container" role="heading" aria-level="1" aria-label="Bandeali Enterprises">
+  <div class="header-container">
     <h1>Bandeali Enterprises</h1>
     <h2>Treasure Box Game</h2>
   </div>
-  <div id="instructions" role="text" aria-live="polite" aria-atomic="true">Choose a treasure box below and test your luck!</div>
-  <div id="game-container" aria-label="Treasure boxes" role="list"></div>
-  <button id="spin-button" aria-label="Reveal all chosen boxes">Reveal All</button>
-  <div id="result-message" role="alert" aria-live="assertive" aria-relevant="additions"></div>
-  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-text" tabindex="-1"></div>
-  <canvas id="fireworks" aria-hidden="true"></canvas>
+  <div id="instructions">Choose a treasure box below and test your luck!</div>
+  <div id="game-container"></div>
+  <button id="spin-button">Reveal All</button>
+  <div id="result-message"></div>
+  <div id="popup" tabindex="-1"></div>
+  <canvas id="fireworks"></canvas>
   <script>
     const prizes = [
       { win: true, text: "🔥 10% OFF" },
@@ -340,45 +181,46 @@
       showPopup(boxes[selectedIndex].prize);
     }
 
-    // CUSTOM POPUP WITH FOLLOW/CALIM LOGIC
-
+    // FINAL POPUP LOGIC: Instagram gradient, logo, grey/yellow button!
     function showPopup(prize) {
       popup.innerHTML = `
         <img id="popup-img" src="treasure.png" alt="Treasure Box" />
-        <div id="popup-text" class="popup-text">${prize.text}</div>
-        <div id="follow-section" style="margin-bottom:20px;">
-          <button id="follow-btn" style="padding:12px 32px; font-size:1.15rem; background:#fd0659; color:white; border:none; border-radius:8px; font-weight:800; cursor:pointer;">
-            Follow Us on Instagram
+        <div class="popup-text">${prize.text}</div>
+        <div class="popup-follow-row">
+          <button id="follow-btn" type="button">
+            <span class="insta-icon" aria-hidden="true" style="position:relative;">
+              <span class="insta-icon-inner"></span>
+              <span class="insta-circle"></span>
+              <span class="insta-dot"></span>
+            </span>
+            Follow Us
           </button>
         </div>
-        <button id="claim-btn" style="padding:12px 40px; font-size:1.25rem; background:#fde14b; border-radius:30px; border:none; color:#4b3700; font-weight:900; cursor:pointer;" disabled>
-          Claim
-        </button>
+        <button id="claim-btn" disabled>Claim</button>
       `;
-      popup.style.display = 'flex';
       if (!prize.win) document.getElementById('popup-img').style.display = 'none';
-      let followSection = document.getElementById('follow-section');
+      popup.style.display = 'flex';
       let followBtn = document.getElementById('follow-btn');
       let claimBtn = document.getElementById('claim-btn');
       followBtn.addEventListener('click', function () {
         window.open('https://www.instagram.com/bandeali_enterprises?igsh=MWw3YXRmMTAwejdhMg==', '_blank');
-        followSection.innerHTML = `
-          <div style="margin:12px 0; font-size:1.04rem;">After following, click below:</div>
-          <button id="done-follow-btn" style="padding:12px 27px; font-size:1rem; background:#25d366; color:white; border:none; border-radius:8px; font-weight:800; cursor:pointer;">
-            I have followed
-          </button>
-        `;
-        document.getElementById('done-follow-btn').addEventListener('click', function() {
+        followBtn.style.display = "none";
+        let doneBtn = document.createElement('button');
+        doneBtn.id = "done-follow-btn";
+        doneBtn.innerText = "I have followed";
+        document.querySelector('.popup-follow-row').appendChild(doneBtn);
+        doneBtn.addEventListener('click', function() {
           claimBtn.disabled = false;
+          claimBtn.classList.add('enabled');
           claimBtn.focus();
         });
       });
       claimBtn.addEventListener('click', function () {
+        if (claimBtn.disabled) return;
         popup.style.display = 'none';
         stopFireworks();
         createBoxes();
         document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
-        // Add your reward logic here if needed
       });
       startFireworks();
       popup.focus();
