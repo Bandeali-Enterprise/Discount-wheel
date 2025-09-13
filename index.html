@@ -38,13 +38,31 @@
       box-shadow: 0 2px 15px #0005;
     }
     #popup #follow-btn:hover { filter:brightness(1.08);}
-    #popup #done-follow-btn {margin-top:10px;padding:12px 30px;font-size:1.13rem;background:#25d366;color:white;border:none;border-radius:8px;font-weight:800;cursor:pointer;}
+    /* Neon "I have followed" button */
+    #popup #done-follow-btn {
+      margin-top: 10px;
+      padding: 16px 50px;
+      font-size: 1.4rem;
+      background: #25d366;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      letter-spacing: 1.2px;
+      box-shadow: 0 0 16px #09f, 0 0 40px #0f9, 0 0 60px #0fc;
+      transition: filter 0.3s ease;
+    }
+    #popup #done-follow-btn:hover {
+      filter: brightness(1.3);
+    }
+    /* Enlarged Claim button */
     #popup #claim-btn {
       margin-top: 24px;
-      font-size: 1.7rem; 
-      padding: 22px 70px;
+      font-size: 2rem; /* Bigger font */
+      padding: 24px 80px; /* Bigger padding */
       background: #b3b3b3;
-      border-radius: 36px;
+      border-radius: 40px;
       border: none;
       color: #606060;
       font-weight: 900;
@@ -54,9 +72,10 @@
       letter-spacing: 1.5px;
       transition: background 0.2s, color 0.2s, opacity 0.2s, box-shadow 0.2s;
     }
+    /* Neon glow animation */
     @keyframes neonGlow {
       0%,100% { box-shadow: 0 0 16px #fff355, 0 0 46px #ffe700, 0 0 66px #fdff00; }
-      50%    { box-shadow: 0 0 24px #fff44c, 0 0 80px #fae856, 0 0 90px #fffc89; }
+      50% { box-shadow: 0 0 24px #fff44c, 0 0 80px #fae856, 0 0 90px #fffc89; }
     }
     #popup #claim-btn.enabled {
       background: #fde14b !important;
@@ -83,10 +102,15 @@
       #popup {font-size:1.7rem;padding:20px;}
       #popup img {max-width:100px;margin-bottom:20px;}
       #popup #claim-btn {
-        padding:14px 10vw; font-size:1.1rem;
+        font-size:1.5rem;
+        padding:14px 40px;
       }
       #popup #follow-btn {padding:10px 20px; font-size:1rem;}
       #popup .popup-follow-row {gap:8px;}
+      #popup #done-follow-btn {
+        padding: 12px 40px;
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
