@@ -71,7 +71,20 @@
     #popup #follow-btn { padding:12px 24px; font-size:1.1rem; border:none; border-radius:8px; font-weight:700; display:flex; align-items:center; gap:10px; cursor:pointer; background:linear-gradient(90deg,#833ab4 0,#fd1d1d 51%,#fcb045 100%); color:#fff; transition:filter 0.2s;}
     #popup #follow-btn:hover { filter:brightness(1.1);}
     #popup #done-follow-btn {margin-top:10px;padding:11px 25px;font-size:1.04rem;background:#25d366;color:white;border:none;border-radius:8px;font-weight:800;cursor:pointer;}
-    #popup #claim-btn {margin-top:18px;font-size:1.25rem;padding:13px 40px;background:#b3b3b3; border-radius:30px; border:none;color:#606060; font-weight:900;opacity:0.75;cursor:not-allowed;box-shadow:none;transition:background 0.2s,color 0.2s,opacity 0.2s;}
+    #popup #claim-btn {
+      margin-top: 18px;
+      font-size: 1.5rem; /* Increased size */
+      padding: 18px 50px; /* Bigger padding */
+      background: #b3b3b3;
+      border-radius: 30px;
+      border: none;
+      color: #606060;
+      font-weight: 900;
+      opacity: 0.75;
+      cursor: not-allowed;
+      box-shadow: none;
+      transition: background 0.2s, color 0.2s, opacity 0.2s;
+    }
     /* Neon glow animation */
     @keyframes neonGlow {
       0%, 100% {
@@ -99,7 +112,10 @@
       #result-message {font-size:1.3rem;margin-bottom:14px;}
       #popup {font-size:1.7rem;padding:20px;}
       #popup img {max-width:100px;margin-bottom:20px;}
-      #popup #claim-btn {padding:12px 20px; font-size:1.08rem;}
+      #popup #claim-btn {
+        font-size:1.3rem;
+        padding:14px 40px;
+      }
       #popup .insta-icon {width:22px;height:22px;}
       #popup .insta-icon-inner {width:14px; height: 14px; border-radius:4px;}
     }
@@ -228,7 +244,6 @@
       spinButton.style.display = 'none';
       showPopup(boxes[selectedIndex].prize);
     }
-    // FINAL POPUP LOGIC: Instagram gradient, logo, neon glow claim button
     function showPopup(prize) {
       popup.innerHTML = `
         <img id="popup-img" src="treasure.png" alt="Treasure Box" />
@@ -256,7 +271,7 @@
         doneBtn.id = "done-follow-btn";
         doneBtn.innerText = "I have followed";
         document.querySelector('.popup-follow-row').appendChild(doneBtn);
-        doneBtn.addEventListener('click', function() {
+        doneBtn.addEventListener('click', function () {
           claimBtn.disabled = false;
           claimBtn.classList.add('enabled');
           claimBtn.focus();
@@ -272,7 +287,6 @@
       startFireworks();
       popup.focus();
     }
-    // Fireworks animation code (unchanged)
     let fireworks = [];
     let fireworksAnimation;
     class Firework {
