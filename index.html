@@ -27,15 +27,66 @@
     #popup img {max-width:140px;margin-bottom:28px;}
     #popup .popup-text {margin-bottom:30px;color:#fde14b;font-weight:900;text-shadow:0 0 22px #fde14b;}
     #popup .popup-follow-row { display: flex; align-items: center; gap: 12px; justify-content: center; margin-bottom: 16px;}
-    #popup .insta-icon { display:inline-block; width:30px;height:30px;border-radius:7px; background:radial-gradient(circle at 30% 110%, #ffdb8b 0%, #ee653d 25%, #d42e81 50%, #a237b6 75%, #3e57bc 100%);}
-    #popup .insta-icon-inner {position:relative; top:5px; left:5px; width:20px; height:20px; border:3px solid #fff; border-radius:6px;}
-    #popup .insta-circle {position:absolute; top:9px; left:9px; width:6px; height:6px; border:2px solid #fff; border-radius:50%;}
-    #popup .insta-dot {position:absolute; top:5px; left:15px; width:3px; height:3px; background:#fff; border-radius:50%;}
+    /* Instagram logo improved */
+    #popup .insta-icon {
+      position: relative;
+      display: inline-block;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 110%, #feda75 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+    #popup .insta-icon-inner {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 22px;
+      height: 22px;
+      border: 3.7px solid white;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    #popup .insta-circle {
+      position: absolute;
+      top: 11px;
+      left: 11px;
+      width: 9px;
+      height: 9px;
+      border: 3.7px solid white;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    #popup .insta-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
     #popup #follow-btn { padding:12px 24px; font-size:1.1rem; border:none; border-radius:8px; font-weight:700; display:flex; align-items:center; gap:10px; cursor:pointer; background:linear-gradient(90deg,#833ab4 0,#fd1d1d 51%,#fcb045 100%); color:#fff; transition:filter 0.2s;}
     #popup #follow-btn:hover { filter:brightness(1.1);}
     #popup #done-follow-btn {margin-top:10px;padding:11px 25px;font-size:1.04rem;background:#25d366;color:white;border:none;border-radius:8px;font-weight:800;cursor:pointer;}
     #popup #claim-btn {margin-top:18px;font-size:1.25rem;padding:13px 40px;background:#b3b3b3; border-radius:30px; border:none;color:#606060; font-weight:900;opacity:0.75;cursor:not-allowed;box-shadow:none;transition:background 0.2s,color 0.2s,opacity 0.2s;}
-    #popup #claim-btn.enabled {background: #fde14b !important; color:#4b3700 !important; box-shadow:0 0 25px #fde14bcc !important; opacity:1.0 !important; cursor:pointer !important;}
+    /* Neon glow animation */
+    @keyframes neonGlow {
+      0%, 100% {
+        box-shadow: 0 0 12px #fffb58, 0 0 30px #ffe700, 0 0 45px #fdff00;
+      }
+      50% {
+        box-shadow: 0 0 20px #fff44c, 0 0 40px #fff856, 0 0 60px #fff44c;
+      }
+    }
+    #popup #claim-btn.enabled {
+      background: #fde14b !important;
+      color: #4b3700 !important;
+      cursor: pointer !important;
+      animation: neonGlow 2.5s ease-in-out infinite;
+    }
     canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
     @media (max-width:600px){
       #logo {max-width:110px;margin:25px auto 10px auto;}
@@ -177,7 +228,7 @@
       spinButton.style.display = 'none';
       showPopup(boxes[selectedIndex].prize);
     }
-    // FINAL POPUP LOGIC: Instagram gradient, logo, grey/yellow button!
+    // FINAL POPUP LOGIC: Instagram gradient, logo, neon glow claim button
     function showPopup(prize) {
       popup.innerHTML = `
         <img id="popup-img" src="treasure.png" alt="Treasure Box" />
@@ -221,7 +272,7 @@
       startFireworks();
       popup.focus();
     }
-    // Fireworks animation code
+    // Fireworks animation code (unchanged)
     let fireworks = [];
     let fireworksAnimation;
     class Firework {
