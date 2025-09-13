@@ -171,26 +171,6 @@
       font-weight: 900;
       text-shadow: 0 0 22px #fde14b;
     }
-    #popup button {
-      padding: 14px 40px;
-      font-size: 1.4rem;
-      background: #fde14b;
-      border-radius: 30px;
-      border: none;
-      font-weight: 900;
-      color: #4b3700;
-      cursor: pointer;
-      box-shadow: 0 0 30px #fde14bcc;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
-    #popup button:hover {
-      background-color: #fff75a;
-    }
-    #popup button:active {
-      background-color: #b6951a;
-      color: #fff;
-    }
     canvas#fireworks {
       position: fixed;
       top: 0; left: 0;
@@ -241,10 +221,6 @@
         max-width: 100px;
         margin-bottom: 20px;
       }
-      #popup button {
-        font-size: 1.2rem;
-        padding: 12px 30px;
-      }
     }
   </style>
 </head>
@@ -258,13 +234,8 @@
   <div id="game-container" aria-label="Treasure boxes" role="list"></div>
   <button id="spin-button" aria-label="Reveal all chosen boxes">Reveal All</button>
   <div id="result-message" role="alert" aria-live="assertive" aria-relevant="additions"></div>
-  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-text" tabindex="-1">
-    <img id="popup-img" src="treasure.png" alt="Treasure Box" />
-    <div id="popup-text" class="popup-text"></div>
-    <button id="popup-close" aria-label="Close popup">OK</button>
-  </div>
+  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-text" tabindex="-1"></div>
   <canvas id="fireworks" aria-hidden="true"></canvas>
-
   <script>
     const prizes = [
       { win: true, text: "🔥 10% OFF" },
@@ -277,19 +248,14 @@
       { win: true, text: "🎧 Free Earphones" },
       { win: true, text: "💵 ₹50 Cashback" }
     ];
-
     const gameContainer = document.getElementById('game-container');
     const spinButton = document.getElementById('spin-button');
     const resultMessage = document.getElementById('result-message');
     const popup = document.getElementById('popup');
-    const popupImg = document.getElementById('popup-img');
-    const popupText = document.getElementById('popup-text');
-    const popupClose = document.getElementById('popup-close');
     const fireworksCanvas = document.getElementById('fireworks');
     const ctx = fireworksCanvas.getContext('2d');
     let selectedIndex = null;
     let boxes = [];
-
     function shuffle(array) {
       let currentIndex = array.length;
       while (currentIndex !== 0) {
@@ -299,16 +265,13 @@
       }
       return array;
     }
-
     function createBoxes() {
       gameContainer.innerHTML = '';
       resultMessage.textContent = '';
       selectedIndex = null;
       boxes = [];
       spinButton.style.display = 'none';
-
       const shuffledPrizes = shuffle([...prizes]);
-
       for (let i = 0; i < shuffledPrizes.length; i++) {
         const box = document.createElement('div');
         box.className = 'box';
@@ -318,7 +281,6 @@
         box.dataset.index = i;
         box.innerHTML = `<span>?</span>`;
         box.title = "Click to select this treasure box";
-
         box.addEventListener('click', onBoxSelect);
         box.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -326,12 +288,10 @@
             onBoxSelect.call(box);
           }
         });
-
         gameContainer.appendChild(box);
         boxes.push({ el: box, prize: shuffledPrizes[i] });
       }
     }
-
     function onBoxSelect() {
       if (selectedIndex !== null) return;
       selectedIndex = Number(this.dataset.index);
@@ -350,11 +310,9 @@
       spinButton.style.display = 'block';
       resultMessage.textContent = 'Click "Reveal All" to see the treasure!';
     }
-
     spinButton.addEventListener('click', () => {
       revealBoxes();
     });
-
     function revealBoxes() {
       boxes.forEach((box, idx) => {
         box.el.classList.remove('locked');
@@ -382,32 +340,53 @@
       showPopup(boxes[selectedIndex].prize);
     }
 
+    // CUSTOM POPUP WITH FOLLOW/CALIM LOGIC
+
     function showPopup(prize) {
-      popupText.textContent = prize.text;
-      popupImg.style.display = prize.win ? 'block' : 'none';
+      popup.innerHTML = `
+        <img id="popup-img" src="treasure.png" alt="Treasure Box" />
+        <div id="popup-text" class="popup-text">${prize.text}</div>
+        <div id="follow-section" style="margin-bottom:20px;">
+          <button id="follow-btn" style="padding:12px 32px; font-size:1.15rem; background:#fd0659; color:white; border:none; border-radius:8px; font-weight:800; cursor:pointer;">
+            Follow Us on Instagram
+          </button>
+        </div>
+        <button id="claim-btn" style="padding:12px 40px; font-size:1.25rem; background:#fde14b; border-radius:30px; border:none; color:#4b3700; font-weight:900; cursor:pointer;" disabled>
+          Claim
+        </button>
+      `;
       popup.style.display = 'flex';
+      if (!prize.win) document.getElementById('popup-img').style.display = 'none';
+      let followSection = document.getElementById('follow-section');
+      let followBtn = document.getElementById('follow-btn');
+      let claimBtn = document.getElementById('claim-btn');
+      followBtn.addEventListener('click', function () {
+        window.open('https://www.instagram.com/bandeali_enterprises?igsh=MWw3YXRmMTAwejdhMg==', '_blank');
+        followSection.innerHTML = `
+          <div style="margin:12px 0; font-size:1.04rem;">After following, click below:</div>
+          <button id="done-follow-btn" style="padding:12px 27px; font-size:1rem; background:#25d366; color:white; border:none; border-radius:8px; font-weight:800; cursor:pointer;">
+            I have followed
+          </button>
+        `;
+        document.getElementById('done-follow-btn').addEventListener('click', function() {
+          claimBtn.disabled = false;
+          claimBtn.focus();
+        });
+      });
+      claimBtn.addEventListener('click', function () {
+        popup.style.display = 'none';
+        stopFireworks();
+        createBoxes();
+        document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
+        // Add your reward logic here if needed
+      });
       startFireworks();
       popup.focus();
     }
 
-    popupClose.addEventListener('click', () => {
-      popup.style.display = 'none';
-      stopFireworks();
-      createBoxes();
-      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
-    });
-
-    popupClose.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        popupClose.click();
-      }
-    });
-
-    // Fireworks animation 
+    // Fireworks animation code
     let fireworks = [];
     let fireworksAnimation;
-
     class Firework {
       constructor() {
         this.x = Math.random() * fireworksCanvas.width;
@@ -464,7 +443,6 @@
         }
       }
     }
-
     function startFireworks() {
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
@@ -475,14 +453,12 @@
       renderFireworks();
       fireworksCanvas.style.display = 'block';
     }
-
     function stopFireworks() {
       clearInterval(fireworksAnimation);
       fireworks = [];
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
       fireworksCanvas.style.display = 'none';
     }
-
     function renderFireworks() {
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
       fireworks.forEach(fw => {
@@ -493,12 +469,10 @@
         requestAnimationFrame(renderFireworks);
       }
     }
-
     window.addEventListener('resize', () => {
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
     });
-
     window.onload = () => {
       createBoxes();
       document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
