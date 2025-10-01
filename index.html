@@ -5,39 +5,146 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bandeali Enterprises Treasure Box Game</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-    body { background:radial-gradient(circle at 60% 50%, #283445 0%, #181e27 100%); font-family:'Orbitron',sans-serif; color:white; min-height:100vh; margin:0; padding:0; display:flex; flex-direction:column; align-items:center; user-select:none; text-align:center;}
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+    body { 
+      background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      font-family:'Orbitron',sans-serif; 
+      color:white; 
+      min-height:100vh; 
+      margin:0; 
+      padding:0; 
+      display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      user-select:none; 
+      text-align:center;
+      overflow-x: hidden;
+    }
     
-    /* Professional Logo Style */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Ultra Cool Animated Logo */
     #logo { 
       max-width: 160px; 
       margin: 25px auto 10px auto; 
       user-select: none;
-      border-radius: 20px; 
-      box-shadow: 0 0 20px #fde14b, 0 4px 15px rgba(0,0,0,0.3); 
+      border-radius: 25px; 
       display: block; 
-      padding: 5px;
-      transition: all 0.3s ease;
+      padding: 8px;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      overflow: hidden;
     }
+    
+    /* Animated Rainbow Glow for Logo */
+    @keyframes rainbowGlow {
+      0% { 
+        box-shadow: 0 0 20px #ff0080, 0 0 40px #ff0080, 0 0 60px #ff0080;
+        filter: hue-rotate(0deg);
+      }
+      25% { 
+        box-shadow: 0 0 25px #00ff80, 0 0 50px #00ff80, 0 0 75px #00ff80;
+        filter: hue-rotate(90deg);
+      }
+      50% { 
+        box-shadow: 0 0 30px #8000ff, 0 0 60px #8000ff, 0 0 90px #8000ff;
+        filter: hue-rotate(180deg);
+      }
+      75% { 
+        box-shadow: 0 0 25px #ff8000, 0 0 50px #ff8000, 0 0 75px #ff8000;
+        filter: hue-rotate(270deg);
+      }
+      100% { 
+        box-shadow: 0 0 20px #ff0080, 0 0 40px #ff0080, 0 0 60px #ff0080;
+        filter: hue-rotate(360deg);
+      }
+    }
+    
+    #logo {
+      animation: rainbowGlow 3s ease-in-out infinite, floatLogo 4s ease-in-out infinite;
+    }
+    
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    
     #logo:hover {
-      box-shadow: 0 0 30px #fde14b, 0 6px 20px rgba(0,0,0,0.4);
-      transform: scale(1.05);
+      transform: scale(1.15) rotate(5deg);
+      animation-duration: 1s;
     }
     
-    .header-container { max-width:600px; margin-bottom:10px;}
-    .header-container h1 {margin:0;font-size:3rem;color:#fde14b;text-shadow: 0 0 20px #fde14b, 0 0 40px #f8d530;font-weight:900;letter-spacing:6px;}
-    .header-container h2 {margin:8px 0 0 0;font-size:2rem;color:#fbe74b;text-shadow:0 0 16px #fbe74b;font-weight:700;letter-spacing:4px;}
-    #instructions { font-size:1.25rem; max-width:450px; margin:20px auto 30px auto; color:#eee;}
-    #game-container { display: grid; grid-template-columns:repeat(3,1fr); gap:16px 14px; justify-items:center; width:320px; max-width:95vw; min-height:380px; margin-bottom:14px; user-select:none;}
+    /* Glowing Header */
+    .header-container { max-width:600px; margin-bottom:15px;}
+    .header-container h1 {
+      margin:0;
+      font-size:3rem;
+      color:#fde14b;
+      text-shadow: 0 0 20px #fde14b, 0 0 40px #f8d530, 0 0 60px #fde14b;
+      font-weight:900;
+      letter-spacing:6px;
+      animation: textGlow 2s ease-in-out infinite alternate;
+    }
     
-    /* Box Styles with Cool Animations */
+    @keyframes textGlow {
+      from { text-shadow: 0 0 20px #fde14b, 0 0 30px #f8d530, 0 0 40px #fde14b; }
+      to { text-shadow: 0 0 30px #fde14b, 0 0 50px #f8d530, 0 0 70px #fde14b; }
+    }
+    
+    .header-container h2 {
+      margin:8px 0 0 0;
+      font-size:2rem;
+      color:#fbe74b;
+      text-shadow:0 0 16px #fbe74b;
+      font-weight:700;
+      letter-spacing:4px;
+      animation: subtleGlow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes subtleGlow {
+      from { text-shadow: 0 0 16px #fbe74b; }
+      to { text-shadow: 0 0 25px #fbe74b, 0 0 35px #fbe74b; }
+    }
+    
+    #instructions { 
+      font-size:1.25rem; 
+      max-width:450px; 
+      margin:20px auto 30px auto; 
+      color:#eee;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    #game-container { 
+      display: grid; 
+      grid-template-columns:repeat(3,1fr); 
+      gap:20px 18px; 
+      justify-items:center; 
+      width:340px; 
+      max-width:95vw; 
+      min-height:380px; 
+      margin-bottom:20px; 
+      user-select:none;
+    }
+    
+    /* Ultra Cool Box Animations */
     .box { 
       width:100px; 
       height:130px; 
-      background: linear-gradient(145deg, #6b3e00, #3f2400 92%); 
+      background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460); 
       border:3px solid #fde14b; 
-      border-radius:16px; 
-      box-shadow:0 0 18px #fde14baa inset,0 3px 10px #000b; 
+      border-radius:20px; 
+      box-shadow:0 0 20px rgba(253, 225, 75, 0.3) inset, 0 5px 15px rgba(0,0,0,0.6); 
       font-weight:900; 
       color:#fde14b; 
       font-size:2.8rem; 
@@ -52,734 +159,314 @@
       overflow: hidden;
     }
     
-    /* Cool Pulse Animation for selectable boxes */
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 18px #fde14baa inset, 0 3px 10px #000b, 0 0 5px #fde14b; }
-      50% { box-shadow: 0 0 25px #fde14b99 inset, 0 3px 15px #000b, 0 0 15px #fde14b; }
-      100% { box-shadow: 0 0 18px #fde14baa inset, 0 3px 10px #000b, 0 0 5px #fde14b; }
-    }
-    
-    .box:hover {
-      animation: pulseGlow 1.5s ease-in-out infinite;
-      transform: translateY(-5px) scale(1.05);
-    }
-    
-    /* Selected Box Animation */
-    @keyframes selectedPulse {
-      0% { 
-        border-color:#fff44c; 
-        box-shadow:0 0 30px #fff44c inset,0 0 15px #fff44c;
-        transform: scale(1.1);
-      }
-      50% { 
-        border-color:#fde14b; 
-        box-shadow:0 0 40px #fde14b inset,0 0 25px #fde14b;
-        transform: scale(1.15);
-      }
-      100% { 
-        border-color:#fff44c; 
-        box-shadow:0 0 30px #fff44c inset,0 0 15px #fff44c;
-        transform: scale(1.1);
-      }
-    }
-    
-    /* Particle Effect for selected box */
-    .box::before {
+    /* Floating particles effect for boxes */
+    .box::after {
       content: '';
       position: absolute;
       top: -50%;
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(45deg, transparent, #fde14b22, transparent);
-      transform: rotate(0deg);
-      transition: all 0.6s ease;
+      background: radial-gradient(circle, rgba(253, 225, 75, 0.1) 0%, transparent 70%);
+      animation: floatingParticles 6s ease-in-out infinite;
       opacity: 0;
     }
     
+    @keyframes floatingParticles {
+      0%, 100% { transform: rotate(0deg) scale(0); opacity: 0; }
+      50% { transform: rotate(180deg) scale(1); opacity: 0.6; }
+    }
+    
+    /* Enhanced Hover Effect */
+    @keyframes advancedPulse {
+      0% { 
+        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 5px 15px rgba(0,0,0,0.6), 0 0 10px #fde14b; 
+        transform: translateY(0) scale(1);
+      }
+      50% { 
+        box-shadow: 0 0 30px rgba(253, 225, 75, 0.6) inset, 0 8px 25px rgba(0,0,0,0.8), 0 0 30px #fde14b; 
+        transform: translateY(-8px) scale(1.05);
+      }
+      100% { 
+        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 5px 15px rgba(0,0,0,0.6), 0 0 10px #fde14b; 
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    .box:hover {
+      animation: advancedPulse 1.5s ease-in-out infinite;
+    }
+    
+    .box:hover::after {
+      opacity: 1;
+      animation-duration: 2s;
+    }
+    
+    /* Epic Selected Box Animation */
+    @keyframes epicSelected {
+      0% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 40px #fff44c inset, 0 0 20px #fff44c, 0 10px 30px rgba(0,0,0,0.8);
+        transform: scale(1.1) rotateY(0deg);
+      }
+      25% { 
+        border-color:#fde14b; 
+        box-shadow: 0 0 50px #fde14b inset, 0 0 30px #fde14b, 0 15px 40px rgba(0,0,0,0.9);
+        transform: scale(1.15) rotateY(90deg);
+      }
+      50% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 60px #fff44c inset, 0 0 40px #fff44c, 0 20px 50px rgba(0,0,0,1.0);
+        transform: scale(1.2) rotateY(180deg);
+      }
+      75% { 
+        border-color:#fde14b; 
+        box-shadow: 0 0 50px #fde14b inset, 0 0 30px #fde14b, 0 15px 40px rgba(0,0,0,0.9);
+        transform: scale(1.15) rotateY(270deg);
+      }
+      100% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 40px #fff44c inset, 0 0 20px #fff44c, 0 10px 30px rgba(0,0,0,0.8);
+        transform: scale(1.1) rotateY(360deg);
+      }
+    }
+    
+    /* Spiral glow effect for selected box */
+    .box.active::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: conic-gradient(from 0deg, transparent, #fde14b, transparent, #fff44c, transparent);
+      animation: spiralGlow 2s linear infinite;
+      opacity: 0.8;
+      z-index: -1;
+    }
+    
+    @keyframes spiralGlow {
+      0% { transform: rotate(0deg) scale(0.8); }
+      100% { transform: rotate(360deg) scale(1.2); }
+    }
+    
     .box.active {
-      animation: selectedPulse 2s ease-in-out infinite;
+      animation: epicSelected 3s ease-in-out infinite;
       color:#4b3700;
       z-index: 10;
     }
     
-    .box.active::before {
-      opacity: 1;
-      animation: rotateGlow 3s linear infinite;
-    }
-    
-    @keyframes rotateGlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    /* Shake animation for locked boxes */
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-2px); }
-      75% { transform: translateX(2px); }
+    /* Explosive shake for locked boxes */
+    @keyframes explosiveShake {
+      0%, 100% { transform: translateX(0) rotateZ(0deg); }
+      10% { transform: translateX(-8px) rotateZ(-2deg); }
+      20% { transform: translateX(8px) rotateZ(2deg); }
+      30% { transform: translateX(-6px) rotateZ(-1deg); }
+      40% { transform: translateX(6px) rotateZ(1deg); }
+      50% { transform: translateX(-4px) rotateZ(-0.5deg); }
+      60% { transform: translateX(4px) rotateZ(0.5deg); }
+      70% { transform: translateX(-2px) rotateZ(-0.25deg); }
+      80% { transform: translateX(2px) rotateZ(0.25deg); }
+      90% { transform: translateX(-1px) rotateZ(0deg); }
     }
     
     .box.locked { 
-      filter:grayscale(1); 
-      opacity:0.6; 
+      filter:grayscale(1) brightness(0.6); 
+      opacity:0.7; 
       cursor:default;
-      animation: shake 0.5s ease-in-out;
+      animation: explosiveShake 0.8s ease-in-out;
     }
     
-    /* Opened box animation */
-    @keyframes bounceOpen {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2) rotate(5deg); }
-      100% { transform: scale(1.1) rotate(0deg); }
+    /* Mega opening animation */
+    @keyframes megaOpen {
+      0% { 
+        transform: scale(1) rotateY(0deg) rotateX(0deg); 
+        background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
+      }
+      25% { 
+        transform: scale(1.3) rotateY(90deg) rotateX(15deg); 
+        background: linear-gradient(145deg, #fde14b, #fff44c, #f8d530);
+      }
+      50% { 
+        transform: scale(1.4) rotateY(180deg) rotateX(30deg); 
+        background: linear-gradient(145deg, #fff44c, #fde14b, #fff856);
+      }
+      75% { 
+        transform: scale(1.3) rotateY(270deg) rotateX(15deg); 
+        background: linear-gradient(145deg, #fde14b, #f8d530, #fff44c);
+      }
+      100% { 
+        transform: scale(1.2) rotateY(360deg) rotateX(0deg); 
+        background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
+      }
     }
     
     .box.opened {
-      background:#fde14b;
+      background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
       color:#4b3700;
       cursor:default;
       filter:none;
       opacity:1;
-      box-shadow:0 0 48px #fee452;
-      animation: bounceOpen 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      transform: scale(1.1);
+      box-shadow: 0 0 60px #fee452, 0 0 100px rgba(255, 215, 0, 0.5);
+      animation: megaOpen 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transform: scale(1.2);
     }
     
     .box.disabled {background:#333; color:#666; border-color:#666; cursor:default; opacity:0.5;}
     .box img {max-width:44px;max-height:44px;margin-bottom:6px;filter:drop-shadow(0 0 6px #c1a834);}
     .box .text {font-size:1rem; user-select:none; text-align:center; line-height:1.2;}
     
-    /* Follow Before Reveal Button */
+    /* Ultra Cool Follow Button */
     #follow-first-btn { 
       display:none; 
       margin:0 auto 28px auto; 
-      padding:16px 45px; 
-      font-size:1.3rem; 
-      background:linear-gradient(90deg,#833ab4 0,#fd1d1d 51%,#fcb045 100%);
-      border-radius:28px; 
+      padding:18px 50px; 
+      font-size:1.4rem; 
+      background:linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
+      background-size: 400% 400%;
+      animation: gradientButton 3s ease infinite;
+      border-radius:35px; 
       border:none; 
       color:#fff; 
       cursor:pointer; 
       font-weight:900; 
-      box-shadow:0 0 25px #fd1d1dcc; 
+      box-shadow:0 0 30px rgba(253, 29, 29, 0.5), 0 5px 15px rgba(0,0,0,0.3); 
       letter-spacing:3px;
-      transition: all 0.3s ease;
-    }
-    #follow-first-btn:hover { 
-      filter:brightness(1.1);
-      transform: translateY(-3px);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      overflow: hidden;
     }
     
-    /* Reveal Button with Animation */
+    @keyframes gradientButton {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    #follow-first-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    #follow-first-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 40px rgba(253, 29, 29, 0.8), 0 10px 25px rgba(0,0,0,0.4);
+    }
+    
+    #follow-first-btn:hover::before {
+      left: 100%;
+    }
+    
+    /* Epic Reveal Button */
     #spin-button { 
       display:none; 
       margin:0 auto 28px auto; 
-      padding:14px 42px; 
-      font-size:1.25rem; 
-      background:#fde14b; 
-      border-radius:28px; 
+      padding:16px 45px; 
+      font-size:1.3rem; 
+      background: linear-gradient(45deg, #fde14b, #fff856, #f8d530, #fde14b); 
+      background-size: 400% 400%;
+      animation: goldenButton 2s ease infinite;
+      border-radius:30px; 
       border:none; 
       color:#4b3700; 
       cursor:pointer; 
       font-weight:900; 
-      box-shadow:0 0 25px #fde14bcc; 
+      box-shadow:0 0 25px rgba(253, 225, 75, 0.6); 
       letter-spacing:4px;
-      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
     }
     
-    @keyframes buttonPulse {
-      0% { box-shadow: 0 0 25px #fde14bcc; }
-      50% { box-shadow: 0 0 40px #fde14b, 0 0 60px #fde14b; }
-      100% { box-shadow: 0 0 25px #fde14bcc; }
+    @keyframes goldenButton {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     
     #spin-button:not(:disabled) {
-      animation: buttonPulse 2s ease-in-out infinite;
+      animation: goldenButton 2s ease infinite, buttonFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes buttonFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
     }
     
     #spin-button:hover { 
-      background-color:#fff856;
-      transform: translateY(-5px) scale(1.05);
+      transform: translateY(-8px) scale(1.08);
+      box-shadow: 0 0 40px rgba(253, 225, 75, 0.8), 0 10px 30px rgba(0,0,0,0.3);
     }
-    #spin-button:active {
-      background-color:#b6951a;
-      color:#fff;
-      transform: translateY(0) scale(0.95);
-    }
-    #spin-button:disabled { background:#888; color:#555; cursor:not-allowed; }
     
-    #result-message { font-size:1.6rem; min-height:28px; margin-bottom:16px; color:#fde14b; text-shadow:0 0 12px #fde14b;}
-    #chances-counter { font-size:1.3rem; color:#ff6b6b; margin-bottom:15px; font-weight:700; }
+    #spin-button:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+    
+    #result-message { 
+      font-size:1.6rem; 
+      min-height:28px; 
+      margin-bottom:16px; 
+      color:#fde14b; 
+      text-shadow:0 0 12px #fde14b;
+      animation: messageGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes messageGlow {
+      from { text-shadow: 0 0 12px #fde14b; }
+      to { text-shadow: 0 0 20px #fde14b, 0 0 30px #fde14b; }
+    }
+    
+    #chances-counter { 
+      font-size:1.4rem; 
+      color:#ff6b6b; 
+      margin-bottom:15px; 
+      font-weight:700; 
+      animation: counterPulse 1s ease-in-out infinite;
+    }
+    
+    @keyframes counterPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
     
     /* Popup Styles */
-    #popup {position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.93);display:none;flex-direction:column;justify-content:center;align-items:center;color:white;font-size:2.25rem;padding:30px;z-index:2000;text-align:center;}
+    #popup {position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);display:none;flex-direction:column;justify-content:center;align-items:center;color:white;font-size:2.25rem;padding:30px;z-index:2000;text-align:center;}
     #popup img {max-width:140px;margin-bottom:28px;}
     #popup .popup-text {margin-bottom:30px;color:#fde14b;font-weight:900;text-shadow:0 0 22px #fde14b;}
     #popup .popup-follow-row { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap;}
     
-    /* Instagram Follow Button */
-    #popup #follow-btn { 
-      padding:14px 32px;
-      font-size:1.18rem; 
-      border:none; border-radius:8px; font-weight:700;
-      display:flex; align-items:center; gap:10px;
-      cursor:pointer;
-      background:linear-gradient(90deg,#833ab4 0,#fd1d1d 51%,#fcb045 100%);
-      color:#fff; transition:filter 0.2s;
-      box-shadow: 0 2px 15px #0005;
-    }
-    #popup #follow-btn:hover { filter:brightness(1.08);}
-    
-    /* "I have followed" button */
-    #popup #done-follow-btn {
-      margin-top: 10px;
-      padding: 16px 50px;
-      font-size: 1.4rem;
-      background: #25d366;
-      color: white;
-      border: none;
-      border-radius: 14px;
-      font-weight: 900;
-      cursor: pointer;
-      letter-spacing: 1.2px;
-      box-shadow: 0 0 16px #09f, 0 0 40px #0f9, 0 0 60px #0fc;
-      transition: filter 0.3s ease;
-    }
-    #popup #done-follow-btn:hover {
-      filter: brightness(1.3);
-    }
-    
     /* Try Again Button for chances */
     #try-again-btn {
       margin-top: 20px;
-      padding: 16px 40px;
-      font-size: 1.3rem;
-      background: #ff6b6b;
+      padding: 18px 45px;
+      font-size: 1.4rem;
+      background: linear-gradient(45deg, #ff6b6b, #ff5252, #ff4444, #ff6b6b);
+      background-size: 400% 400%;
+      animation: redButton 2s ease infinite;
       color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: 15px;
       font-weight: 900;
       cursor: pointer;
       letter-spacing: 1px;
-      box-shadow: 0 0 20px #ff6b6b;
+      box-shadow: 0 0 25px rgba(255, 107, 107, 0.5);
+      transition: all 0.3s ease;
     }
+    
+    @keyframes redButton {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
     #try-again-btn:hover {
-      background: #ff5252;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 35px rgba(255, 107, 107, 0.8);
     }
     
-    /* Claim button */
-    #popup #claim-btn {
-      margin-top: 24px;
-      font-size: 2rem;
-      padding: 24px 80px;
-      background: #b3b3b3;
-      border-radius: 40px;
-      border: none;
-      color: #606060;
-      font-weight: 900;
-      opacity: 0.8;
-      cursor: not-allowed;
-      box-shadow: none;
-      letter-spacing: 1.5px;
-      transition: background 0.2s, color 0.2s, opacity 0.2s, box-shadow 0.2s;
-    }
-    
-    /* Neon glow animation */
-    @keyframes neonGlow {
-      0%,100% { box-shadow: 0 0 16px #fff355, 0 0 46px #ffe700, 0 0 66px #fdff00; }
-      50% { box-shadow: 0 0 24px #fff44c, 0 0 80px #fae856, 0 0 90px #fffc89; }
-    }
-    #popup #claim-btn.enabled {
-      background: #fde14b !important;
-      color: #4b3700 !important;
-      cursor: pointer !important;
-      animation: neonGlow 2.5s ease-in-out infinite;
-      opacity: 1;
-      box-shadow: 0 0 11px #fde14b, 0 0 22px #fde14b90;
-    }
-    
-    canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
-    
-    @media (max-width:600px){
-      #logo {max-width:110px;margin:25px auto 10px auto;}
-      .header-container h1 {font-size:2rem;}
-      .header-container h2 {font-size:1.5rem;}
-      #instructions {font-size:1.1rem;margin-bottom:28px;padding:0 10px;}
-      #game-container {width:290px;gap:10px 7px;}
-      .box {width:80px;height:110px;font-size:2.3rem;}
-      #follow-first-btn {padding:12px 30px;font-size:1.1rem;}
-      #spin-button {padding:12px 27px;font-size:1.1rem;}
-      #result-message {font-size:1.3rem;margin-bottom:14px;}
-      #chances-counter {font-size:1.1rem;}
-      #popup {font-size:1.7rem;padding:20px;}
-      #popup img {max-width:100px;margin-bottom:20px;}
-      #popup #claim-btn {
-        font-size:1.5rem;
-        padding:14px 40px;
-      }
-      #popup #follow-btn {padding:10px 20px; font-size:1rem;}
-      #popup .popup-follow-row {gap:8px;}
-      #popup #done-follow-btn {
-        padding: 12px 40px;
-        font-size: 1.1rem;
-      }
-      #try-again-btn {
-        padding: 12px 30px;
-        font-size: 1.1rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
-  <div class="header-container">
-    <h1>Bandeali Enterprises</h1>
-    <h2>Treasure Box Game</h2>
-  </div>
-  <div id="instructions">Choose a treasure box below and test your luck!</div>
-  <div id="chances-counter"></div>
-  <div id="game-container"></div>
-  <button id="follow-first-btn">📸 Follow Us to Reveal</button>
-  <button id="spin-button">Reveal All</button>
-  <div id="result-message"></div>
-  <div id="popup" tabindex="-1"></div>
-  <canvas id="fireworks"></canvas>
-  
-  <script>
-    const prizes = [
-      { win: true, text: "🔥 10% OFF" },
-      { win: false, text: "Better luck!" },
-      { win: true, text: "🎁 15% OFF" },
-      { win: false, text: "Better luck!" },
-      { win: true, text: "💸 20% OFF" },
-      { win: false, text: "Better luck!" },
-      { win: true, text: "🎉 ₹30 OFF" },
-      { win: true, text: "🎧 Free Earphones" },
-      { win: true, text: "💵 ₹50 Cashback" }
-    ];
-    
-    const gameContainer = document.getElementById('game-container');
-    const followFirstBtn = document.getElementById('follow-first-btn');
-    const spinButton = document.getElementById('spin-button');
-    const resultMessage = document.getElementById('result-message');
-    const chancesCounter = document.getElementById('chances-counter');
-    const popup = document.getElementById('popup');
-    const fireworksCanvas = document.getElementById('fireworks');
-    const ctx = fireworksCanvas.getContext('2d');
-    
-    let selectedIndex = null;
-    let boxes = [];
-    let gameState = 'selection'; // 'selection', 'follow', 'reveal', 'finished'
-    let chancesLeft = 3;
-    let hasFollowed = false;
-    let usedBoxes = [];
-    
-    function shuffle(array) {
-      let currentIndex = array.length;
-      while (currentIndex !== 0) {
-        const randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-      }
-      return array;
-    }
-    
-    function updateChancesDisplay() {
-      if (chancesLeft < 3) {
-        chancesCounter.textContent = `Chances Left: ${chancesLeft}`;
-        chancesCounter.style.display = 'block';
-      } else {
-        chancesCounter.style.display = 'none';
-      }
-    }
-    
-    function createBoxes() {
-      gameContainer.innerHTML = '';
-      resultMessage.textContent = '';
-      selectedIndex = null;
-      boxes = [];
-      gameState = 'selection';
-      followFirstBtn.style.display = 'none';
-      spinButton.style.display = 'none';
-      
-      const shuffledPrizes = shuffle([...prizes]);
-      for (let i = 0; i < shuffledPrizes.length; i++) {
-        const box = document.createElement('div');
-        box.className = 'box';
-        if (usedBoxes.includes(i)) {
-          box.classList.add('disabled');
-        }
-        box.setAttribute('tabindex', '0');
-        box.setAttribute('role', 'listitem');
-        box.setAttribute('aria-label', 'Treasure box. Click to select.');
-        box.dataset.index = i;
-        box.innerHTML = `<span>?</span>`;
-        box.title = "Click to select this treasure box";
-        box.addEventListener('click', onBoxSelect);
-        box.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onBoxSelect.call(box);
-          }
-        });
-        gameContainer.appendChild(box);
-        boxes.push({ el: box, prize: shuffledPrizes[i] });
-      }
-      updateChancesDisplay();
-    }
-    
-    function onBoxSelect() {
-      if (selectedIndex !== null || gameState !== 'selection') return;
-      if (usedBoxes.includes(Number(this.dataset.index))) return;
-      
-      selectedIndex = Number(this.dataset.index);
-      gameState = 'follow';
-      
-      // Cool animation for selected box
-      this.style.animationDelay = '0s';
-      
-      boxes.forEach((box, idx) => {
-        if (idx !== selectedIndex) {
-          box.el.classList.add('locked');
-          box.el.setAttribute('aria-pressed', 'false');
-          box.el.tabIndex = -1;
-          // Add staggered shake animation
-          setTimeout(() => {
-            box.el.style.animation = 'shake 0.5s ease-in-out';
-          }, idx * 100);
-        } else {
-          box.el.classList.remove('locked');
-          box.el.classList.add('active');
-          box.el.setAttribute('aria-pressed', 'true');
-          box.el.tabIndex = 0;
-          box.el.focus();
-          
-          // Create particle burst effect
-          createParticleBurst(box.el);
-        }
-      });
-      
-      if (!hasFollowed) {
-        followFirstBtn.style.display = 'block';
-        resultMessage.textContent = 'Please follow us on Instagram to reveal your treasure!';
-      } else {
-        showRevealButton();
-      }
-    }
-    
-    // Create particle burst effect for selected box
-    function createParticleBurst(box) {
-      for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = '4px';
-        particle.style.height = '4px';
-        particle.style.background = '#fde14b';
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '1000';
-        
-        const boxRect = box.getBoundingClientRect();
-        particle.style.left = boxRect.left + boxRect.width/2 + 'px';
-        particle.style.top = boxRect.top + boxRect.height/2 + 'px';
-        
-        document.body.appendChild(particle);
-        
-        // Animate particle
-        const angle = (i / 20) * Math.PI * 2;
-        const distance = 50 + Math.random() * 50;
-        const finalX = boxRect.left + boxRect.width/2 + Math.cos(angle) * distance;
-        const finalY = boxRect.top + boxRect.height/2 + Math.sin(angle) * distance;
-        
-        particle.animate([
-          { 
-            transform: 'translate(0, 0) scale(1)', 
-            opacity: 1 
-          },
-          { 
-            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0)`, 
-            opacity: 0 
-          }
-        ], {
-          duration: 800,
-          easing: 'ease-out'
-        }).onfinish = () => {
-          particle.remove();
-        };
-      }
-    }
-    
-    function showRevealButton() {
-      followFirstBtn.style.display = 'none';
-      spinButton.style.display = 'block';
-      spinButton.disabled = false;
-      gameState = 'reveal';
-      resultMessage.textContent = 'Click "Reveal All" to see your treasure!';
-    }
-    
-    // Follow First Button Click
-    followFirstBtn.addEventListener('click', () => {
-      showFollowPopup();
-    });
-    
-    function showFollowPopup() {
-      popup.innerHTML = `
-        <img src="Logo.png" alt="Follow Us" style="max-width:120px; margin-bottom:20px;" />
-        <div class="popup-text">Follow us on Instagram to continue!</div>
-        <div class="popup-follow-row">
-          <button id="follow-btn" type="button">
-            <span aria-hidden="true" style="display:inline-block; vertical-align:middle;">
-              <svg width="30" height="30" viewBox="0 0 448 448" style="display:block" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient id="instaGradient" cx="30%" cy="107%" r="150%" fx="30%" fy="107%">
-                    <stop offset="0%" stop-color="#fdf497"/>
-                    <stop offset="5%" stop-color="#fdf497"/>
-                    <stop offset="45%" stop-color="#fd5949"/>
-                    <stop offset="60%" stop-color="#d6249f"/>
-                    <stop offset="90%" stop-color="#285AEB"/>
-                  </radialGradient>
-                </defs>
-                <rect rx="90" width="448" height="448" fill="url(#instaGradient)" />
-                <circle cx="224" cy="224" r="88" fill="none" stroke="#fff" stroke-width="32"/>
-                <circle cx="224" cy="224" r="56" fill="none" stroke="#fff" stroke-width="8"/>
-                <circle cx="339" cy="109" r="21" fill="#fff"/>
-              </svg>
-            </span>
-            Follow Us
-          </button>
-        </div>
-      `;
-      popup.style.display = 'flex';
-      
-      let followBtn = document.getElementById('follow-btn');
-      followBtn.addEventListener('click', function () {
-        window.open('https://www.instagram.com/bandeali_enterprises', '_blank');
-        followBtn.style.display = "none";
-        let doneBtn = document.createElement('button');
-        doneBtn.id = "done-follow-btn";
-        doneBtn.innerText = "I have followed";
-        document.querySelector('.popup-follow-row').appendChild(doneBtn);
-        
-        doneBtn.addEventListener('click', function () {
-          hasFollowed = true;
-          popup.style.display = 'none';
-          showRevealButton();
-        });
-      });
-      popup.focus();
-    }
-    
-    spinButton.addEventListener('click', () => {
-      if (gameState === 'reveal') {
-        revealBoxes();
-      }
-    });
-    
-    function revealBoxes() {
-      boxes.forEach((box, idx) => {
-        setTimeout(() => {
-          box.el.classList.remove('locked', 'active');
-          box.el.classList.add('opened');
-          box.el.tabIndex = -1;
-          box.el.innerHTML = '';
-          
-          if (box.prize.win) {
-            const img = document.createElement('img');
-            img.src = 'treasure.png';
-            img.alt = 'Treasure box image';
-            img.className = 'chest-img';
-            box.el.appendChild(img);
-            const textDiv = document.createElement('div');
-            textDiv.className = 'text';
-            textDiv.textContent = box.prize.text;
-            box.el.appendChild(textDiv);
-          } else {
-            const textDiv = document.createElement('div');
-            textDiv.className = 'text';
-            textDiv.textContent = box.prize.text;
-            box.el.appendChild(textDiv);
-          }
-        }, idx * 150); // Staggered reveal animation
-      });
-      
-      spinButton.style.display = 'none';
-      gameState = 'finished';
-      
-      // Show result popup after all boxes are revealed
-      setTimeout(() => {
-        showResultPopup(boxes[selectedIndex].prize);
-      }, boxes.length * 150 + 500);
-    }
-    
-    function showResultPopup(prize) {
-      usedBoxes.push(selectedIndex);
-      
-      if (prize.win) {
-        // Winner popup
-        popup.innerHTML = `
-          <img id="popup-img" src="treasure.png" alt="Treasure Box" />
-          <div class="popup-text">🎉 Congratulations! 🎉<br>${prize.text}</div>
-          <button id="claim-btn" class="enabled">Claim Your Prize</button>
-        `;
-        startFireworks();
-      } else {
-        // Better luck popup
-        chancesLeft--;
-        if (chancesLeft > 0) {
-          popup.innerHTML = `
-            <div class="popup-text">😔 ${prize.text}<br>You have ${chancesLeft} more chance${chancesLeft > 1 ? 's' : ''}!</div>
-            <button id="try-again-btn">Try Again</button>
-          `;
-        } else {
-          popup.innerHTML = `
-            <div class="popup-text">😞 Bad luck today, try next time!</div>
-            <button id="try-again-btn">Start New Game</button>
-          `;
-        }
-      }
-      
-      popup.style.display = 'flex';
-      
-      // Event listeners for popup buttons
-      const claimBtn = document.getElementById('claim-btn');
-      const tryAgainBtn = document.getElementById('try-again-btn');
-      
-      if (claimBtn) {
-        claimBtn.addEventListener('click', function () {
-          popup.style.display = 'none';
-          stopFireworks();
-          resetGame();
-        });
-      }
-      
-      if (tryAgainBtn) {
-        tryAgainBtn.addEventListener('click', function () {
-          popup.style.display = 'none';
-          if (chancesLeft > 0) {
-            // Continue with remaining chances
-            createBoxes();
-            document.getElementById('instructions').textContent = 'Choose another treasure box!';
-          } else {
-            // Reset entire game
-            resetGame();
-          }
-        });
-      }
-      
-      popup.focus();
-    }
-    
-    function resetGame() {
-      chancesLeft = 3;
-      hasFollowed = false;
-      usedBoxes = [];
-      selectedIndex = null;
-      gameState = 'selection';
-      createBoxes();
-      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
-    }
-    
-    // Fireworks Animation
-    let fireworks = [];
-    let fireworksAnimation;
-    
-    class Firework {
-      constructor() {
-        this.x = Math.random() * fireworksCanvas.width;
-        this.y = fireworksCanvas.height + 10;
-        this.targetY = Math.random() * fireworksCanvas.height / 2;
-        this.vy = -(7 + Math.random() * 3);
-        this.exploded = false;
-        this.particles = [];
-        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
-      }
-      
-      update() {
-        if (!this.exploded) {
-          this.y += this.vy;
-          this.vy += 0.15;
-          if (this.vy >= 0) {
-            this.exploded = true;
-            for (let i = 0; i < 24; i++) {
-              const angle = (2 * Math.PI / 24) * i;
-              this.particles.push({
-                x: this.x,
-                y: this.y,
-                vx: Math.cos(angle) * (2 + Math.random() * 2),
-                vy: Math.sin(angle) * (2 + Math.random() * 2),
-                alpha: 1,
-                color: this.color,
-              });
-            }
-          }
-        } else {
-          this.particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            p.vy += 0.05;
-            p.alpha -= 0.02;
-          });
-          this.particles = this.particles.filter(p => p.alpha > 0);
-        }
-      }
-      
-      draw(ctx) {
-        if (!this.exploded) {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, 2.5, 0, 2 * Math.PI);
-          ctx.fillStyle = this.color;
-          ctx.fill();
-        } else {
-          this.particles.forEach(p => {
-            ctx.globalAlpha = p.alpha;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, 1.5, 0, 2 * Math.PI);
-            ctx.fillStyle = p.color;
-            ctx.fill();
-            ctx.globalAlpha = 1;
-          });
-        }
-      }
-    }
-    
-    function startFireworks() {
-      fireworksCanvas.width = window.innerWidth;
-      fireworksCanvas.height = window.innerHeight;
-      fireworks = [];
-      fireworksAnimation = setInterval(() => {
-        if (fireworks.length < 30) fireworks.push(new Firework());
-      }, 200);
-      renderFireworks();
-      fireworksCanvas.style.display = 'block';
-    }
-    
-    function stopFireworks() {
-      clearInterval(fireworksAnimation);
-      fireworks = [];
-      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-      fireworksCanvas.style.display = 'none';
-    }
-    
-    function renderFireworks() {
-      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-      fireworks.forEach(fw => {
-        fw.update();
-        fw.draw(fw);
-      });
-      if (fireworksCanvas.style.display === 'block') {
-        requestAnimationFrame(renderFireworks);
-      }
-    }
-    
-    window.addEventListener('resize', () => {
-      fireworksCanvas.width = window.innerWidth;
-      fireworksCanvas.height = window.innerHeight;
-    });
-    
-    window.onload = () => {
-      createBoxes();
-      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
-    };
-  </script>
-</body>
-</html>
+    /* Epic
