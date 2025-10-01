@@ -8,31 +8,143 @@
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     body { background:radial-gradient(circle at 60% 50%, #283445 0%, #181e27 100%); font-family:'Orbitron',sans-serif; color:white; min-height:100vh; margin:0; padding:0; display:flex; flex-direction:column; align-items:center; user-select:none; text-align:center;}
     
-    /* Professional Logo Style with Glow */
+    /* Professional Logo Style */
     #logo { 
-      max-width: 170px; 
-      margin: 28px auto 15px auto; 
-      user-select: none; 
-      border-radius: 32px; 
-      box-shadow: 0 0 28px #ffe700, 0 2px 10px #0C101A; 
+      max-width: 160px; 
+      margin: 25px auto 10px auto; 
+      user-select: none;
+      border-radius: 20px; 
+      box-shadow: 0 0 20px #fde14b, 0 4px 15px rgba(0,0,0,0.3); 
       display: block; 
-      background: rgba(255,255,255,0.02); 
-      padding: 8px;
-      transition: box-shadow 0.3s ease;
+      padding: 5px;
+      transition: all 0.3s ease;
     }
     #logo:hover {
-      box-shadow: 0 0 35px #ffe700, 0 4px 15px #0C101A;
+      box-shadow: 0 0 30px #fde14b, 0 6px 20px rgba(0,0,0,0.4);
+      transform: scale(1.05);
     }
     
-    .header-container { max-width:600px; margin-bottom:15px;}
+    .header-container { max-width:600px; margin-bottom:10px;}
     .header-container h1 {margin:0;font-size:3rem;color:#fde14b;text-shadow: 0 0 20px #fde14b, 0 0 40px #f8d530;font-weight:900;letter-spacing:6px;}
     .header-container h2 {margin:8px 0 0 0;font-size:2rem;color:#fbe74b;text-shadow:0 0 16px #fbe74b;font-weight:700;letter-spacing:4px;}
     #instructions { font-size:1.25rem; max-width:450px; margin:20px auto 30px auto; color:#eee;}
     #game-container { display: grid; grid-template-columns:repeat(3,1fr); gap:16px 14px; justify-items:center; width:320px; max-width:95vw; min-height:380px; margin-bottom:14px; user-select:none;}
-    .box { width:100px; height:130px; background: linear-gradient(145deg, #6b3e00, #3f2400 92%); border:3px solid #fde14b; border-radius:16px; box-shadow:0 0 18px #fde14baa inset,0 3px 10px #000b; font-weight:900; color:#fde14b; font-size:2.8rem; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; transition:transform 0.3s ease; outline:none; position:relative;}
-    .box.locked { filter:grayscale(1); opacity:0.6; cursor:default;}
-    .box.active {border-color:#fff44c; box-shadow:0 0 30px #fff44c inset,0 0 15px #fff44c; transform:scale(1.07);color:#4b3700;}
-    .box.opened {background:#fde14b;color:#4b3700;cursor:default;filter:none;opacity:1;box-shadow:0 0 48px #fee452;transform:scale(1.1);}
+    
+    /* Box Styles with Cool Animations */
+    .box { 
+      width:100px; 
+      height:130px; 
+      background: linear-gradient(145deg, #6b3e00, #3f2400 92%); 
+      border:3px solid #fde14b; 
+      border-radius:16px; 
+      box-shadow:0 0 18px #fde14baa inset,0 3px 10px #000b; 
+      font-weight:900; 
+      color:#fde14b; 
+      font-size:2.8rem; 
+      display:flex; 
+      flex-direction:column; 
+      justify-content:center; 
+      align-items:center; 
+      cursor:pointer; 
+      transition:all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+      outline:none; 
+      position:relative;
+      overflow: hidden;
+    }
+    
+    /* Cool Pulse Animation for selectable boxes */
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 18px #fde14baa inset, 0 3px 10px #000b, 0 0 5px #fde14b; }
+      50% { box-shadow: 0 0 25px #fde14b99 inset, 0 3px 15px #000b, 0 0 15px #fde14b; }
+      100% { box-shadow: 0 0 18px #fde14baa inset, 0 3px 10px #000b, 0 0 5px #fde14b; }
+    }
+    
+    .box:hover {
+      animation: pulseGlow 1.5s ease-in-out infinite;
+      transform: translateY(-5px) scale(1.05);
+    }
+    
+    /* Selected Box Animation */
+    @keyframes selectedPulse {
+      0% { 
+        border-color:#fff44c; 
+        box-shadow:0 0 30px #fff44c inset,0 0 15px #fff44c;
+        transform: scale(1.1);
+      }
+      50% { 
+        border-color:#fde14b; 
+        box-shadow:0 0 40px #fde14b inset,0 0 25px #fde14b;
+        transform: scale(1.15);
+      }
+      100% { 
+        border-color:#fff44c; 
+        box-shadow:0 0 30px #fff44c inset,0 0 15px #fff44c;
+        transform: scale(1.1);
+      }
+    }
+    
+    /* Particle Effect for selected box */
+    .box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, #fde14b22, transparent);
+      transform: rotate(0deg);
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+    
+    .box.active {
+      animation: selectedPulse 2s ease-in-out infinite;
+      color:#4b3700;
+      z-index: 10;
+    }
+    
+    .box.active::before {
+      opacity: 1;
+      animation: rotateGlow 3s linear infinite;
+    }
+    
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Shake animation for locked boxes */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-2px); }
+      75% { transform: translateX(2px); }
+    }
+    
+    .box.locked { 
+      filter:grayscale(1); 
+      opacity:0.6; 
+      cursor:default;
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    /* Opened box animation */
+    @keyframes bounceOpen {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2) rotate(5deg); }
+      100% { transform: scale(1.1) rotate(0deg); }
+    }
+    
+    .box.opened {
+      background:#fde14b;
+      color:#4b3700;
+      cursor:default;
+      filter:none;
+      opacity:1;
+      box-shadow:0 0 48px #fee452;
+      animation: bounceOpen 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transform: scale(1.1);
+    }
+    
     .box.disabled {background:#333; color:#666; border-color:#666; cursor:default; opacity:0.5;}
     .box img {max-width:44px;max-height:44px;margin-bottom:6px;filter:drop-shadow(0 0 6px #c1a834);}
     .box .text {font-size:1rem; user-select:none; text-align:center; line-height:1.2;}
@@ -51,12 +163,49 @@
       font-weight:900; 
       box-shadow:0 0 25px #fd1d1dcc; 
       letter-spacing:3px;
+      transition: all 0.3s ease;
     }
-    #follow-first-btn:hover { filter:brightness(1.1);}
+    #follow-first-btn:hover { 
+      filter:brightness(1.1);
+      transform: translateY(-3px);
+    }
     
-    #spin-button { display:none; margin:0 auto 28px auto; padding:14px 42px; font-size:1.25rem; background:#fde14b; border-radius:28px; border:none; color:#4b3700; cursor:pointer; font-weight:900; box-shadow:0 0 25px #fde14bcc; letter-spacing:4px;}
-    #spin-button:hover { background-color:#fff856;}
-    #spin-button:active {background-color:#b6951a;color:#fff;}
+    /* Reveal Button with Animation */
+    #spin-button { 
+      display:none; 
+      margin:0 auto 28px auto; 
+      padding:14px 42px; 
+      font-size:1.25rem; 
+      background:#fde14b; 
+      border-radius:28px; 
+      border:none; 
+      color:#4b3700; 
+      cursor:pointer; 
+      font-weight:900; 
+      box-shadow:0 0 25px #fde14bcc; 
+      letter-spacing:4px;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    @keyframes buttonPulse {
+      0% { box-shadow: 0 0 25px #fde14bcc; }
+      50% { box-shadow: 0 0 40px #fde14b, 0 0 60px #fde14b; }
+      100% { box-shadow: 0 0 25px #fde14bcc; }
+    }
+    
+    #spin-button:not(:disabled) {
+      animation: buttonPulse 2s ease-in-out infinite;
+    }
+    
+    #spin-button:hover { 
+      background-color:#fff856;
+      transform: translateY(-5px) scale(1.05);
+    }
+    #spin-button:active {
+      background-color:#b6951a;
+      color:#fff;
+      transform: translateY(0) scale(0.95);
+    }
     #spin-button:disabled { background:#888; color:#555; cursor:not-allowed; }
     
     #result-message { font-size:1.6rem; min-height:28px; margin-bottom:16px; color:#fde14b; text-shadow:0 0 12px #fde14b;}
@@ -152,7 +301,7 @@
     canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
     
     @media (max-width:600px){
-      #logo {max-width:130px;margin:20px auto 10px auto; padding: 6px;}
+      #logo {max-width:110px;margin:25px auto 10px auto;}
       .header-container h1 {font-size:2rem;}
       .header-container h2 {font-size:1.5rem;}
       #instructions {font-size:1.1rem;margin-bottom:28px;padding:0 10px;}
@@ -182,7 +331,7 @@
   </style>
 </head>
 <body>
-  <img id="logo" src="insta.png" alt="Bandeali Enterprises Logo" />
+  <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
   <div class="header-container">
     <h1>Bandeali Enterprises</h1>
     <h2>Treasure Box Game</h2>
@@ -286,17 +435,27 @@
       selectedIndex = Number(this.dataset.index);
       gameState = 'follow';
       
+      // Cool animation for selected box
+      this.style.animationDelay = '0s';
+      
       boxes.forEach((box, idx) => {
         if (idx !== selectedIndex) {
           box.el.classList.add('locked');
           box.el.setAttribute('aria-pressed', 'false');
           box.el.tabIndex = -1;
+          // Add staggered shake animation
+          setTimeout(() => {
+            box.el.style.animation = 'shake 0.5s ease-in-out';
+          }, idx * 100);
         } else {
           box.el.classList.remove('locked');
           box.el.classList.add('active');
           box.el.setAttribute('aria-pressed', 'true');
           box.el.tabIndex = 0;
           box.el.focus();
+          
+          // Create particle burst effect
+          createParticleBurst(box.el);
         }
       });
       
@@ -305,6 +464,48 @@
         resultMessage.textContent = 'Please follow us on Instagram to reveal your treasure!';
       } else {
         showRevealButton();
+      }
+    }
+    
+    // Create particle burst effect for selected box
+    function createParticleBurst(box) {
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = '4px';
+        particle.style.height = '4px';
+        particle.style.background = '#fde14b';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '1000';
+        
+        const boxRect = box.getBoundingClientRect();
+        particle.style.left = boxRect.left + boxRect.width/2 + 'px';
+        particle.style.top = boxRect.top + boxRect.height/2 + 'px';
+        
+        document.body.appendChild(particle);
+        
+        // Animate particle
+        const angle = (i / 20) * Math.PI * 2;
+        const distance = 50 + Math.random() * 50;
+        const finalX = boxRect.left + boxRect.width/2 + Math.cos(angle) * distance;
+        const finalY = boxRect.top + boxRect.height/2 + Math.sin(angle) * distance;
+        
+        particle.animate([
+          { 
+            transform: 'translate(0, 0) scale(1)', 
+            opacity: 1 
+          },
+          { 
+            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0)`, 
+            opacity: 0 
+          }
+        ], {
+          duration: 800,
+          easing: 'ease-out'
+        }).onfinish = () => {
+          particle.remove();
+        };
       }
     }
     
@@ -323,7 +524,7 @@
     
     function showFollowPopup() {
       popup.innerHTML = `
-        <img src="insta.png" alt="Follow Us" style="max-width:120px; margin-bottom:20px;" />
+        <img src="Logo.png" alt="Follow Us" style="max-width:120px; margin-bottom:20px;" />
         <div class="popup-text">Follow us on Instagram to continue!</div>
         <div class="popup-follow-row">
           <button id="follow-btn" type="button">
@@ -376,32 +577,38 @@
     
     function revealBoxes() {
       boxes.forEach((box, idx) => {
-        box.el.classList.remove('locked');
-        box.el.classList.add('opened');
-        box.el.tabIndex = -1;
-        box.el.innerHTML = '';
-        
-        if (box.prize.win) {
-          const img = document.createElement('img');
-          img.src = 'treasure.png';
-          img.alt = 'Treasure box image';
-          img.className = 'chest-img';
-          box.el.appendChild(img);
-          const textDiv = document.createElement('div');
-          textDiv.className = 'text';
-          textDiv.textContent = box.prize.text;
-          box.el.appendChild(textDiv);
-        } else {
-          const textDiv = document.createElement('div');
-          textDiv.className = 'text';
-          textDiv.textContent = box.prize.text;
-          box.el.appendChild(textDiv);
-        }
+        setTimeout(() => {
+          box.el.classList.remove('locked', 'active');
+          box.el.classList.add('opened');
+          box.el.tabIndex = -1;
+          box.el.innerHTML = '';
+          
+          if (box.prize.win) {
+            const img = document.createElement('img');
+            img.src = 'treasure.png';
+            img.alt = 'Treasure box image';
+            img.className = 'chest-img';
+            box.el.appendChild(img);
+            const textDiv = document.createElement('div');
+            textDiv.className = 'text';
+            textDiv.textContent = box.prize.text;
+            box.el.appendChild(textDiv);
+          } else {
+            const textDiv = document.createElement('div');
+            textDiv.className = 'text';
+            textDiv.textContent = box.prize.text;
+            box.el.appendChild(textDiv);
+          }
+        }, idx * 150); // Staggered reveal animation
       });
       
       spinButton.style.display = 'none';
       gameState = 'finished';
-      showResultPopup(boxes[selectedIndex].prize);
+      
+      // Show result popup after all boxes are revealed
+      setTimeout(() => {
+        showResultPopup(boxes[selectedIndex].prize);
+      }, boxes.length * 150 + 500);
     }
     
     function showResultPopup(prize) {
@@ -557,7 +764,7 @@
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
       fireworks.forEach(fw => {
         fw.update();
-        fw.draw(ctx);
+        fw.draw(fw);
       });
       if (fireworksCanvas.style.display === 'block') {
         requestAnimationFrame(renderFireworks);
