@@ -3,343 +3,497 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bandeali Enterprises Treasure Box Game</title>
+  <title>🎯 Bandeali Enterprises - Ultimate Treasure Hunt 🎯</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-    body { 
-      background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      font-family:'Orbitron',sans-serif; 
-      color:white; 
-      min-height:100vh; 
-      margin:0; 
-      padding:0; 
-      display:flex; 
-      flex-direction:column; 
-      align-items:center; 
-      user-select:none; 
-      text-align:center;
-      overflow-x: hidden;
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --primary-gold: #ffd700;
+      --secondary-gold: #ffed4e;
+      --dark-gold: #b8860b;
+      --neon-blue: #00ffff;
+      --neon-pink: #ff00ff;
+      --neon-green: #39ff14;
     }
     
-    @keyframes gradientShift {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      background: linear-gradient(45deg, #0a0a0a, #1a0033, #330066, #0066cc, #00ccff);
+      background-size: 1000% 1000%;
+      animation: epicBackground 20s ease infinite;
+      font-family: 'Orbitron', sans-serif; 
+      color: white; 
+      min-height: 100vh; 
+      margin: 0; 
+      padding: 0; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      user-select: none; 
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    @keyframes epicBackground {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 0%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Animated Background Particles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+        radial-gradient(2px 2px at 40px 70px, var(--neon-blue), transparent),
+        radial-gradient(1px 1px at 90px 40px, var(--neon-pink), transparent),
+        radial-gradient(1px 1px at 130px 80px, var(--neon-green), transparent),
+        radial-gradient(2px 2px at 160px 30px, var(--primary-gold), transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: starField 20s linear infinite;
+      opacity: 0.6;
+      z-index: -1;
+    }
+    
+    @keyframes starField {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100px); }
+    }
+    
+    /* MEGA COOL LOGO */
+    #logo { 
+      max-width: 180px; 
+      margin: 30px auto 15px auto; 
+      user-select: none;
+      border-radius: 50%; 
+      display: block; 
+      padding: 10px;
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      overflow: hidden;
+      z-index: 100;
+    }
+    
+    /* ULTIMATE RAINBOW GLOW */
+    @keyframes ultimateLogoGlow {
+      0% { 
+        box-shadow: 
+          0 0 20px var(--neon-blue),
+          0 0 40px var(--neon-blue),
+          0 0 60px var(--neon-blue),
+          0 0 80px var(--neon-blue),
+          inset 0 0 20px rgba(0, 255, 255, 0.1);
+        filter: hue-rotate(0deg) brightness(1.2);
+        transform: translateY(0px) rotate(0deg) scale(1);
+      }
+      25% { 
+        box-shadow: 
+          0 0 25px var(--neon-green),
+          0 0 50px var(--neon-green),
+          0 0 75px var(--neon-green),
+          0 0 100px var(--neon-green),
+          inset 0 0 25px rgba(57, 255, 20, 0.1);
+        filter: hue-rotate(90deg) brightness(1.4);
+        transform: translateY(-5px) rotate(2deg) scale(1.05);
+      }
+      50% { 
+        box-shadow: 
+          0 0 30px var(--neon-pink),
+          0 0 60px var(--neon-pink),
+          0 0 90px var(--neon-pink),
+          0 0 120px var(--neon-pink),
+          inset 0 0 30px rgba(255, 0, 255, 0.1);
+        filter: hue-rotate(180deg) brightness(1.6);
+        transform: translateY(-10px) rotate(-2deg) scale(1.1);
+      }
+      75% { 
+        box-shadow: 
+          0 0 25px var(--primary-gold),
+          0 0 50px var(--primary-gold),
+          0 0 75px var(--primary-gold),
+          0 0 100px var(--primary-gold),
+          inset 0 0 25px rgba(255, 215, 0, 0.1);
+        filter: hue-rotate(270deg) brightness(1.4);
+        transform: translateY(-5px) rotate(1deg) scale(1.05);
+      }
+      100% { 
+        box-shadow: 
+          0 0 20px var(--neon-blue),
+          0 0 40px var(--neon-blue),
+          0 0 60px var(--neon-blue),
+          0 0 80px var(--neon-blue),
+          inset 0 0 20px rgba(0, 255, 255, 0.1);
+        filter: hue-rotate(360deg) brightness(1.2);
+        transform: translateY(0px) rotate(0deg) scale(1);
+      }
+    }
+    
+    #logo {
+      animation: ultimateLogoGlow 4s ease-in-out infinite;
+    }
+    
+    #logo:hover {
+      transform: scale(1.25) rotate(10deg) !important;
+      animation-duration: 0.5s !important;
+      cursor: pointer;
+    }
+    
+    /* EPIC HEADERS */
+    .header-container { 
+      max-width: 700px; 
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .header-container h1 {
+      margin: 0;
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: 8px;
+      background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold), var(--neon-blue), var(--neon-pink));
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: epicTextGradient 3s ease-in-out infinite, titleFloat 6s ease-in-out infinite;
+      position: relative;
+    }
+    
+    @keyframes epicTextGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     
-    /* Ultra Cool Animated Logo */
-    #logo { 
-      max-width: 160px; 
-      margin: 25px auto 10px auto; 
-      user-select: none;
-      border-radius: 25px; 
-      display: block; 
-      padding: 8px;
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      position: relative;
-      overflow: hidden;
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
     
-    /* Animated Rainbow Glow for Logo */
-    @keyframes rainbowGlow {
-      0% { 
-        box-shadow: 0 0 20px #ff0080, 0 0 40px #ff0080, 0 0 60px #ff0080;
-        filter: hue-rotate(0deg);
-      }
-      25% { 
-        box-shadow: 0 0 25px #00ff80, 0 0 50px #00ff80, 0 0 75px #00ff80;
-        filter: hue-rotate(90deg);
-      }
-      50% { 
-        box-shadow: 0 0 30px #8000ff, 0 0 60px #8000ff, 0 0 90px #8000ff;
-        filter: hue-rotate(180deg);
-      }
-      75% { 
-        box-shadow: 0 0 25px #ff8000, 0 0 50px #ff8000, 0 0 75px #ff8000;
-        filter: hue-rotate(270deg);
-      }
-      100% { 
-        box-shadow: 0 0 20px #ff0080, 0 0 40px #ff0080, 0 0 60px #ff0080;
-        filter: hue-rotate(360deg);
-      }
+    .header-container h1::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, transparent, var(--primary-gold), transparent);
+      z-index: -1;
+      filter: blur(20px);
+      opacity: 0.3;
+      animation: titleAura 4s ease-in-out infinite;
     }
     
-    #logo {
-      animation: rainbowGlow 3s ease-in-out infinite, floatLogo 4s ease-in-out infinite;
-    }
-    
-    @keyframes floatLogo {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(2deg); }
-    }
-    
-    #logo:hover {
-      transform: scale(1.15) rotate(5deg);
-      animation-duration: 1s;
-    }
-    
-    /* Glowing Header */
-    .header-container { max-width:600px; margin-bottom:15px;}
-    .header-container h1 {
-      margin:0;
-      font-size:3rem;
-      color:#fde14b;
-      text-shadow: 0 0 20px #fde14b, 0 0 40px #f8d530, 0 0 60px #fde14b;
-      font-weight:900;
-      letter-spacing:6px;
-      animation: textGlow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes textGlow {
-      from { text-shadow: 0 0 20px #fde14b, 0 0 30px #f8d530, 0 0 40px #fde14b; }
-      to { text-shadow: 0 0 30px #fde14b, 0 0 50px #f8d530, 0 0 70px #fde14b; }
+    @keyframes titleAura {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
     }
     
     .header-container h2 {
-      margin:8px 0 0 0;
-      font-size:2rem;
-      color:#fbe74b;
-      text-shadow:0 0 16px #fbe74b;
-      font-weight:700;
-      letter-spacing:4px;
-      animation: subtleGlow 3s ease-in-out infinite alternate;
+      margin: 10px 0 0 0;
+      font-size: 2.2rem;
+      color: var(--secondary-gold);
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-shadow: 
+        0 0 10px var(--secondary-gold),
+        0 0 20px var(--secondary-gold),
+        0 0 30px var(--secondary-gold);
+      animation: subtitlePulse 4s ease-in-out infinite;
     }
     
-    @keyframes subtleGlow {
-      from { text-shadow: 0 0 16px #fbe74b; }
-      to { text-shadow: 0 0 25px #fbe74b, 0 0 35px #fbe74b; }
+    @keyframes subtitlePulse {
+      0%, 100% { text-shadow: 0 0 10px var(--secondary-gold), 0 0 20px var(--secondary-gold); }
+      50% { text-shadow: 0 0 20px var(--secondary-gold), 0 0 40px var(--secondary-gold), 0 0 60px var(--secondary-gold); }
     }
     
+    /* INSTRUCTIONS WITH TYPEWRITER EFFECT */
     #instructions { 
-      font-size:1.25rem; 
-      max-width:450px; 
-      margin:20px auto 30px auto; 
-      color:#eee;
-      animation: fadeInUp 1s ease-out;
+      font-size: 1.4rem; 
+      max-width: 500px; 
+      margin: 25px auto 35px auto; 
+      color: var(--neon-blue);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+      text-shadow: 0 0 10px var(--neon-blue);
+      animation: instructionGlow 3s ease-in-out infinite alternate;
     }
     
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes instructionGlow {
+      from { text-shadow: 0 0 10px var(--neon-blue); }
+      to { text-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue); }
     }
     
     #game-container { 
       display: grid; 
-      grid-template-columns:repeat(3,1fr); 
-      gap:20px 18px; 
-      justify-items:center; 
-      width:340px; 
-      max-width:95vw; 
-      min-height:380px; 
-      margin-bottom:20px; 
-      user-select:none;
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 25px 20px; 
+      justify-items: center; 
+      width: 360px; 
+      max-width: 95vw; 
+      min-height: 400px; 
+      margin-bottom: 30px; 
+      user-select: none;
+      perspective: 1000px;
     }
     
-    /* Ultra Cool Box Animations */
+    /* ULTIMATE BOX DESIGN */
     .box { 
-      width:100px; 
-      height:130px; 
-      background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460); 
-      border:3px solid #fde14b; 
-      border-radius:20px; 
-      box-shadow:0 0 20px rgba(253, 225, 75, 0.3) inset, 0 5px 15px rgba(0,0,0,0.6); 
-      font-weight:900; 
-      color:#fde14b; 
-      font-size:2.8rem; 
-      display:flex; 
-      flex-direction:column; 
-      justify-content:center; 
-      align-items:center; 
-      cursor:pointer; 
-      transition:all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-      outline:none; 
-      position:relative;
+      width: 110px; 
+      height: 140px; 
+      background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460, #533483); 
+      border: 4px solid var(--primary-gold); 
+      border-radius: 25px; 
+      font-weight: 900; 
+      color: var(--primary-gold); 
+      font-size: 3rem; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      cursor: pointer; 
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+      outline: none; 
+      position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
     }
     
-    /* Floating particles effect for boxes */
-    .box::after {
+    /* ANIMATED BORDER GLOW */
+    .box::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(253, 225, 75, 0.1) 0%, transparent 70%);
-      animation: floatingParticles 6s ease-in-out infinite;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-green), var(--primary-gold));
+      background-size: 400% 400%;
+      border-radius: 25px;
+      z-index: -1;
+      animation: borderFlow 4s linear infinite;
       opacity: 0;
     }
     
-    @keyframes floatingParticles {
-      0%, 100% { transform: rotate(0deg) scale(0); opacity: 0; }
-      50% { transform: rotate(180deg) scale(1); opacity: 0.6; }
+    @keyframes borderFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     
-    /* Enhanced Hover Effect */
-    @keyframes advancedPulse {
-      0% { 
-        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 5px 15px rgba(0,0,0,0.6), 0 0 10px #fde14b; 
-        transform: translateY(0) scale(1);
-      }
-      50% { 
-        box-shadow: 0 0 30px rgba(253, 225, 75, 0.6) inset, 0 8px 25px rgba(0,0,0,0.8), 0 0 30px #fde14b; 
-        transform: translateY(-8px) scale(1.05);
-      }
-      100% { 
-        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 5px 15px rgba(0,0,0,0.6), 0 0 10px #fde14b; 
-        transform: translateY(0) scale(1);
-      }
+    /* FLOATING PARTICLES */
+    .box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.3) 2px, transparent 2px),
+        radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 40% 60%, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
+      animation: floatingDots 8s ease-in-out infinite;
+      opacity: 0;
     }
     
+    @keyframes floatingDots {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(-10px) rotate(180deg); opacity: 1; }
+    }
+    
+    /* MEGA HOVER EFFECT */
     .box:hover {
-      animation: advancedPulse 1.5s ease-in-out infinite;
+      transform: translateY(-15px) rotateX(15deg) rotateY(15deg) scale(1.1);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.8),
+        0 0 30px var(--primary-gold),
+        0 0 60px var(--neon-blue);
+    }
+    
+    .box:hover::before {
+      opacity: 1;
     }
     
     .box:hover::after {
       opacity: 1;
-      animation-duration: 2s;
+      animation-duration: 3s;
     }
     
-    /* Epic Selected Box Animation */
-    @keyframes epicSelected {
+    /* ULTIMATE SELECTED ANIMATION */
+    @keyframes ultimateSelected {
       0% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 40px #fff44c inset, 0 0 20px #fff44c, 0 10px 30px rgba(0,0,0,0.8);
-        transform: scale(1.1) rotateY(0deg);
+        transform: rotateY(0deg) scale(1.2);
+        box-shadow: 
+          0 0 30px var(--primary-gold),
+          0 0 60px var(--neon-blue),
+          0 20px 40px rgba(0, 0, 0, 0.8);
       }
       25% { 
-        border-color:#fde14b; 
-        box-shadow: 0 0 50px #fde14b inset, 0 0 30px #fde14b, 0 15px 40px rgba(0,0,0,0.9);
-        transform: scale(1.15) rotateY(90deg);
+        transform: rotateY(90deg) scale(1.25);
+        box-shadow: 
+          0 0 40px var(--neon-green),
+          0 0 80px var(--neon-pink),
+          0 25px 50px rgba(0, 0, 0, 0.9);
       }
       50% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 60px #fff44c inset, 0 0 40px #fff44c, 0 20px 50px rgba(0,0,0,1.0);
-        transform: scale(1.2) rotateY(180deg);
+        transform: rotateY(180deg) scale(1.3);
+        box-shadow: 
+          0 0 50px var(--neon-pink),
+          0 0 100px var(--primary-gold),
+          0 30px 60px rgba(0, 0, 0, 1.0);
       }
       75% { 
-        border-color:#fde14b; 
-        box-shadow: 0 0 50px #fde14b inset, 0 0 30px #fde14b, 0 15px 40px rgba(0,0,0,0.9);
-        transform: scale(1.15) rotateY(270deg);
+        transform: rotateY(270deg) scale(1.25);
+        box-shadow: 
+          0 0 40px var(--neon-blue),
+          0 0 80px var(--neon-green),
+          0 25px 50px rgba(0, 0, 0, 0.9);
       }
       100% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 40px #fff44c inset, 0 0 20px #fff44c, 0 10px 30px rgba(0,0,0,0.8);
-        transform: scale(1.1) rotateY(360deg);
+        transform: rotateY(360deg) scale(1.2);
+        box-shadow: 
+          0 0 30px var(--primary-gold),
+          0 0 60px var(--neon-blue),
+          0 20px 40px rgba(0, 0, 0, 0.8);
       }
     }
     
-    /* Spiral glow effect for selected box */
+    /* SPIRAL ENERGY RING */
     .box.active::before {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: -100%;
-      width: 300%;
-      height: 300%;
-      background: conic-gradient(from 0deg, transparent, #fde14b, transparent, #fff44c, transparent);
-      animation: spiralGlow 2s linear infinite;
-      opacity: 0.8;
-      z-index: -1;
+      opacity: 1 !important;
+      animation: borderFlow 1s linear infinite, spiralEnergy 3s ease-in-out infinite;
     }
     
-    @keyframes spiralGlow {
-      0% { transform: rotate(0deg) scale(0.8); }
+    @keyframes spiralEnergy {
+      0% { transform: rotate(0deg) scale(1); }
       100% { transform: rotate(360deg) scale(1.2); }
     }
     
     .box.active {
-      animation: epicSelected 3s ease-in-out infinite;
-      color:#4b3700;
-      z-index: 10;
+      animation: ultimateSelected 4s ease-in-out infinite;
+      color: #1a0033;
+      z-index: 50;
     }
     
-    /* Explosive shake for locked boxes */
-    @keyframes explosiveShake {
-      0%, 100% { transform: translateX(0) rotateZ(0deg); }
-      10% { transform: translateX(-8px) rotateZ(-2deg); }
-      20% { transform: translateX(8px) rotateZ(2deg); }
-      30% { transform: translateX(-6px) rotateZ(-1deg); }
-      40% { transform: translateX(6px) rotateZ(1deg); }
-      50% { transform: translateX(-4px) rotateZ(-0.5deg); }
-      60% { transform: translateX(4px) rotateZ(0.5deg); }
-      70% { transform: translateX(-2px) rotateZ(-0.25deg); }
-      80% { transform: translateX(2px) rotateZ(0.25deg); }
-      90% { transform: translateX(-1px) rotateZ(0deg); }
+    .box.active::after {
+      opacity: 1 !important;
+      animation: energyPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes energyPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+    
+    /* EXPLOSIVE SHAKE */
+    @keyframes megaShake {
+      0% { transform: translateX(0) rotateZ(0deg); }
+      10% { transform: translateX(-12px) rotateZ(-3deg); }
+      20% { transform: translateX(12px) rotateZ(3deg); }
+      30% { transform: translateX(-10px) rotateZ(-2deg); }
+      40% { transform: translateX(10px) rotateZ(2deg); }
+      50% { transform: translateX(-8px) rotateZ(-1deg); }
+      60% { transform: translateX(8px) rotateZ(1deg); }
+      70% { transform: translateX(-6px) rotateZ(-0.5deg); }
+      80% { transform: translateX(6px) rotateZ(0.5deg); }
+      90% { transform: translateX(-2px) rotateZ(0deg); }
+      100% { transform: translateX(0) rotateZ(0deg); }
     }
     
     .box.locked { 
-      filter:grayscale(1) brightness(0.6); 
-      opacity:0.7; 
-      cursor:default;
-      animation: explosiveShake 0.8s ease-in-out;
+      filter: grayscale(1) brightness(0.4); 
+      opacity: 0.5; 
+      cursor: not-allowed;
+      animation: megaShake 1s ease-in-out;
     }
     
-    /* Mega opening animation */
-    @keyframes megaOpen {
+    /* ULTIMATE OPENING ANIMATION */
+    @keyframes ultimateOpen {
       0% { 
         transform: scale(1) rotateY(0deg) rotateX(0deg); 
-        background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
+        background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460, #533483);
       }
       25% { 
-        transform: scale(1.3) rotateY(90deg) rotateX(15deg); 
-        background: linear-gradient(145deg, #fde14b, #fff44c, #f8d530);
+        transform: scale(1.4) rotateY(90deg) rotateX(20deg); 
+        background: linear-gradient(145deg, var(--primary-gold), var(--secondary-gold), var(--neon-blue));
       }
       50% { 
-        transform: scale(1.4) rotateY(180deg) rotateX(30deg); 
-        background: linear-gradient(145deg, #fff44c, #fde14b, #fff856);
+        transform: scale(1.5) rotateY(180deg) rotateX(40deg); 
+        background: linear-gradient(145deg, var(--neon-pink), var(--neon-green), var(--primary-gold));
       }
       75% { 
-        transform: scale(1.3) rotateY(270deg) rotateX(15deg); 
-        background: linear-gradient(145deg, #fde14b, #f8d530, #fff44c);
+        transform: scale(1.4) rotateY(270deg) rotateX(20deg); 
+        background: linear-gradient(145deg, var(--neon-blue), var(--primary-gold), var(--secondary-gold));
       }
       100% { 
-        transform: scale(1.2) rotateY(360deg) rotateX(0deg); 
-        background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
+        transform: scale(1.3) rotateY(360deg) rotateX(0deg); 
+        background: linear-gradient(145deg, var(--primary-gold), var(--secondary-gold), #ffed4e);
       }
     }
     
     .box.opened {
-      background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
-      color:#4b3700;
-      cursor:default;
-      filter:none;
-      opacity:1;
-      box-shadow: 0 0 60px #fee452, 0 0 100px rgba(255, 215, 0, 0.5);
-      animation: megaOpen 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      transform: scale(1.2);
+      background: linear-gradient(145deg, var(--primary-gold), var(--secondary-gold), #ffed4e);
+      color: #1a0033;
+      cursor: default;
+      filter: none;
+      opacity: 1;
+      box-shadow: 
+        0 0 80px var(--primary-gold), 
+        0 0 120px rgba(255, 215, 0, 0.6),
+        0 30px 60px rgba(0, 0, 0, 0.8);
+      animation: ultimateOpen 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transform: scale(1.3);
+      z-index: 20;
     }
     
-    .box.disabled {background:#333; color:#666; border-color:#666; cursor:default; opacity:0.5;}
-    .box img {max-width:44px;max-height:44px;margin-bottom:6px;filter:drop-shadow(0 0 6px #c1a834);}
-    .box .text {font-size:1rem; user-select:none; text-align:center; line-height:1.2;}
+    .box img {max-width:50px;max-height:50px;margin-bottom:8px;filter:drop-shadow(0 0 10px #000);}
+    .box .text {font-size:1.1rem; user-select:none; text-align:center; line-height:1.2; font-weight: 700;}
     
-    /* Ultra Cool Follow Button */
+    /* ULTIMATE FOLLOW BUTTON */
     #follow-first-btn { 
-      display:none; 
-      margin:0 auto 28px auto; 
-      padding:18px 50px; 
-      font-size:1.4rem; 
-      background:linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
-      background-size: 400% 400%;
-      animation: gradientButton 3s ease infinite;
-      border-radius:35px; 
-      border:none; 
-      color:#fff; 
-      cursor:pointer; 
-      font-weight:900; 
-      box-shadow:0 0 30px rgba(253, 29, 29, 0.5), 0 5px 15px rgba(0,0,0,0.3); 
-      letter-spacing:3px;
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      display: none; 
+      margin: 0 auto 35px auto; 
+      padding: 20px 55px; 
+      font-size: 1.6rem; 
+      background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #f56040, #833ab4);
+      background-size: 500% 500%;
+      animation: ultimateButtonGradient 3s ease infinite;
+      border-radius: 50px; 
+      border: none; 
+      color: #fff; 
+      cursor: pointer; 
+      font-weight: 900; 
+      box-shadow: 
+        0 0 40px rgba(253, 29, 29, 0.6), 
+        0 10px 30px rgba(0,0,0,0.5),
+        inset 0 0 20px rgba(255,255,255,0.1); 
+      letter-spacing: 4px;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
       overflow: hidden;
+      font-family: 'Rajdhani', sans-serif;
     }
     
-    @keyframes gradientButton {
+    @keyframes ultimateButtonGradient {
       0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      25% { background-position: 100% 0%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
       100% { background-position: 0% 50%; }
     }
     
@@ -350,216 +504,318 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.5s ease;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s ease;
     }
     
     #follow-first-btn:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 0 40px rgba(253, 29, 29, 0.8), 0 10px 25px rgba(0,0,0,0.4);
+      transform: translateY(-8px) scale(1.08);
+      box-shadow: 
+        0 0 60px rgba(253, 29, 29, 0.8), 
+        0 15px 40px rgba(0,0,0,0.6),
+        inset 0 0 30px rgba(255,255,255,0.2);
     }
     
     #follow-first-btn:hover::before {
       left: 100%;
     }
     
-    /* Epic Reveal Button */
+    /* ULTIMATE REVEAL BUTTON */
     #spin-button { 
-      display:none; 
-      margin:0 auto 28px auto; 
-      padding:16px 45px; 
-      font-size:1.3rem; 
-      background: linear-gradient(45deg, #fde14b, #fff856, #f8d530, #fde14b); 
-      background-size: 400% 400%;
-      animation: goldenButton 2s ease infinite;
-      border-radius:30px; 
-      border:none; 
-      color:#4b3700; 
-      cursor:pointer; 
-      font-weight:900; 
-      box-shadow:0 0 25px rgba(253, 225, 75, 0.6); 
-      letter-spacing:4px;
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      display: none; 
+      margin: 0 auto 35px auto; 
+      padding: 18px 50px; 
+      font-size: 1.5rem; 
+      background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold), #ffed4e, var(--neon-blue), var(--primary-gold)); 
+      background-size: 500% 500%;
+      animation: ultimateGoldenButton 2.5s ease infinite, revealFloat 4s ease-in-out infinite;
+      border-radius: 40px; 
+      border: 4px solid var(--primary-gold);
+      color: #1a0033; 
+      cursor: pointer; 
+      font-weight: 900; 
+      box-shadow: 
+        0 0 50px var(--primary-gold), 
+        0 10px 30px rgba(0,0,0,0.6),
+        inset 0 0 20px rgba(255,255,255,0.2); 
+      letter-spacing: 5px;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
+      font-family: 'Rajdhani', sans-serif;
     }
     
-    @keyframes goldenButton {
+    @keyframes ultimateGoldenButton {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 0%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes revealFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-8px) scale(1.02); }
+    }
+    
+    #spin-button:hover { 
+      transform: translateY(-12px) scale(1.12);
+      box-shadow: 
+        0 0 80px var(--primary-gold), 
+        0 20px 50px rgba(0,0,0,0.8),
+        inset 0 0 30px rgba(255,255,255,0.3);
+    }
+    
+    #spin-button:active {
+      transform: translateY(-5px) scale(1.05);
+    }
+    
+    #result-message { 
+      font-size: 1.8rem; 
+      min-height: 35px; 
+      margin-bottom: 20px; 
+      color: var(--neon-blue); 
+      text-shadow: 0 0 15px var(--neon-blue);
+      animation: messageUltimateGlow 2.5s ease-in-out infinite alternate;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+    }
+    
+    @keyframes messageUltimateGlow {
+      from { text-shadow: 0 0 15px var(--neon-blue); }
+      to { text-shadow: 0 0 30px var(--neon-blue), 0 0 45px var(--neon-blue); }
+    }
+    
+    #chances-counter { 
+      font-size: 1.6rem; 
+      color: var(--neon-pink); 
+      margin-bottom: 20px; 
+      font-weight: 700; 
+      animation: counterUltimatePulse 1.5s ease-in-out infinite;
+      font-family: 'Rajdhani', sans-serif;
+      text-shadow: 0 0 10px var(--neon-pink);
+    }
+    
+    @keyframes counterUltimatePulse {
+      0%, 100% { transform: scale(1); text-shadow: 0 0 10px var(--neon-pink); }
+      50% { transform: scale(1.1); text-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink); }
+    }
+    
+    /* ULTIMATE POPUP */
+    #popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(0,0,0,0.95), rgba(26,0,51,0.95), rgba(51,0,102,0.95));
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2.5rem;
+      padding: 40px;
+      z-index: 3000;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    
+    #popup img {
+      max-width: 160px;
+      margin-bottom: 35px;
+      animation: popupImageFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes popupImageFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+    
+    #popup .popup-text {
+      margin-bottom: 40px;
+      background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold), var(--neon-blue), var(--neon-pink));
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: popupTextGradient 3s ease-in-out infinite;
+      font-weight: 900;
+      text-shadow: none;
+      font-family: 'Rajdhani', sans-serif;
+    }
+    
+    @keyframes popupTextGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     
-    #spin-button:not(:disabled) {
-      animation: goldenButton 2s ease infinite, buttonFloat 3s ease-in-out infinite;
-    }
-    
-    @keyframes buttonFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-5px); }
-    }
-    
-    #spin-button:hover { 
-      transform: translateY(-8px) scale(1.08);
-      box-shadow: 0 0 40px rgba(253, 225, 75, 0.8), 0 10px 30px rgba(0,0,0,0.3);
-    }
-    
-    #spin-button:active {
-      transform: translateY(-2px) scale(0.98);
-    }
-    
-    #result-message { 
-      font-size:1.6rem; 
-      min-height:28px; 
-      margin-bottom:16px; 
-      color:#fde14b; 
-      text-shadow:0 0 12px #fde14b;
-      animation: messageGlow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes messageGlow {
-      from { text-shadow: 0 0 12px #fde14b; }
-      to { text-shadow: 0 0 20px #fde14b, 0 0 30px #fde14b; }
-    }
-    
-    #chances-counter { 
-      font-size:1.4rem; 
-      color:#ff6b6b; 
-      margin-bottom:15px; 
-      font-weight:700; 
-      animation: counterPulse 1s ease-in-out infinite;
-    }
-    
-    @keyframes counterPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    /* Popup Styles */
-    #popup {position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);display:none;flex-direction:column;justify-content:center;align-items:center;color:white;font-size:2.25rem;padding:30px;z-index:2000;text-align:center;}
-    #popup img {max-width:140px;margin-bottom:28px;}
-    #popup .popup-text {margin-bottom:30px;color:#fde14b;font-weight:900;text-shadow:0 0 22px #fde14b;}
-    #popup .popup-follow-row { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap;}
-    
-    /* Try Again Button for chances */
+    /* ULTIMATE TRY AGAIN BUTTON */
     #try-again-btn {
-      margin-top: 20px;
-      padding: 18px 45px;
-      font-size: 1.4rem;
-      background: linear-gradient(45deg, #ff6b6b, #ff5252, #ff4444, #ff6b6b);
-      background-size: 400% 400%;
-      animation: redButton 2s ease infinite;
+      margin-top: 30px;
+      padding: 20px 50px;
+      font-size: 1.6rem;
+      background: linear-gradient(45deg, #ff6b6b, #ff5252, #ff4444, var(--neon-pink), #ff6b6b);
+      background-size: 500% 500%;
+      animation: ultimateRedButton 2.5s ease infinite;
       color: white;
-      border: none;
-      border-radius: 15px;
+      border: 3px solid #ff4444;
+      border-radius: 20px;
       font-weight: 900;
       cursor: pointer;
-      letter-spacing: 1px;
-      box-shadow: 0 0 25px rgba(255, 107, 107, 0.5);
-      transition: all 0.3s ease;
+      letter-spacing: 2px;
+      box-shadow: 
+        0 0 40px rgba(255, 107, 107, 0.6),
+        0 10px 30px rgba(0,0,0,0.5);
+      transition: all 0.4s ease;
+      font-family: 'Rajdhani', sans-serif;
     }
     
-    @keyframes redButton {
+    @keyframes ultimateRedButton {
       0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      25% { background-position: 100% 0%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
       100% { background-position: 0% 50%; }
     }
     
     #try-again-btn:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 0 35px rgba(255, 107, 107, 0.8);
+      transform: translateY(-5px) scale(1.08);
+      box-shadow: 
+        0 0 60px rgba(255, 107, 107, 0.8),
+        0 15px 40px rgba(0,0,0,0.6);
     }
     
-    /* Epic Claim button */
+    /* ULTIMATE CLAIM BUTTON */
     #popup #claim-btn {
-      margin-top: 30px;
-      font-size: 2.2rem;
-      padding: 25px 85px;
-      background: linear-gradient(45deg, #fde14b, #fff856, #f8d530, #fde14b);
-      background-size: 400% 400%;
-      animation: epicClaimButton 2s ease infinite;
-      border-radius: 45px;
-      border: none;
-      color: #4b3700;
+      margin-top: 40px;
+      font-size: 2.5rem;
+      padding: 30px 90px;
+      background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold), #ffed4e, var(--neon-green), var(--primary-gold));
+      background-size: 500% 500%;
+      animation: ultimateClaimButton 2s ease infinite;
+      border-radius: 50px;
+      border: 5px solid var(--primary-gold);
+      color: #1a0033;
       font-weight: 900;
       cursor: pointer;
-      letter-spacing: 2px;
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      letter-spacing: 3px;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
       overflow: hidden;
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
     }
     
-    @keyframes epicClaimButton {
+    @keyframes ultimateClaimButton {
       0% { 
         background-position: 0% 50%; 
-        box-shadow: 0 0 20px #fde14b, 0 0 40px rgba(253, 225, 75, 0.5);
+        box-shadow: 
+          0 0 30px var(--primary-gold), 
+          0 0 60px rgba(255, 215, 0, 0.6),
+          0 15px 40px rgba(0,0,0,0.6);
+      }
+      25% { 
+        background-position: 100% 0%; 
+        box-shadow: 
+          0 0 40px var(--neon-green), 
+          0 0 80px rgba(57, 255, 20, 0.6),
+          0 20px 50px rgba(0,0,0,0.7);
       }
       50% { 
-        background-position: 100% 50%; 
-        box-shadow: 0 0 30px #fff856, 0 0 60px rgba(255, 248, 86, 0.7);
+        background-position: 100% 100%; 
+        box-shadow: 
+          0 0 50px var(--secondary-gold), 
+          0 0 100px rgba(255, 237, 78, 0.7),
+          0 25px 60px rgba(0,0,0,0.8);
+      }
+      75% { 
+        background-position: 0% 100%; 
+        box-shadow: 
+          0 0 40px var(--primary-gold), 
+          0 0 80px rgba(255, 215, 0, 0.6),
+          0 20px 50px rgba(0,0,0,0.7);
       }
       100% { 
         background-position: 0% 50%; 
-        box-shadow: 0 0 20px #fde14b, 0 0 40px rgba(253, 225, 75, 0.5);
+        box-shadow: 
+          0 0 30px var(--primary-gold), 
+          0 0 60px rgba(255, 215, 0, 0.6),
+          0 15px 40px rgba(0,0,0,0.6);
       }
     }
     
     #popup #claim-btn:hover {
-      transform: translateY(-5px) scale(1.08);
-      box-shadow: 0 0 50px #fde14b, 0 0 80px rgba(253, 225, 75, 0.8);
+      transform: translateY(-8px) scale(1.12);
+      box-shadow: 
+        0 0 80px var(--primary-gold), 
+        0 0 120px rgba(255, 215, 0, 0.8),
+        0 30px 70px rgba(0,0,0,0.8);
     }
     
-    canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
+    /* ULTIMATE FIREWORKS CANVAS */
+    canvas#fireworks { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100vw; 
+      height: 100vh; 
+      pointer-events: none; 
+      display: none; 
+      z-index: 3500;
+    }
     
+    /* RESPONSIVE DESIGN */
     @media (max-width:600px){
-      #logo {max-width:120px;margin:20px auto 10px auto;}
-      .header-container h1 {font-size:2.2rem;}
-      .header-container h2 {font-size:1.6rem;}
-      #instructions {font-size:1.1rem;margin-bottom:25px;padding:0 10px;}
-      #game-container {width:300px;gap:15px 12px;}
-      .box {width:85px;height:115px;font-size:2.2rem;}
-      #follow-first-btn {padding:14px 35px;font-size:1.2rem;}
-      #spin-button {padding:14px 30px;font-size:1.2rem;}
-      #result-message {font-size:1.4rem;margin-bottom:14px;}
-      #chances-counter {font-size:1.2rem;}
-      #popup {font-size:1.8rem;padding:20px;}
-      #popup img {max-width:100px;margin-bottom:20px;}
+      #logo {max-width:140px;margin:20px auto 10px auto;}
+      .header-container h1 {font-size:2.5rem; letter-spacing: 4px;}
+      .header-container h2 {font-size:1.8rem; letter-spacing: 3px;}
+      #instructions {font-size:1.2rem;margin-bottom:25px;padding:0 10px;}
+      #game-container {width:320px;gap:18px 15px;}
+      .box {width:90px;height:120px;font-size:2.5rem;}
+      #follow-first-btn {padding:16px 35px;font-size:1.3rem;}
+      #spin-button {padding:16px 35px;font-size:1.3rem;}
+      #result-message {font-size:1.5rem;margin-bottom:18px;}
+      #chances-counter {font-size:1.3rem;}
+      #popup {font-size:2rem;padding:25px;}
+      #popup img {max-width:120px;margin-bottom:25px;}
       #popup #claim-btn {
-        font-size:1.6rem;
-        padding:18px 45px;
+        font-size:1.8rem;
+        padding:20px 50px;
       }
       #try-again-btn {
-        padding: 14px 35px;
-        font-size: 1.2rem;
+        padding: 16px 40px;
+        font-size: 1.3rem;
       }
     }
   </style>
 </head>
 <body>
-  <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
+  <img id="logo" src="Logo.png" alt="🚀 Bandeali Enterprises Logo 🚀" />
   <div class="header-container">
-    <h1>Bandeali Enterprises</h1>
-    <h2>Treasure Box Game</h2>
+    <h1>🎯 BANDEALI ENTERPRISES 🎯</h1>
+    <h2>⚡ ULTIMATE TREASURE HUNT ⚡</h2>
   </div>
-  <div id="instructions">Choose a treasure box below and test your luck!</div>
+  <div id="instructions">🍀 Choose your destiny box and unlock amazing rewards! 🍀</div>
   <div id="chances-counter"></div>
   <div id="game-container"></div>
-  <button id="follow-first-btn">📸 Follow Us to Reveal</button>
-  <button id="spin-button">Reveal All</button>
+  <button id="follow-first-btn">🔥 FOLLOW US FOR MEGA REWARDS 🔥</button>
+  <button id="spin-button">✨ REVEAL THE MAGIC ✨</button>
   <div id="result-message"></div>
   <div id="popup" tabindex="-1"></div>
   <canvas id="fireworks"></canvas>
   
   <script>
     const prizes = [
-      { win: true, text: "🔥 10% OFF" },
-      { win: false, text: "Better luck!" },
-      { win: true, text: "🎁 15% OFF" },
-      { win: false, text: "Better luck!" },
-      { win: true, text: "💸 20% OFF" },
-      { win: false, text: "Better luck!" },
-      { win: true, text: "🎉 ₹30 OFF" },
-      { win: true, text: "🎧 Free Earphones" },
-      { win: true, text: "💵 ₹50 Cashback" }
+      { win: true, text: "🔥 MEGA 10% OFF" },
+      { win: false, text: "🎯 Try Again!" },
+      { win: true, text: "🎁 SUPER 15% OFF" },
+      { win: false, text: "🎯 Try Again!" },
+      { win: true, text: "💎 ULTRA 20% OFF" },
+      { win: false, text: "🎯 Try Again!" },
+      { win: true, text: "🎉 EPIC ₹30 OFF" },
+      { win: true, text: "🎧 FREE EARPHONES" },
+      { win: true, text: "💰 MEGA ₹50 CASHBACK" }
     ];
     
     const gameContainer = document.getElementById('game-container');
@@ -573,7 +829,7 @@
     
     let selectedIndex = null;
     let boxes = [];
-    let gameState = 'selection'; // 'selection', 'follow', 'reveal', 'finished'
+    let gameState = 'selection';
     let chancesLeft = 3;
     let hasFollowed = false;
     let usedBoxes = [];
@@ -590,7 +846,7 @@
     
     function updateChancesDisplay() {
       if (chancesLeft < 3) {
-        chancesCounter.textContent = `🎯 Chances Left: ${chancesLeft}`;
+        chancesCounter.textContent = `🎯 ULTIMATE CHANCES LEFT: ${chancesLeft} 🎯`;
         chancesCounter.style.display = 'block';
       } else {
         chancesCounter.style.display = 'none';
@@ -614,29 +870,21 @@
           box.classList.add('disabled');
         }
         box.setAttribute('tabindex', '0');
-        box.setAttribute('role', 'listitem');
-        box.setAttribute('aria-label', 'Treasure box. Click to select.');
         box.dataset.index = i;
         box.innerHTML = `<span>?</span>`;
-        box.title = "Click to select this treasure box";
+        box.title = "Click to select this ultimate treasure box";
         box.addEventListener('click', onBoxSelect);
-        box.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onBoxSelect.call(box);
-          }
-        });
         gameContainer.appendChild(box);
         boxes.push({ el: box, prize: shuffledPrizes[i] });
         
-        // Staggered entrance animation
+        // Epic entrance animation
         box.style.opacity = '0';
-        box.style.transform = 'translateY(50px)';
+        box.style.transform = 'translateY(100px) rotateX(90deg)';
         setTimeout(() => {
-          box.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+          box.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
           box.style.opacity = '1';
-          box.style.transform = 'translateY(0)';
-        }, i * 100);
+          box.style.transform = 'translateY(0) rotateX(0deg)';
+        }, i * 150);
       }
       updateChancesDisplay();
     }
@@ -648,50 +896,39 @@
       selectedIndex = Number(this.dataset.index);
       gameState = 'follow';
       
-      // Epic selection animation
-      this.style.animationDelay = '0s';
-      
       boxes.forEach((box, idx) => {
         if (idx !== selectedIndex) {
           box.el.classList.add('locked');
-          box.el.setAttribute('aria-pressed', 'false');
-          box.el.tabIndex = -1;
-          // Staggered shake animation
           setTimeout(() => {
-            box.el.style.animation = 'explosiveShake 0.8s ease-in-out';
-          }, idx * 80);
+            box.el.style.animation = 'megaShake 1s ease-in-out';
+          }, idx * 100);
         } else {
-          box.el.classList.remove('locked');
           box.el.classList.add('active');
-          box.el.setAttribute('aria-pressed', 'true');
-          box.el.tabIndex = 0;
-          box.el.focus();
-          
-          // Epic particle burst effect
-          createEpicParticleBurst(box.el);
+          createUltimateParticleBurst(box.el);
         }
       });
       
       if (!hasFollowed) {
         followFirstBtn.style.display = 'block';
-        resultMessage.textContent = 'Follow us on Instagram to reveal your treasure! 📸✨';
+        resultMessage.textContent = '🔥 FOLLOW US FOR ULTIMATE POWER! 🔥';
       } else {
         showRevealButton();
       }
     }
     
-    // Create epic particle burst effect
-    function createEpicParticleBurst(box) {
-      for (let i = 0; i < 30; i++) {
+    function createUltimateParticleBurst(box) {
+      const colors = ['#ffd700', '#00ffff', '#ff00ff', '#39ff14', '#ff6b6b'];
+      
+      for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
-        particle.style.width = '6px';
-        particle.style.height = '6px';
-        particle.style.background = `hsl(${Math.random() * 60 + 30}, 100%, 60%)`; // Golden colors
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '1500';
-        particle.style.boxShadow = `0 0 6px ${particle.style.background}`;
+        particle.style.zIndex = '2000';
+        particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
         
         const boxRect = box.getBoundingClientRect();
         particle.style.left = boxRect.left + boxRect.width/2 + 'px';
@@ -699,9 +936,8 @@
         
         document.body.appendChild(particle);
         
-        // Enhanced particle animation
-        const angle = (i / 30) * Math.PI * 2;
-        const distance = 80 + Math.random() * 80;
+        const angle = (i / 50) * Math.PI * 2;
+        const distance = 100 + Math.random() * 100;
         const finalX = boxRect.left + boxRect.width/2 + Math.cos(angle) * distance;
         const finalY = boxRect.top + boxRect.height/2 + Math.sin(angle) * distance;
         
@@ -711,11 +947,11 @@
             opacity: 1 
           },
           { 
-            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0) rotate(720deg)`, 
+            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0) rotate(1080deg)`, 
             opacity: 0 
           }
         ], {
-          duration: 1200 + Math.random() * 400,
+          duration: 1500 + Math.random() * 500,
           easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
         }).onfinish = () => {
           particle.remove();
@@ -726,22 +962,18 @@
     function showRevealButton() {
       followFirstBtn.style.display = 'none';
       spinButton.style.display = 'block';
-      spinButton.disabled = false;
       gameState = 'reveal';
-      resultMessage.textContent = 'Click "Reveal All" to see your treasure! 🎁✨';
+      resultMessage.textContent = '⚡ UNLEASH THE ULTIMATE POWER! ⚡';
     }
     
-    // Direct Instagram redirect on Follow button click
     followFirstBtn.addEventListener('click', () => {
-      // Direct redirect to Instagram
       window.open('https://www.instagram.com/bandeali_enterprises', '_blank');
       
-      // Mark as followed and show reveal button after short delay
       setTimeout(() => {
         hasFollowed = true;
         showRevealButton();
-        resultMessage.textContent = '🎉 Thank you for following! Now reveal your treasure!';
-      }, 1000);
+        resultMessage.textContent = '🚀 ULTIMATE POWER ACTIVATED! REVEAL NOW! 🚀';
+      }, 1200);
     });
     
     spinButton.addEventListener('click', () => {
@@ -751,19 +983,18 @@
     });
     
     function revealBoxes() {
-      // Epic reveal sequence
+      resultMessage.textContent = '🔮 THE ULTIMATE MOMENT... 🔮';
+      
       boxes.forEach((box, idx) => {
         setTimeout(() => {
           box.el.classList.remove('locked', 'active');
           box.el.classList.add('opened');
-          box.el.tabIndex = -1;
           box.el.innerHTML = '';
           
           if (box.prize.win) {
             const img = document.createElement('img');
             img.src = 'treasure.png';
-            img.alt = 'Treasure box image';
-            img.className = 'chest-img';
+            img.alt = 'Ultimate Treasure';
             box.el.appendChild(img);
             const textDiv = document.createElement('div');
             textDiv.className = 'text';
@@ -775,48 +1006,44 @@
             textDiv.textContent = box.prize.text;
             box.el.appendChild(textDiv);
           }
-        }, idx * 200); // Staggered reveal with longer delay
+        }, idx * 250);
       });
       
       spinButton.style.display = 'none';
       gameState = 'finished';
       
-      // Show result popup after all boxes are revealed
       setTimeout(() => {
         showResultPopup(boxes[selectedIndex].prize);
-      }, boxes.length * 200 + 800);
+      }, boxes.length * 250 + 1000);
     }
     
     function showResultPopup(prize) {
       usedBoxes.push(selectedIndex);
       
       if (prize.win) {
-        // Winner popup
         popup.innerHTML = `
-          <img id="popup-img" src="treasure.png" alt="Treasure Box" />
-          <div class="popup-text">🎉 CONGRATULATIONS! 🎉<br><br>${prize.text}</div>
-          <button id="claim-btn">✨ CLAIM YOUR PRIZE ✨</button>
+          <img src="treasure.png" alt="Ultimate Victory!" />
+          <div class="popup-text">🎊 ULTIMATE VICTORY! 🎊<br><br>🏆 ${prize.text} 🏆</div>
+          <button id="claim-btn">💎 CLAIM ULTIMATE REWARD 💎</button>
         `;
-        startFireworks();
+        startUltimateFireworks();
       } else {
-        // Better luck popup
         chancesLeft--;
         if (chancesLeft > 0) {
           popup.innerHTML = `
-            <div class="popup-text">😔 ${prize.text}<br><br>🎯 You have ${chancesLeft} more chance${chancesLeft > 1 ? 's' : ''}!</div>
-            <button id="try-again-btn">🔄 Try Again</button>
+            <div class="popup-text">⚡ ${prize.text} ⚡<br><br>🎯 ${chancesLeft} ULTIMATE CHANCE${chancesLeft > 1 ? 'S' : ''} REMAINING!</div>
+            <button id="try-again-btn">🔥 UNLEASH AGAIN 🔥</button>
           `;
         } else {
           popup.innerHTML = `
-            <div class="popup-text">😞 Bad luck today!<br><br>🌟 Try again tomorrow for better luck!</div>
-            <button id="try-again-btn">🎮 Start New Game</button>
+            <div class="popup-text">🌟 ULTIMATE CHALLENGE COMPLETE! 🌟<br><br>🎮 NEW ADVENTURE AWAITS!</div>
+            <button id="try-again-btn">🚀 START ULTIMATE QUEST 🚀</button>
           `;
         }
       }
       
       popup.style.display = 'flex';
       
-      // Event listeners for popup buttons
       const claimBtn = document.getElementById('claim-btn');
       const tryAgainBtn = document.getElementById('try-again-btn');
       
@@ -832,17 +1059,13 @@
         tryAgainBtn.addEventListener('click', function () {
           popup.style.display = 'none';
           if (chancesLeft > 0) {
-            // Continue with remaining chances
             createBoxes();
-            document.getElementById('instructions').textContent = 'Choose another treasure box! 🎯';
+            document.getElementById('instructions').textContent = '⚡ CHOOSE YOUR NEXT ULTIMATE DESTINY! ⚡';
           } else {
-            // Reset entire game
             resetGame();
           }
         });
       }
-      
-      popup.focus();
     }
     
     function resetGame() {
@@ -852,41 +1075,55 @@
       selectedIndex = null;
       gameState = 'selection';
       createBoxes();
-      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
+      document.getElementById('instructions').textContent = '🍀 Choose your destiny box and unlock amazing rewards! 🍀';
     }
     
-    // Enhanced Fireworks Animation
+    // ULTIMATE FIREWORKS
     let fireworks = [];
     let fireworksAnimation;
     
-    class Firework {
+    class UltimateFirework {
       constructor() {
         this.x = Math.random() * fireworksCanvas.width;
-        this.y = fireworksCanvas.height + 10;
-        this.targetY = Math.random() * fireworksCanvas.height / 2;
-        this.vy = -(8 + Math.random() * 4);
+        this.y = fireworksCanvas.height + 20;
+        this.vy = -(10 + Math.random() * 6);
         this.exploded = false;
         this.particles = [];
-        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
-        this.size = 2 + Math.random() * 2;
+        this.colors = ['#ffd700', '#00ffff', '#ff00ff', '#39ff14', '#ff6b6b', '#ffffff'];
+        this.size = 3 + Math.random() * 3;
+        this.trailParticles = [];
       }
       
       update() {
         if (!this.exploded) {
+          // Add trail particles
+          this.trailParticles.push({
+            x: this.x,
+            y: this.y,
+            alpha: 1,
+            color: this.colors[Math.floor(Math.random() * this.colors.length)]
+          });
+          
+          if (this.trailParticles.length > 10) {
+            this.trailParticles.shift();
+          }
+          
           this.y += this.vy;
-          this.vy += 0.15;
-          if (this.vy >= 0) {
+          this.vy += 0.2;
+          if (this.vy >= -2) {
             this.exploded = true;
-            for (let i = 0; i < 32; i++) {
-              const angle = (2 * Math.PI / 32) * i;
+            for (let i = 0; i < 60; i++) {
+              const angle = (2 * Math.PI / 60) * i;
+              const speed = 4 + Math.random() * 6;
               this.particles.push({
                 x: this.x,
                 y: this.y,
-                vx: Math.cos(angle) * (3 + Math.random() * 3),
-                vy: Math.sin(angle) * (3 + Math.random() * 3),
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
                 alpha: 1,
-                color: this.color,
-                size: 1 + Math.random() * 2,
+                color: this.colors[Math.floor(Math.random() * this.colors.length)],
+                size: 2 + Math.random() * 3,
+                decay: 0.01 + Math.random() * 0.02
               });
             }
           }
@@ -894,21 +1131,40 @@
           this.particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
-            p.vy += 0.05;
-            p.alpha -= 0.015;
-            p.vx *= 0.99;
+            p.vy += 0.08;
+            p.alpha -= p.decay;
+            p.vx *= 0.995;
           });
           this.particles = this.particles.filter(p => p.alpha > 0);
         }
+        
+        // Update trail
+        this.trailParticles.forEach(tp => {
+          tp.alpha -= 0.1;
+        });
+        this.trailParticles = this.trailParticles.filter(tp => tp.alpha > 0);
       }
       
       draw(ctx) {
+        // Draw trail
+        this.trailParticles.forEach((tp, index) => {
+          ctx.globalAlpha = tp.alpha * 0.5;
+          ctx.beginPath();
+          ctx.arc(tp.x, tp.y, 2, 0, 2 * Math.PI);
+          ctx.fillStyle = tp.color;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = tp.color;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+        
         if (!this.exploded) {
+          ctx.globalAlpha = 1;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-          ctx.fillStyle = this.color;
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = this.color;
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = '#ffffff';
           ctx.fill();
           ctx.shadowBlur = 0;
         } else {
@@ -917,23 +1173,23 @@
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
             ctx.fillStyle = p.color;
-            ctx.shadowBlur = 5;
+            ctx.shadowBlur = 8;
             ctx.shadowColor = p.color;
             ctx.fill();
             ctx.shadowBlur = 0;
-            ctx.globalAlpha = 1;
           });
         }
+        ctx.globalAlpha = 1;
       }
     }
     
-    function startFireworks() {
+    function startUltimateFireworks() {
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
       fireworks = [];
       fireworksAnimation = setInterval(() => {
-        if (fireworks.length < 40) fireworks.push(new Firework());
-      }, 150);
+        if (fireworks.length < 60) fireworks.push(new UltimateFirework());
+      }, 100);
       renderFireworks();
       fireworksCanvas.style.display = 'block';
     }
@@ -946,7 +1202,9 @@
     }
     
     function renderFireworks() {
-      ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      
       fireworks.forEach(fw => {
         fw.update();
         fw.draw(ctx);
@@ -963,9 +1221,17 @@
       fireworksCanvas.height = window.innerHeight;
     });
     
+    // Logo click easter egg
+    document.getElementById('logo').addEventListener('click', () => {
+      document.body.style.animation = 'epicBackground 2s ease infinite';
+      setTimeout(() => {
+        document.body.style.animation = 'epicBackground 20s ease infinite';
+      }, 4000);
+    });
+    
     window.onload = () => {
       createBoxes();
-      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
+      document.getElementById('instructions').textContent = '🍀 Choose your destiny box and unlock amazing rewards! 🍀';
     };
   </script>
 </body>
