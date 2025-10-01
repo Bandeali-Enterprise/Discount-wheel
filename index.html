@@ -7,8 +7,24 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     body { background:radial-gradient(circle at 60% 50%, #283445 0%, #181e27 100%); font-family:'Orbitron',sans-serif; color:white; min-height:100vh; margin:0; padding:0; display:flex; flex-direction:column; align-items:center; user-select:none; text-align:center;}
-    #logo { max-width: 160px; margin: 25px auto 10px auto; user-select: none;}
-    .header-container { max-width:600px; margin-bottom:10px;}
+    
+    /* Professional Logo Style with Glow */
+    #logo { 
+      max-width: 170px; 
+      margin: 28px auto 15px auto; 
+      user-select: none; 
+      border-radius: 32px; 
+      box-shadow: 0 0 28px #ffe700, 0 2px 10px #0C101A; 
+      display: block; 
+      background: rgba(255,255,255,0.02); 
+      padding: 8px;
+      transition: box-shadow 0.3s ease;
+    }
+    #logo:hover {
+      box-shadow: 0 0 35px #ffe700, 0 4px 15px #0C101A;
+    }
+    
+    .header-container { max-width:600px; margin-bottom:15px;}
     .header-container h1 {margin:0;font-size:3rem;color:#fde14b;text-shadow: 0 0 20px #fde14b, 0 0 40px #f8d530;font-weight:900;letter-spacing:6px;}
     .header-container h2 {margin:8px 0 0 0;font-size:2rem;color:#fbe74b;text-shadow:0 0 16px #fbe74b;font-weight:700;letter-spacing:4px;}
     #instructions { font-size:1.25rem; max-width:450px; margin:20px auto 30px auto; color:#eee;}
@@ -17,16 +33,42 @@
     .box.locked { filter:grayscale(1); opacity:0.6; cursor:default;}
     .box.active {border-color:#fff44c; box-shadow:0 0 30px #fff44c inset,0 0 15px #fff44c; transform:scale(1.07);color:#4b3700;}
     .box.opened {background:#fde14b;color:#4b3700;cursor:default;filter:none;opacity:1;box-shadow:0 0 48px #fee452;transform:scale(1.1);}
+    .box.disabled {background:#333; color:#666; border-color:#666; cursor:default; opacity:0.5;}
     .box img {max-width:44px;max-height:44px;margin-bottom:6px;filter:drop-shadow(0 0 6px #c1a834);}
     .box .text {font-size:1rem; user-select:none; text-align:center; line-height:1.2;}
+    
+    /* Follow Before Reveal Button */
+    #follow-first-btn { 
+      display:none; 
+      margin:0 auto 28px auto; 
+      padding:16px 45px; 
+      font-size:1.3rem; 
+      background:linear-gradient(90deg,#833ab4 0,#fd1d1d 51%,#fcb045 100%);
+      border-radius:28px; 
+      border:none; 
+      color:#fff; 
+      cursor:pointer; 
+      font-weight:900; 
+      box-shadow:0 0 25px #fd1d1dcc; 
+      letter-spacing:3px;
+    }
+    #follow-first-btn:hover { filter:brightness(1.1);}
+    
     #spin-button { display:none; margin:0 auto 28px auto; padding:14px 42px; font-size:1.25rem; background:#fde14b; border-radius:28px; border:none; color:#4b3700; cursor:pointer; font-weight:900; box-shadow:0 0 25px #fde14bcc; letter-spacing:4px;}
     #spin-button:hover { background-color:#fff856;}
     #spin-button:active {background-color:#b6951a;color:#fff;}
+    #spin-button:disabled { background:#888; color:#555; cursor:not-allowed; }
+    
     #result-message { font-size:1.6rem; min-height:28px; margin-bottom:16px; color:#fde14b; text-shadow:0 0 12px #fde14b;}
+    #chances-counter { font-size:1.3rem; color:#ff6b6b; margin-bottom:15px; font-weight:700; }
+    
+    /* Popup Styles */
     #popup {position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.93);display:none;flex-direction:column;justify-content:center;align-items:center;color:white;font-size:2.25rem;padding:30px;z-index:2000;text-align:center;}
     #popup img {max-width:140px;margin-bottom:28px;}
     #popup .popup-text {margin-bottom:30px;color:#fde14b;font-weight:900;text-shadow:0 0 22px #fde14b;}
-    #popup .popup-follow-row { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px;}
+    #popup .popup-follow-row { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap;}
+    
+    /* Instagram Follow Button */
     #popup #follow-btn { 
       padding:14px 32px;
       font-size:1.18rem; 
@@ -38,7 +80,8 @@
       box-shadow: 0 2px 15px #0005;
     }
     #popup #follow-btn:hover { filter:brightness(1.08);}
-    /* Neon "I have followed" button */
+    
+    /* "I have followed" button */
     #popup #done-follow-btn {
       margin-top: 10px;
       padding: 16px 50px;
@@ -56,11 +99,30 @@
     #popup #done-follow-btn:hover {
       filter: brightness(1.3);
     }
-    /* Enlarged Claim button */
+    
+    /* Try Again Button for chances */
+    #try-again-btn {
+      margin-top: 20px;
+      padding: 16px 40px;
+      font-size: 1.3rem;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      letter-spacing: 1px;
+      box-shadow: 0 0 20px #ff6b6b;
+    }
+    #try-again-btn:hover {
+      background: #ff5252;
+    }
+    
+    /* Claim button */
     #popup #claim-btn {
       margin-top: 24px;
-      font-size: 2rem; /* Bigger font */
-      padding: 24px 80px; /* Bigger padding */
+      font-size: 2rem;
+      padding: 24px 80px;
       background: #b3b3b3;
       border-radius: 40px;
       border: none;
@@ -72,6 +134,7 @@
       letter-spacing: 1.5px;
       transition: background 0.2s, color 0.2s, opacity 0.2s, box-shadow 0.2s;
     }
+    
     /* Neon glow animation */
     @keyframes neonGlow {
       0%,100% { box-shadow: 0 0 16px #fff355, 0 0 46px #ffe700, 0 0 66px #fdff00; }
@@ -85,20 +148,20 @@
       opacity: 1;
       box-shadow: 0 0 11px #fde14b, 0 0 22px #fde14b90;
     }
-    #popup #claim-btn:disabled,
-    #popup #claim-btn[disabled] {
-      background: #b3b3b3 !important; color: #606060 !important; opacity: 0.8 !important; cursor: not-allowed !important; box-shadow: none !important;
-    }
+    
     canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
+    
     @media (max-width:600px){
-      #logo {max-width:110px;margin:25px auto 10px auto;}
+      #logo {max-width:130px;margin:20px auto 10px auto; padding: 6px;}
       .header-container h1 {font-size:2rem;}
       .header-container h2 {font-size:1.5rem;}
       #instructions {font-size:1.1rem;margin-bottom:28px;padding:0 10px;}
       #game-container {width:290px;gap:10px 7px;}
       .box {width:80px;height:110px;font-size:2.3rem;}
+      #follow-first-btn {padding:12px 30px;font-size:1.1rem;}
       #spin-button {padding:12px 27px;font-size:1.1rem;}
       #result-message {font-size:1.3rem;margin-bottom:14px;}
+      #chances-counter {font-size:1.1rem;}
       #popup {font-size:1.7rem;padding:20px;}
       #popup img {max-width:100px;margin-bottom:20px;}
       #popup #claim-btn {
@@ -111,21 +174,28 @@
         padding: 12px 40px;
         font-size: 1.1rem;
       }
+      #try-again-btn {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
+  <img id="logo" src="insta.png" alt="Bandeali Enterprises Logo" />
   <div class="header-container">
     <h1>Bandeali Enterprises</h1>
     <h2>Treasure Box Game</h2>
   </div>
   <div id="instructions">Choose a treasure box below and test your luck!</div>
+  <div id="chances-counter"></div>
   <div id="game-container"></div>
+  <button id="follow-first-btn">📸 Follow Us to Reveal</button>
   <button id="spin-button">Reveal All</button>
   <div id="result-message"></div>
   <div id="popup" tabindex="-1"></div>
   <canvas id="fireworks"></canvas>
+  
   <script>
     const prizes = [
       { win: true, text: "🔥 10% OFF" },
@@ -138,14 +208,23 @@
       { win: true, text: "🎧 Free Earphones" },
       { win: true, text: "💵 ₹50 Cashback" }
     ];
+    
     const gameContainer = document.getElementById('game-container');
+    const followFirstBtn = document.getElementById('follow-first-btn');
     const spinButton = document.getElementById('spin-button');
     const resultMessage = document.getElementById('result-message');
+    const chancesCounter = document.getElementById('chances-counter');
     const popup = document.getElementById('popup');
     const fireworksCanvas = document.getElementById('fireworks');
     const ctx = fireworksCanvas.getContext('2d');
+    
     let selectedIndex = null;
     let boxes = [];
+    let gameState = 'selection'; // 'selection', 'follow', 'reveal', 'finished'
+    let chancesLeft = 3;
+    let hasFollowed = false;
+    let usedBoxes = [];
+    
     function shuffle(array) {
       let currentIndex = array.length;
       while (currentIndex !== 0) {
@@ -155,16 +234,32 @@
       }
       return array;
     }
+    
+    function updateChancesDisplay() {
+      if (chancesLeft < 3) {
+        chancesCounter.textContent = `Chances Left: ${chancesLeft}`;
+        chancesCounter.style.display = 'block';
+      } else {
+        chancesCounter.style.display = 'none';
+      }
+    }
+    
     function createBoxes() {
       gameContainer.innerHTML = '';
       resultMessage.textContent = '';
       selectedIndex = null;
       boxes = [];
+      gameState = 'selection';
+      followFirstBtn.style.display = 'none';
       spinButton.style.display = 'none';
+      
       const shuffledPrizes = shuffle([...prizes]);
       for (let i = 0; i < shuffledPrizes.length; i++) {
         const box = document.createElement('div');
         box.className = 'box';
+        if (usedBoxes.includes(i)) {
+          box.classList.add('disabled');
+        }
         box.setAttribute('tabindex', '0');
         box.setAttribute('role', 'listitem');
         box.setAttribute('aria-label', 'Treasure box. Click to select.');
@@ -181,10 +276,16 @@
         gameContainer.appendChild(box);
         boxes.push({ el: box, prize: shuffledPrizes[i] });
       }
+      updateChancesDisplay();
     }
+    
     function onBoxSelect() {
-      if (selectedIndex !== null) return;
+      if (selectedIndex !== null || gameState !== 'selection') return;
+      if (usedBoxes.includes(Number(this.dataset.index))) return;
+      
       selectedIndex = Number(this.dataset.index);
+      gameState = 'follow';
+      
       boxes.forEach((box, idx) => {
         if (idx !== selectedIndex) {
           box.el.classList.add('locked');
@@ -192,47 +293,38 @@
           box.el.tabIndex = -1;
         } else {
           box.el.classList.remove('locked');
+          box.el.classList.add('active');
           box.el.setAttribute('aria-pressed', 'true');
           box.el.tabIndex = 0;
           box.el.focus();
         }
       });
+      
+      if (!hasFollowed) {
+        followFirstBtn.style.display = 'block';
+        resultMessage.textContent = 'Please follow us on Instagram to reveal your treasure!';
+      } else {
+        showRevealButton();
+      }
+    }
+    
+    function showRevealButton() {
+      followFirstBtn.style.display = 'none';
       spinButton.style.display = 'block';
-      resultMessage.textContent = 'Click "Reveal All" to see the treasure!';
+      spinButton.disabled = false;
+      gameState = 'reveal';
+      resultMessage.textContent = 'Click "Reveal All" to see your treasure!';
     }
-    spinButton.addEventListener('click', () => {
-      revealBoxes();
+    
+    // Follow First Button Click
+    followFirstBtn.addEventListener('click', () => {
+      showFollowPopup();
     });
-    function revealBoxes() {
-      boxes.forEach((box, idx) => {
-        box.el.classList.remove('locked');
-        box.el.classList.add('opened');
-        box.el.tabIndex = -1;
-        box.el.innerHTML = '';
-        if (box.prize.win) {
-          const img = document.createElement('img');
-          img.src = 'treasure.png';
-          img.alt = 'Treasure box image';
-          img.className = 'chest-img';
-          box.el.appendChild(img);
-          const textDiv = document.createElement('div');
-          textDiv.className = 'text';
-          textDiv.textContent = box.prize.text;
-          box.el.appendChild(textDiv);
-        } else {
-          const textDiv = document.createElement('div');
-          textDiv.className = 'text';
-          textDiv.textContent = box.prize.text;
-          box.el.appendChild(textDiv);
-        }
-      });
-      spinButton.style.display = 'none';
-      showPopup(boxes[selectedIndex].prize);
-    }
-    function showPopup(prize) {
+    
+    function showFollowPopup() {
       popup.innerHTML = `
-        <img id="popup-img" src="treasure.png" alt="Treasure Box" />
-        <div class="popup-text">${prize.text}</div>
+        <img src="insta.png" alt="Follow Us" style="max-width:120px; margin-bottom:20px;" />
+        <div class="popup-text">Follow us on Instagram to continue!</div>
         <div class="popup-follow-row">
           <button id="follow-btn" type="button">
             <span aria-hidden="true" style="display:inline-block; vertical-align:middle;">
@@ -255,12 +347,10 @@
             Follow Us
           </button>
         </div>
-        <button id="claim-btn" disabled>Claim</button>
       `;
-      if (!prize.win) document.getElementById('popup-img').style.display = 'none';
       popup.style.display = 'flex';
+      
       let followBtn = document.getElementById('follow-btn');
-      let claimBtn = document.getElementById('claim-btn');
       followBtn.addEventListener('click', function () {
         window.open('https://www.instagram.com/bandeali_enterprises', '_blank');
         followBtn.style.display = "none";
@@ -268,24 +358,124 @@
         doneBtn.id = "done-follow-btn";
         doneBtn.innerText = "I have followed";
         document.querySelector('.popup-follow-row').appendChild(doneBtn);
+        
         doneBtn.addEventListener('click', function () {
-          claimBtn.disabled = false;
-          claimBtn.classList.add('enabled');
-          claimBtn.focus();
+          hasFollowed = true;
+          popup.style.display = 'none';
+          showRevealButton();
         });
       });
-      claimBtn.addEventListener('click', function () {
-        if (claimBtn.disabled) return;
-        popup.style.display = 'none';
-        stopFireworks();
-        createBoxes();
-        document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
-      });
-      startFireworks();
       popup.focus();
     }
+    
+    spinButton.addEventListener('click', () => {
+      if (gameState === 'reveal') {
+        revealBoxes();
+      }
+    });
+    
+    function revealBoxes() {
+      boxes.forEach((box, idx) => {
+        box.el.classList.remove('locked');
+        box.el.classList.add('opened');
+        box.el.tabIndex = -1;
+        box.el.innerHTML = '';
+        
+        if (box.prize.win) {
+          const img = document.createElement('img');
+          img.src = 'treasure.png';
+          img.alt = 'Treasure box image';
+          img.className = 'chest-img';
+          box.el.appendChild(img);
+          const textDiv = document.createElement('div');
+          textDiv.className = 'text';
+          textDiv.textContent = box.prize.text;
+          box.el.appendChild(textDiv);
+        } else {
+          const textDiv = document.createElement('div');
+          textDiv.className = 'text';
+          textDiv.textContent = box.prize.text;
+          box.el.appendChild(textDiv);
+        }
+      });
+      
+      spinButton.style.display = 'none';
+      gameState = 'finished';
+      showResultPopup(boxes[selectedIndex].prize);
+    }
+    
+    function showResultPopup(prize) {
+      usedBoxes.push(selectedIndex);
+      
+      if (prize.win) {
+        // Winner popup
+        popup.innerHTML = `
+          <img id="popup-img" src="treasure.png" alt="Treasure Box" />
+          <div class="popup-text">🎉 Congratulations! 🎉<br>${prize.text}</div>
+          <button id="claim-btn" class="enabled">Claim Your Prize</button>
+        `;
+        startFireworks();
+      } else {
+        // Better luck popup
+        chancesLeft--;
+        if (chancesLeft > 0) {
+          popup.innerHTML = `
+            <div class="popup-text">😔 ${prize.text}<br>You have ${chancesLeft} more chance${chancesLeft > 1 ? 's' : ''}!</div>
+            <button id="try-again-btn">Try Again</button>
+          `;
+        } else {
+          popup.innerHTML = `
+            <div class="popup-text">😞 Bad luck today, try next time!</div>
+            <button id="try-again-btn">Start New Game</button>
+          `;
+        }
+      }
+      
+      popup.style.display = 'flex';
+      
+      // Event listeners for popup buttons
+      const claimBtn = document.getElementById('claim-btn');
+      const tryAgainBtn = document.getElementById('try-again-btn');
+      
+      if (claimBtn) {
+        claimBtn.addEventListener('click', function () {
+          popup.style.display = 'none';
+          stopFireworks();
+          resetGame();
+        });
+      }
+      
+      if (tryAgainBtn) {
+        tryAgainBtn.addEventListener('click', function () {
+          popup.style.display = 'none';
+          if (chancesLeft > 0) {
+            // Continue with remaining chances
+            createBoxes();
+            document.getElementById('instructions').textContent = 'Choose another treasure box!';
+          } else {
+            // Reset entire game
+            resetGame();
+          }
+        });
+      }
+      
+      popup.focus();
+    }
+    
+    function resetGame() {
+      chancesLeft = 3;
+      hasFollowed = false;
+      usedBoxes = [];
+      selectedIndex = null;
+      gameState = 'selection';
+      createBoxes();
+      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
+    }
+    
+    // Fireworks Animation
     let fireworks = [];
     let fireworksAnimation;
+    
     class Firework {
       constructor() {
         this.x = Math.random() * fireworksCanvas.width;
@@ -296,6 +486,7 @@
         this.particles = [];
         this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
       }
+      
       update() {
         if (!this.exploded) {
           this.y += this.vy;
@@ -324,6 +515,7 @@
           this.particles = this.particles.filter(p => p.alpha > 0);
         }
       }
+      
       draw(ctx) {
         if (!this.exploded) {
           ctx.beginPath();
@@ -342,6 +534,7 @@
         }
       }
     }
+    
     function startFireworks() {
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
@@ -352,12 +545,14 @@
       renderFireworks();
       fireworksCanvas.style.display = 'block';
     }
+    
     function stopFireworks() {
       clearInterval(fireworksAnimation);
       fireworks = [];
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
       fireworksCanvas.style.display = 'none';
     }
+    
     function renderFireworks() {
       ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
       fireworks.forEach(fw => {
@@ -368,10 +563,12 @@
         requestAnimationFrame(renderFireworks);
       }
     }
+    
     window.addEventListener('resize', () => {
       fireworksCanvas.width = window.innerWidth;
       fireworksCanvas.height = window.innerHeight;
     });
+    
     window.onload = () => {
       createBoxes();
       document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck!';
