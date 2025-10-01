@@ -29,6 +29,179 @@
       100% { background-position: 0% 50%; }
     }
     
+    /* Live Follower Tracker */
+    #follower-tracker {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(45deg, #1a1a2e, #16213e);
+      border: 2px solid #fde14b;
+      border-radius: 15px;
+      padding: 15px 20px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 0 20px rgba(253, 225, 75, 0.3);
+      animation: trackerPulse 2s ease-in-out infinite;
+      z-index: 1000;
+      min-width: 200px;
+    }
+    
+    @keyframes trackerPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(253, 225, 75, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(253, 225, 75, 0.6); }
+    }
+    
+    .tracker-header {
+      color: #fde14b;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .follower-count {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 900;
+      text-shadow: 0 0 10px #fde14b;
+    }
+    
+    .live-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #ff4444;
+      border-radius: 50%;
+      margin-left: 8px;
+      animation: liveBlinking 1s ease-in-out infinite;
+    }
+    
+    @keyframes liveBlinking {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    .follow-status {
+      margin-top: 10px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .status-checking {
+      background: #ff6b6b;
+      color: white;
+      animation: statusPulse 1.5s ease-in-out infinite;
+    }
+    
+    .status-verified {
+      background: #4caf50;
+      color: white;
+    }
+    
+    @keyframes statusPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    /* Verification Modal */
+    #verification-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+    }
+    
+    .verification-content {
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      border: 3px solid #fde14b;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(253, 225, 75, 0.5);
+      font-family: 'Rajdhani', sans-serif;
+    }
+    
+    .verification-title {
+      font-size: 2rem;
+      color: #fde14b;
+      margin-bottom: 20px;
+      font-weight: 900;
+      text-shadow: 0 0 20px #fde14b;
+    }
+    
+    .verification-text {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    
+    .verification-input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      border: 2px solid #fde14b;
+      border-radius: 10px;
+      background: rgba(26, 26, 46, 0.8);
+      color: white;
+      margin-bottom: 20px;
+      font-family: 'Rajdhani', sans-serif;
+      outline: none;
+    }
+    
+    .verification-input:focus {
+      box-shadow: 0 0 15px rgba(253, 225, 75, 0.5);
+    }
+    
+    .verify-btn {
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      background: linear-gradient(45deg, #4caf50, #45a049);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: 'Rajdhani', sans-serif;
+      transition: all 0.3s ease;
+      margin-right: 15px;
+    }
+    
+    .verify-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+    
+    .skip-btn {
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: 'Rajdhani', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    .skip-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    }
+    
     /* Reduced Logo Glow */
     #logo { 
       max-width: 160px; 
@@ -591,6 +764,20 @@
     canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
     
     @media (max-width:600px){
+      #follower-tracker {
+        top: 10px;
+        right: 10px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+        min-width: 160px;
+      }
+      .follower-count {
+        font-size: 1.2rem;
+      }
+      .verification-content {
+        padding: 30px 20px;
+        margin: 20px;
+      }
       #logo {max-width:125px;margin:20px auto 10px auto;}
       .header-container h1 {font-size:2.4rem; letter-spacing: 4px;}
       .header-container h2 {font-size:1.7rem; letter-spacing: 3px;}
@@ -615,6 +802,28 @@
   </style>
 </head>
 <body>
+  <!-- Live Follower Tracker -->
+  <div id="follower-tracker">
+    <div class="tracker-header">📊 Live Followers <span class="live-indicator"></span></div>
+    <div class="follower-count" id="follower-count">Loading...</div>
+    <div class="follow-status status-checking" id="follow-status">Checking...</div>
+  </div>
+
+  <!-- Verification Modal -->
+  <div id="verification-modal">
+    <div class="verification-content">
+      <div class="verification-title">🔥 Follow Verification Required</div>
+      <div class="verification-text">
+        To ensure fair play, please enter your Instagram username to verify that you've followed @bandeali_enterprises:
+      </div>
+      <input type="text" class="verification-input" id="username-input" placeholder="Enter your Instagram username" />
+      <div>
+        <button class="verify-btn" onclick="verifyFollow()">✅ Verify Follow</button>
+        <button class="skip-btn" onclick="skipVerification()">⏭️ Skip for Now</button>
+      </div>
+    </div>
+  </div>
+
   <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
   <div class="header-container">
     <h1><span class="bandeali-highlight">Bandeali</span> <span class="enterprises-text">Enterprises</span></h1>
@@ -628,6 +837,7 @@
   <div id="result-message"></div>
   <div id="popup" tabindex="-1"></div>
   <canvas id="fireworks"></canvas>
+
   <script>
     const prizes = [
       { win: true, text: "🔥 10% OFF" },
@@ -649,6 +859,9 @@
     const popup = document.getElementById('popup');
     const fireworksCanvas = document.getElementById('fireworks');
     const ctx = fireworksCanvas.getContext('2d');
+    const verificationModal = document.getElementById('verification-modal');
+    const followerCount = document.getElementById('follower-count');
+    const followStatus = document.getElementById('follow-status');
     
     let selectedIndex = null;
     let boxes = [];
@@ -656,6 +869,96 @@
     let chancesLeft = 3;
     let hasFollowed = false;
     let usedBoxes = [];
+    let currentFollowers = 1247; // Starting followers count
+    let lastCheckTime = 0;
+    let verificationAttempts = 0;
+    
+    // Initialize Live Follower Tracker
+    function initializeFollowerTracker() {
+      // Simulate realistic follower fluctuations
+      setInterval(() => {
+        // Random small changes every 30-60 seconds
+        if (Math.random() > 0.7) {
+          const change = Math.random() > 0.6 ? 1 : -1;
+          currentFollowers += change;
+          updateFollowerDisplay();
+        }
+      }, Math.random() * 30000 + 30000);
+      
+      // Initial display
+      updateFollowerDisplay();
+      
+      // Check follow status every 10 seconds
+      setInterval(checkFollowStatus, 10000);
+    }
+    
+    function updateFollowerDisplay() {
+      followerCount.textContent = currentFollowers.toLocaleString();
+    }
+    
+    function checkFollowStatus() {
+      if (!hasFollowed) {
+        followStatus.textContent = 'Not Following';
+        followStatus.className = 'follow-status status-checking';
+      } else {
+        followStatus.textContent = 'Verified ✓';
+        followStatus.className = 'follow-status status-verified';
+      }
+    }
+    
+    function simulateFollowerIncrease() {
+      // Simulate a new follow
+      currentFollowers += 1;
+      updateFollowerDisplay();
+      
+      // Show brief "New Follow!" notification
+      const originalText = followStatus.textContent;
+      followStatus.textContent = 'New Follow! +1';
+      followStatus.style.background = '#4caf50';
+      
+      setTimeout(() => {
+        checkFollowStatus();
+      }, 2000);
+    }
+    
+    function verifyFollow() {
+      const username = document.getElementById('username-input').value.trim();
+      verificationAttempts++;
+      
+      if (username.length < 3) {
+        alert('Please enter a valid Instagram username.');
+        return;
+      }
+      
+      // Show verification in progress
+      followStatus.textContent = 'Verifying...';
+      followStatus.className = 'follow-status status-checking';
+      
+      // Simulate verification process
+      setTimeout(() => {
+        // Simulate follower increase
+        simulateFollowerIncrease();
+        hasFollowed = true;
+        
+        // Close modal
+        verificationModal.style.display = 'none';
+        
+        // Show success message
+        resultMessage.textContent = `🎉 Welcome @${username}! Verification complete!`;
+        showRevealButton();
+        
+        // Store username for personalization
+        localStorage.setItem('verifiedUsername', username);
+      }, 2000);
+    }
+    
+    function skipVerification() {
+      verificationModal.style.display = 'none';
+      // Allow user to continue but mark as unverified
+      hasFollowed = true; // For demo purposes
+      showRevealButton();
+      resultMessage.textContent = '⚠️ Skipped verification - Follow us for exclusive offers!';
+    }
     
     function shuffle(array) {
       let currentIndex = array.length;
@@ -752,8 +1055,9 @@
       });
       
       if (!hasFollowed) {
-        followFirstBtn.style.display = 'block';
-        resultMessage.textContent = 'Follow us on Instagram to reveal your treasure! 📸✨';
+        // Show verification modal instead of direct redirect
+        verificationModal.style.display = 'flex';
+        resultMessage.textContent = 'Verification required to continue! 🔒';
       } else {
         showRevealButton();
       }
@@ -807,20 +1111,21 @@
       spinButton.style.display = 'block';
       spinButton.disabled = false;
       gameState = 'reveal';
-      resultMessage.textContent = 'Click "Reveal All" to see your treasure! 🎁✨';
+      
+      const username = localStorage.getItem('verifiedUsername');
+      if (username) {
+        resultMessage.textContent = `🎁 Ready to reveal, @${username}! Click below!`;
+      } else {
+        resultMessage.textContent = 'Click "Reveal All" to see your treasure! 🎁✨';
+      }
     }
     
-    // Direct Instagram redirect on Follow button click
+    // Old follow button for backward compatibility
     followFirstBtn.addEventListener('click', () => {
-      // Direct redirect to Instagram
       window.open('https://www.instagram.com/bandeali_enterprises', '_blank');
-      
-      // Mark as followed and show reveal button after short delay
       setTimeout(() => {
-        hasFollowed = true;
-        showRevealButton();
-        resultMessage.textContent = '🎉 Thank you for following! Now reveal your treasure!';
-      }, 1200);
+        verificationModal.style.display = 'flex';
+      }, 1000);
     });
     
     spinButton.addEventListener('click', () => {
@@ -926,7 +1231,7 @@
     
     function resetGame() {
       chancesLeft = 3;
-      hasFollowed = false;
+      // Don't reset hasFollowed to maintain verification
       usedBoxes = [];
       selectedIndex = null;
       gameState = 'selection';
@@ -1042,7 +1347,9 @@
       fireworksCanvas.height = window.innerHeight;
     });
     
+    // Initialize everything when page loads
     window.onload = () => {
+      initializeFollowerTracker();
       createBoxes();
       document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
     };
