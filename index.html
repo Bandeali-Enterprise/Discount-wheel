@@ -14,6 +14,7 @@
       --neon-blue: #00ffff;
       --neon-pink: #ff00ff;
       --neon-green: #39ff14;
+      --bandeali-special: #ff6600; /* Special color for BANDEALI */
     }
     
     * {
@@ -159,18 +160,54 @@
       position: relative;
     }
     
+    /* SPECIAL BANDEALI HIGHLIGHT */
     .header-container h1 {
       margin: 0;
       font-size: 3.5rem;
       font-weight: 900;
       letter-spacing: 8px;
-      background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold), var(--neon-blue), var(--neon-pink));
+      position: relative;
+      animation: titleFloat 6s ease-in-out infinite;
+    }
+    
+    /* Split BANDEALI and ENTERPRISES for different effects */
+    .bandeali-text {
+      background: linear-gradient(45deg, var(--bandeali-special), #ff3300, #ff9900, var(--primary-gold));
       background-size: 400% 400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: epicTextGradient 3s ease-in-out infinite, titleFloat 6s ease-in-out infinite;
+      animation: bandealiSpecialGlow 2s ease-in-out infinite;
+      text-shadow: 0 0 30px var(--bandeali-special), 0 0 60px var(--bandeali-special);
       position: relative;
+      display: inline-block;
+    }
+    
+    .enterprises-text {
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--primary-gold));
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: epicTextGradient 3s ease-in-out infinite;
+    }
+    
+    @keyframes bandealiSpecialGlow {
+      0% { 
+        background-position: 0% 50%; 
+        filter: drop-shadow(0 0 20px var(--bandeali-special)) drop-shadow(0 0 40px var(--bandeali-special));
+        transform: scale(1);
+      }
+      50% { 
+        background-position: 100% 50%; 
+        filter: drop-shadow(0 0 40px var(--bandeali-special)) drop-shadow(0 0 80px var(--bandeali-special));
+        transform: scale(1.05);
+      }
+      100% { 
+        background-position: 0% 50%; 
+        filter: drop-shadow(0 0 20px var(--bandeali-special)) drop-shadow(0 0 40px var(--bandeali-special));
+        transform: scale(1);
+      }
     }
     
     @keyframes epicTextGradient {
@@ -184,23 +221,24 @@
       50% { transform: translateY(-8px); }
     }
     
-    .header-container h1::before {
+    /* BANDEALI Aura Effect */
+    .bandeali-text::before {
       content: '';
       position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      background: linear-gradient(45deg, transparent, var(--primary-gold), transparent);
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      background: radial-gradient(circle, var(--bandeali-special), transparent);
       z-index: -1;
-      filter: blur(20px);
-      opacity: 0.3;
-      animation: titleAura 4s ease-in-out infinite;
+      filter: blur(25px);
+      opacity: 0.6;
+      animation: bandealiAura 3s ease-in-out infinite;
     }
     
-    @keyframes titleAura {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.05); }
+    @keyframes bandealiAura {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.2); }
     }
     
     .header-container h2 {
@@ -793,7 +831,7 @@
 <body>
   <img id="logo" src="Logo.png" alt="🚀 Bandeali Enterprises Logo 🚀" />
   <div class="header-container">
-    <h1>🎯 BANDEALI ENTERPRISES 🎯</h1>
+    <h1>🎯 <span class="bandeali-text">BANDEALI</span> <span class="enterprises-text">ENTERPRISES</span> 🎯</h1>
     <h2>⚡ ULTIMATE TREASURE HUNT ⚡</h2>
   </div>
   <div id="instructions">🍀 Choose your destiny box and unlock amazing rewards! 🍀</div>
