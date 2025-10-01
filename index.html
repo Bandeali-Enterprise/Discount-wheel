@@ -29,7 +29,20 @@
       100% { background-position: 0% 50%; }
     }
     
-    /* Logo */
+    /* Hidden Backend Tracker - Only visible in console */
+    #hidden-tracker {
+      display: none !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    
+    /* Reduced Logo Glow */
     #logo { 
       max-width: 160px; 
       margin: 25px auto 10px auto; 
@@ -40,17 +53,25 @@
       transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
       overflow: hidden;
-      animation: subtleLogoGlow 3s ease-in-out infinite, floatLogo 4s ease-in-out infinite;
     }
     
+    /* Subtle Logo Glow */
     @keyframes subtleLogoGlow {
       0% { 
         box-shadow: 0 0 10px #fde14b, 0 0 20px #fde14b;
         filter: brightness(1.1);
       }
+      25% { 
+        box-shadow: 0 0 12px #fff856, 0 0 24px #fff856;
+        filter: brightness(1.15);
+      }
       50% { 
         box-shadow: 0 0 15px #f8d530, 0 0 30px #f8d530;
         filter: brightness(1.2);
+      }
+      75% { 
+        box-shadow: 0 0 12px #fde14b, 0 0 24px #fde14b;
+        filter: brightness(1.15);
       }
       100% { 
         box-shadow: 0 0 10px #fde14b, 0 0 20px #fde14b;
@@ -58,12 +79,21 @@
       }
     }
     
+    #logo {
+      animation: subtleLogoGlow 3s ease-in-out infinite, floatLogo 4s ease-in-out infinite;
+    }
+    
     @keyframes floatLogo {
       0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
       50% { transform: translateY(-8px) rotate(1deg) scale(1.01); }
     }
     
-    /* Headers */
+    #logo:hover {
+      transform: scale(1.15) rotate(5deg);
+      animation-duration: 1s;
+    }
+    
+    /* Enhanced Header with Original Colors */
     .header-container { max-width:700px; margin-bottom:20px; position: relative;}
     
     .header-container h1 {
@@ -76,6 +106,7 @@
       display: inline-block;
     }
     
+    /* BANDEALI with Original Golden Color + Special Highlight */
     .bandeali-highlight {
       color:#fde14b;
       text-shadow: 
@@ -115,6 +146,7 @@
       }
     }
     
+    /* BANDEALI Extra Highlight Ring */
     .bandeali-highlight::before {
       content: '';
       position: absolute;
@@ -176,7 +208,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    /* Game Container */
+    /* FIXED TREASURE BOX CONTAINER */
     #game-container { 
       display: grid !important; 
       grid-template-columns: repeat(3, 1fr) !important; 
@@ -193,7 +225,7 @@
       position: relative !important;
     }
     
-    /* Treasure Boxes */
+    /* FIXED BOX STYLES */
     .box { 
       width: 105px !important; 
       height: 135px !important; 
@@ -219,9 +251,95 @@
       z-index: 10 !important;
     }
     
+    /* Enhanced floating particles effect */
+    .box::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(253, 225, 75, 0.15) 0%, transparent 70%);
+      animation: floatingParticles 6s ease-in-out infinite;
+      opacity: 0;
+    }
+    
+    @keyframes floatingParticles {
+      0%, 100% { transform: rotate(0deg) scale(0); opacity: 0; }
+      50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
+    }
+    
+    /* Enhanced Hover Effect */
+    @keyframes advancedPulse {
+      0% { 
+        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6), 0 0 15px #fde14b; 
+        transform: translateY(0) scale(1) rotateX(0deg);
+      }
+      50% { 
+        box-shadow: 0 0 35px rgba(253, 225, 75, 0.7) inset, 0 15px 35px rgba(0,0,0,0.8), 0 0 40px #fde14b; 
+        transform: translateY(-10px) scale(1.06) rotateX(5deg);
+      }
+      100% { 
+        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6), 0 0 15px #fde14b; 
+        transform: translateY(0) scale(1) rotateX(0deg);
+      }
+    }
+    
     .box:hover {
-      transform: translateY(-10px) scale(1.06) rotateX(5deg);
-      box-shadow: 0 0 35px rgba(253, 225, 75, 0.7) inset, 0 15px 35px rgba(0,0,0,0.8), 0 0 40px #fde14b;
+      animation: advancedPulse 1.8s ease-in-out infinite;
+    }
+    
+    .box:hover::after {
+      opacity: 1;
+      animation-duration: 2s;
+    }
+    
+    /* Enhanced Selected Box Animation */
+    @keyframes epicSelected {
+      0% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
+        transform: scale(1.15) rotateY(0deg) rotateX(5deg);
+      }
+      25% { 
+        border-color:#fde14b; 
+        box-shadow: 0 0 60px #fde14b inset, 0 0 40px #fde14b, 0 20px 50px rgba(0,0,0,0.9);
+        transform: scale(1.2) rotateY(90deg) rotateX(10deg);
+      }
+      50% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 70px #fff44c inset, 0 0 50px #fff44c, 0 25px 60px rgba(0,0,0,1.0);
+        transform: scale(1.25) rotateY(180deg) rotateX(5deg);
+      }
+      75% { 
+        border-color:#fde14b; 
+        box-shadow: 0 0 60px #fde14b inset, 0 0 40px #fde14b, 0 20px 50px rgba(0,0,0,0.9);
+        transform: scale(1.2) rotateY(270deg) rotateX(10deg);
+      }
+      100% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
+        transform: scale(1.15) rotateY(360deg) rotateX(5deg);
+      }
+    }
+    
+    /* Enhanced spiral glow effect */
+    .box.active::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: conic-gradient(from 0deg, transparent, #fde14b, transparent, #fff44c, transparent, #ffed4e, transparent);
+      animation: spiralGlow 2.5s linear infinite;
+      opacity: 0.9;
+      z-index: -1;
+    }
+    
+    @keyframes spiralGlow {
+      0% { transform: rotate(0deg) scale(0.8); }
+      100% { transform: rotate(360deg) scale(1.3); }
     }
     
     .box.active {
@@ -230,22 +348,18 @@
       z-index: 50;
     }
     
-    @keyframes epicSelected {
-      0% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
-        transform: scale(1.15) rotateY(0deg);
-      }
-      50% { 
-        border-color:#fde14b; 
-        box-shadow: 0 0 70px #fff44c inset, 0 0 50px #fff44c, 0 25px 60px rgba(0,0,0,1.0);
-        transform: scale(1.25) rotateY(180deg);
-      }
-      100% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
-        transform: scale(1.15) rotateY(360deg);
-      }
+    /* Enhanced explosive shake */
+    @keyframes explosiveShake {
+      0%, 100% { transform: translateX(0) rotateZ(0deg); }
+      10% { transform: translateX(-10px) rotateZ(-3deg); }
+      20% { transform: translateX(10px) rotateZ(3deg); }
+      30% { transform: translateX(-8px) rotateZ(-2deg); }
+      40% { transform: translateX(8px) rotateZ(2deg); }
+      50% { transform: translateX(-6px) rotateZ(-1deg); }
+      60% { transform: translateX(6px) rotateZ(1deg); }
+      70% { transform: translateX(-4px) rotateZ(-0.5deg); }
+      80% { transform: translateX(4px) rotateZ(0.5deg); }
+      90% { transform: translateX(-2px) rotateZ(0deg); }
     }
     
     .box.locked { 
@@ -255,11 +369,28 @@
       animation: explosiveShake 1s ease-in-out;
     }
     
-    @keyframes explosiveShake {
-      0%, 100% { transform: translateX(0) rotateZ(0deg); }
-      10% { transform: translateX(-10px) rotateZ(-3deg); }
-      20% { transform: translateX(10px) rotateZ(3deg); }
-      50% { transform: translateX(-6px) rotateZ(-1deg); }
+    /* Enhanced mega opening animation */
+    @keyframes megaOpen {
+      0% { 
+        transform: scale(1) rotateY(0deg) rotateX(0deg); 
+        background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
+      }
+      25% { 
+        transform: scale(1.35) rotateY(90deg) rotateX(20deg); 
+        background: linear-gradient(145deg, #fde14b, #fff44c, #f8d530);
+      }
+      50% { 
+        transform: scale(1.45) rotateY(180deg) rotateX(35deg); 
+        background: linear-gradient(145deg, #fff44c, #fde14b, #fff856);
+      }
+      75% { 
+        transform: scale(1.35) rotateY(270deg) rotateX(20deg); 
+        background: linear-gradient(145deg, #fde14b, #f8d530, #fff44c);
+      }
+      100% { 
+        transform: scale(1.25) rotateY(360deg) rotateX(0deg); 
+        background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
+      }
     }
     
     .box.opened {
@@ -273,25 +404,11 @@
       transform: scale(1.25);
     }
     
-    @keyframes megaOpen {
-      0% { 
-        transform: scale(1) rotateY(0deg); 
-        background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
-      }
-      50% { 
-        transform: scale(1.45) rotateY(180deg); 
-        background: linear-gradient(145deg, #fff44c, #fde14b, #fff856);
-      }
-      100% { 
-        transform: scale(1.25) rotateY(360deg); 
-        background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
-      }
-    }
-    
+    .box.disabled {background:#333; color:#666; border-color:#666; cursor:default; opacity:0.5;}
     .box img {max-width:48px;max-height:48px;margin-bottom:8px;filter:drop-shadow(0 0 8px #c1a834);}
     .box .text {font-size:1.1rem; user-select:none; text-align:center; line-height:1.2; font-weight: 700;}
     
-    /* Buttons */
+    /* Enhanced Follow Button */
     #follow-first-btn { 
       display:none; 
       margin:0 auto 32px auto; 
@@ -308,6 +425,8 @@
       box-shadow:0 0 35px rgba(253, 29, 29, 0.6), 0 8px 20px rgba(0,0,0,0.4); 
       letter-spacing:3px;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      overflow: hidden;
       font-family: 'Rajdhani', sans-serif;
     }
     
@@ -317,11 +436,27 @@
       100% { background-position: 0% 50%; }
     }
     
+    #follow-first-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s ease;
+    }
+    
     #follow-first-btn:hover {
       transform: translateY(-6px) scale(1.06);
       box-shadow: 0 0 50px rgba(253, 29, 29, 0.9), 0 15px 35px rgba(0,0,0,0.5);
     }
     
+    #follow-first-btn:hover::before {
+      left: 100%;
+    }
+    
+    /* Enhanced Reveal Button */
     #spin-button { 
       display:none; 
       margin:0 auto 32px auto; 
@@ -329,7 +464,7 @@
       font-size:1.4rem; 
       background: linear-gradient(45deg, #fde14b, #fff856, #f8d530, #fde14b); 
       background-size: 400% 400%;
-      animation: goldenButton 2s ease infinite, buttonFloat 3.5s ease-in-out infinite;
+      animation: goldenButton 2s ease infinite;
       border-radius:35px; 
       border:none; 
       color:#4b3700; 
@@ -338,6 +473,7 @@
       box-shadow:0 0 30px rgba(253, 225, 75, 0.7); 
       letter-spacing:4px;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
       font-family: 'Rajdhani', sans-serif;
     }
     
@@ -345,6 +481,10 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+    
+    #spin-button:not(:disabled) {
+      animation: goldenButton 2s ease infinite, buttonFloat 3.5s ease-in-out infinite;
     }
     
     @keyframes buttonFloat {
@@ -355,6 +495,10 @@
     #spin-button:hover { 
       transform: translateY(-10px) scale(1.1);
       box-shadow: 0 0 50px rgba(253, 225, 75, 0.9), 0 15px 40px rgba(0,0,0,0.4);
+    }
+    
+    #spin-button:active {
+      transform: translateY(-3px) scale(1.02);
     }
     
     #result-message { 
@@ -389,11 +533,13 @@
       50% { transform: scale(1.08); }
     }
     
-    /* Popup */
+    /* Enhanced Popup Styles */
     #popup {position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.96);display:none;flex-direction:column;justify-content:center;align-items:center;color:white;font-size:2.4rem;padding:35px;z-index:2000;text-align:center;}
     #popup img {max-width:150px;margin-bottom:32px;}
     #popup .popup-text {margin-bottom:35px;color:#fde14b;font-weight:900;text-shadow:0 0 25px #fde14b; font-family: 'Rajdhani', sans-serif;}
+    #popup .popup-follow-row { display: flex; align-items: center; gap: 16px; justify-content: center; margin-bottom: 18px; flex-wrap: wrap;}
     
+    /* Enhanced Try Again Button */
     #try-again-btn {
       margin-top: 25px;
       padding: 20px 50px;
@@ -418,6 +564,12 @@
       100% { background-position: 0% 50%; }
     }
     
+    #try-again-btn:hover {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 0 45px rgba(255, 107, 107, 0.9);
+    }
+    
+    /* Enhanced Claim button */
     #popup #claim-btn {
       margin-top: 35px;
       font-size: 2.4rem;
@@ -432,6 +584,8 @@
       cursor: pointer;
       letter-spacing: 3px;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      overflow: hidden;
       font-family: 'Rajdhani', sans-serif;
     }
     
@@ -448,6 +602,11 @@
         background-position: 0% 50%; 
         box-shadow: 0 0 25px #fde14b, 0 0 50px rgba(253, 225, 75, 0.6);
       }
+    }
+    
+    #popup #claim-btn:hover {
+      transform: translateY(-6px) scale(1.1);
+      box-shadow: 0 0 60px #fde14b, 0 0 100px rgba(253, 225, 75, 0.9);
     }
     
     canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
@@ -477,6 +636,9 @@
   </style>
 </head>
 <body>
+  <!-- Hidden Backend Tracker (Not visible to users) -->
+  <div id="hidden-tracker"></div>
+
   <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
   <div class="header-container">
     <h1><span class="bandeali-highlight">Bandeali</span> <span class="enterprises-text">Enterprises</span></h1>
@@ -492,118 +654,6 @@
   <canvas id="fireworks"></canvas>
 
   <script>
-    // 🔥 SUPER EASY TRACKING - NO SETUP NEEDED! 🔥
-    class EasyTracker {
-      constructor() {
-        this.stats = {
-          pageViews: 0,
-          gameStarts: 0,
-          followClicks: 0,
-          estimatedFollowers: 0
-        };
-        this.init();
-      }
-      
-      init() {
-        this.stats.pageViews++;
-        console.log('🎯 Bandeali Tracker Active');
-        console.log('📊 Stats:', this.stats);
-        
-        // Monitor user behavior
-        this.monitorFollowClicks();
-        this.detectFollowCompletion();
-      }
-      
-      monitorFollowClicks() {
-        document.addEventListener('click', (e) => {
-          if (e.target.id === 'follow-first-btn') {
-            this.stats.followClicks++;
-            console.log('📸 Follow button clicked!');
-            console.log('📈 Total clicks:', this.stats.followClicks);
-            
-            // Start follow detection
-            this.trackFollowSession();
-          }
-        });
-      }
-      
-      trackFollowSession() {
-        const startTime = Date.now();
-        let windowLeft = false;
-        
-        const handleBlur = () => {
-          windowLeft = true;
-          console.log('👀 User went to Instagram');
-        };
-        
-        const handleFocus = () => {
-          if (windowLeft) {
-            const timeAway = Date.now() - startTime;
-            console.log(`⏱️ Back after ${Math.round(timeAway/1000)} seconds`);
-            
-            if (timeAway > 5000) { // 5+ seconds = likely followed
-              this.handleLikelyFollow();
-            }
-          }
-        };
-        
-        window.addEventListener('blur', handleBlur, {once: true});
-        window.addEventListener('focus', handleFocus, {once: true});
-        
-        // Cleanup after 2 minutes
-        setTimeout(() => {
-          window.removeEventListener('blur', handleBlur);
-          window.removeEventListener('focus', handleFocus);
-        }, 120000);
-      }
-      
-      handleLikelyFollow() {
-        this.stats.estimatedFollowers++;
-        console.log('🎉 LIKELY NEW FOLLOWER DETECTED!');
-        console.log('🚀 Estimated new followers:', this.stats.estimatedFollowers);
-        
-        // Could send to external service here
-        this.sendToExternalService();
-      }
-      
-      detectFollowCompletion() {
-        // Check if user came from Instagram
-        if (document.referrer.includes('instagram.com')) {
-          console.log('📱 User came from Instagram - possible follow!');
-          this.handleLikelyFollow();
-        }
-      }
-      
-      sendToExternalService() {
-        // Easy webhook - replace with your URL
-        const webhookUrl = 'https://httpbin.org/post'; // Demo URL
-        
-        fetch(webhookUrl, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            event: 'new_follower',
-            stats: this.stats,
-            timestamp: new Date().toISOString(),
-            source: 'treasure_game'
-          })
-        }).catch(() => {}); // Silent fail
-        
-        console.log('📡 Data sent to tracking service');
-      }
-      
-      getStats() {
-        return this.stats;
-      }
-    }
-    
-    // Initialize easy tracker
-    const tracker = new EasyTracker();
-    
-    // Make it accessible from console
-    window.tracker = tracker;
-    
-    // Game Logic
     const prizes = [
       { win: true, text: "🔥 10% OFF" },
       { win: false, text: "Better luck!" },
@@ -632,6 +682,104 @@
     let hasFollowed = false;
     let usedBoxes = [];
     
+    // 🔥 SIMPLIFIED HIDDEN FOLLOWER TRACKER 🔥
+    class HiddenFollowerTracker {
+      constructor() {
+        this.analytics = {
+          totalViews: 0,
+          gameStarts: 0,
+          followClicks: 0,
+          newFollowers: 0,
+          conversionRate: 0
+        };
+        this.initializeTracker();
+        console.log('🕵️‍♂️ Hidden Follower Tracker Active - Check Console for Logs');
+      }
+      
+      initializeTracker() {
+        this.analytics.totalViews++;
+        this.logEvent('tracker_initialized', {
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          referrer: document.referrer
+        });
+        
+        // Track follow button clicks
+        document.addEventListener('click', (event) => {
+          if (event.target.id === 'follow-first-btn') {
+            this.analytics.followClicks++;
+            this.logEvent('follow_button_clicked');
+            this.detectFollowCompletion();
+          }
+        });
+      }
+      
+      detectFollowCompletion() {
+        let windowFocusTimer;
+        
+        window.addEventListener('blur', () => {
+          windowFocusTimer = Date.now();
+        });
+        
+        window.addEventListener('focus', () => {
+          const timeAway = Date.now() - windowFocusTimer;
+          
+          if (timeAway > 8000) { // User was away for 8+ seconds
+            this.handleNewFollower();
+          }
+        });
+      }
+      
+      handleNewFollower() {
+        this.analytics.newFollowers++;
+        this.calculateConversionRate();
+        
+        this.logEvent('new_follower_detected', {
+          total: this.analytics.newFollowers,
+          conversionRate: this.analytics.conversionRate,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      calculateConversionRate() {
+        if (this.analytics.followClicks > 0) {
+          this.analytics.conversionRate = (this.analytics.newFollowers / this.analytics.followClicks) * 100;
+        }
+      }
+      
+      logEvent(eventType, data = {}) {
+        const logEntry = {
+          event: eventType,
+          timestamp: new Date().toISOString(),
+          analytics: this.analytics,
+          ...data
+        };
+        
+        console.log(`🔍 [TRACKER] ${eventType}:`, logEntry);
+        
+        // Store in localStorage
+        const logs = JSON.parse(localStorage.getItem('followerTrackerLogs') || '[]');
+        logs.push(logEntry);
+        
+        if (logs.length > 50) {
+          logs.splice(0, logs.length - 50);
+        }
+        
+        localStorage.setItem('followerTrackerLogs', JSON.stringify(logs));
+      }
+      
+      getAnalytics() {
+        return {
+          ...this.analytics,
+          logs: JSON.parse(localStorage.getItem('followerTrackerLogs') || '[]')
+        };
+      }
+    }
+    
+    // Initialize hidden tracker
+    const hiddenTracker = new HiddenFollowerTracker();
+    window._ht = hiddenTracker; // For console access
+    
     function shuffle(array) {
       let currentIndex = array.length;
       while (currentIndex !== 0) {
@@ -652,7 +800,7 @@
     }
     
     function createBoxes() {
-      tracker.stats.gameStarts++;
+      console.log('Creating treasure boxes...'); // Debug log
       
       gameContainer.innerHTML = '';
       resultMessage.textContent = '';
@@ -661,6 +809,10 @@
       gameState = 'selection';
       followFirstBtn.style.display = 'none';
       spinButton.style.display = 'none';
+      
+      // Track game start
+      hiddenTracker.analytics.gameStarts++;
+      hiddenTracker.logEvent('game_started');
       
       const shuffledPrizes = shuffle([...prizes]);
       
@@ -673,10 +825,13 @@
         }
         
         box.setAttribute('tabindex', '0');
+        box.setAttribute('role', 'button');
+        box.setAttribute('aria-label', 'Treasure box. Click to select.');
         box.dataset.index = i;
         box.innerHTML = `<span>?</span>`;
         box.title = "Click to select this treasure box";
         
+        // Add event listeners
         box.addEventListener('click', onBoxSelect);
         box.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -688,17 +843,20 @@
         gameContainer.appendChild(box);
         boxes.push({ el: box, prize: shuffledPrizes[i] });
         
-        // Entrance animation
+        console.log(`Box ${i} created:`, box); // Debug log
+        
+        // Entrance animation with immediate visibility
         box.style.opacity = '0';
-        box.style.transform = 'translateY(60px)';
+        box.style.transform = 'translateY(60px) rotateX(30deg)';
         
         setTimeout(() => {
-          box.style.transition = 'all 0.7s ease';
+          box.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
           box.style.opacity = '1';
-          box.style.transform = 'translateY(0)';
-        }, i * 100 + 100);
+          box.style.transform = 'translateY(0) rotateX(0deg)';
+        }, i * 100 + 100); // Faster animation start
       }
       
+      console.log('Total boxes created:', boxes.length); // Debug log
       updateChancesDisplay();
     }
     
@@ -709,15 +867,29 @@
       selectedIndex = Number(this.dataset.index);
       gameState = 'follow';
       
+      console.log('Box selected:', selectedIndex); // Debug log
+      
+      // Track box selection
+      hiddenTracker.logEvent('box_selected', {
+        boxIndex: selectedIndex,
+        prize: boxes[selectedIndex].prize
+      });
+      
       boxes.forEach((box, idx) => {
         if (idx !== selectedIndex) {
           box.el.classList.add('locked');
+          box.el.setAttribute('aria-pressed', 'false');
+          box.el.tabIndex = -1;
           setTimeout(() => {
             box.el.style.animation = 'explosiveShake 1s ease-in-out';
           }, idx * 90);
         } else {
+          box.el.classList.remove('locked');
           box.el.classList.add('active');
-          createParticleBurst(box.el);
+          box.el.setAttribute('aria-pressed', 'true');
+          box.el.tabIndex = 0;
+          box.el.focus();
+          createEpicParticleBurst(box.el);
         }
       });
       
@@ -729,16 +901,17 @@
       }
     }
     
-    function createParticleBurst(box) {
-      for (let i = 0; i < 30; i++) {
+    function createEpicParticleBurst(box) {
+      for (let i = 0; i < 35; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
-        particle.style.width = '6px';
-        particle.style.height = '6px';
-        particle.style.background = '#fde14b';
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.background = `hsl(${Math.random() * 60 + 30}, 100%, 65%)`;
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '1000';
+        particle.style.zIndex = '1500';
+        particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
         
         const boxRect = box.getBoundingClientRect();
         particle.style.left = boxRect.left + boxRect.width/2 + 'px';
@@ -746,38 +919,46 @@
         
         document.body.appendChild(particle);
         
-        const angle = (i / 30) * Math.PI * 2;
-        const distance = 80 + Math.random() * 60;
+        const angle = (i / 35) * Math.PI * 2;
+        const distance = 90 + Math.random() * 90;
         const finalX = boxRect.left + boxRect.width/2 + Math.cos(angle) * distance;
         const finalY = boxRect.top + boxRect.height/2 + Math.sin(angle) * distance;
         
         particle.animate([
-          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
           { 
-            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0)`, 
+            transform: 'translate(0, 0) scale(1) rotate(0deg)', 
+            opacity: 1 
+          },
+          { 
+            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0) rotate(900deg)`, 
             opacity: 0 
           }
         ], {
-          duration: 1200,
-          easing: 'ease-out'
-        }).onfinish = () => particle.remove();
+          duration: 1400 + Math.random() * 500,
+          easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        }).onfinish = () => {
+          particle.remove();
+        };
       }
     }
     
     function showRevealButton() {
       followFirstBtn.style.display = 'none';
       spinButton.style.display = 'block';
+      spinButton.disabled = false;
       gameState = 'reveal';
       resultMessage.textContent = 'Click "Reveal All" to see your treasure! 🎁✨';
     }
     
     followFirstBtn.addEventListener('click', () => {
+      hiddenTracker.logEvent('follow_button_clicked');
       window.open('https://www.instagram.com/bandeali_enterprises', '_blank');
       
       setTimeout(() => {
         hasFollowed = true;
         showRevealButton();
         resultMessage.textContent = '🎉 Thank you for following! Now reveal your treasure!';
+        hiddenTracker.logEvent('follow_completed');
       }, 1200);
     });
     
@@ -788,16 +969,22 @@
     });
     
     function revealBoxes() {
+      hiddenTracker.logEvent('boxes_revealed', {
+        selectedPrize: boxes[selectedIndex].prize
+      });
+      
       boxes.forEach((box, idx) => {
         setTimeout(() => {
           box.el.classList.remove('locked', 'active');
           box.el.classList.add('opened');
+          box.el.tabIndex = -1;
           box.el.innerHTML = '';
           
           if (box.prize.win) {
             const img = document.createElement('img');
             img.src = 'treasure.png';
-            img.alt = 'Treasure';
+            img.alt = 'Treasure box image';
+            img.className = 'chest-img';
             box.el.appendChild(img);
             const textDiv = document.createElement('div');
             textDiv.className = 'text';
@@ -823,9 +1010,14 @@
     function showResultPopup(prize) {
       usedBoxes.push(selectedIndex);
       
+      hiddenTracker.logEvent('result_shown', {
+        prize: prize,
+        isWinner: prize.win
+      });
+      
       if (prize.win) {
         popup.innerHTML = `
-          <img src="treasure.png" alt="Treasure" />
+          <img id="popup-img" src="treasure.png" alt="Treasure Box" />
           <div class="popup-text">🎉 CONGRATULATIONS! 🎉<br><br>${prize.text}</div>
           <button id="claim-btn">✨ CLAIM YOUR PRIZE ✨</button>
         `;
@@ -839,7 +1031,7 @@
           `;
         } else {
           popup.innerHTML = `
-            <div class="popup-text">😞 Bad luck today!<br><br>🌟 Try again tomorrow!</div>
+            <div class="popup-text">😞 Bad luck today!<br><br>🌟 Try again tomorrow for better luck!</div>
             <button id="try-again-btn">🎮 Start New Game</button>
           `;
         }
@@ -851,7 +1043,8 @@
       const tryAgainBtn = document.getElementById('try-again-btn');
       
       if (claimBtn) {
-        claimBtn.addEventListener('click', () => {
+        claimBtn.addEventListener('click', function () {
+          hiddenTracker.logEvent('prize_claimed', { prize: prize });
           popup.style.display = 'none';
           stopFireworks();
           resetGame();
@@ -859,7 +1052,8 @@
       }
       
       if (tryAgainBtn) {
-        tryAgainBtn.addEventListener('click', () => {
+        tryAgainBtn.addEventListener('click', function () {
+          hiddenTracker.logEvent('try_again_clicked');
           popup.style.display = 'none';
           if (chancesLeft > 0) {
             createBoxes();
@@ -869,6 +1063,8 @@
           }
         });
       }
+      
+      popup.focus();
     }
     
     function resetGame() {
@@ -877,39 +1073,45 @@
       usedBoxes = [];
       selectedIndex = null;
       gameState = 'selection';
+      
+      hiddenTracker.logEvent('game_reset');
+      
       createBoxes();
       document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
     }
     
-    // Simple Fireworks
+    // Fireworks code (same as before)
     let fireworks = [];
     let fireworksAnimation;
     
     class Firework {
       constructor() {
         this.x = Math.random() * fireworksCanvas.width;
-        this.y = fireworksCanvas.height;
-        this.vy = -(8 + Math.random() * 4);
+        this.y = fireworksCanvas.height + 10;
+        this.targetY = Math.random() * fireworksCanvas.height / 2;
+        this.vy = -(9 + Math.random() * 5);
         this.exploded = false;
         this.particles = [];
-        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        this.color = `hsl(${Math.random() * 360}, 100%, 65%)`;
+        this.size = 3 + Math.random() * 2;
       }
       
       update() {
         if (!this.exploded) {
           this.y += this.vy;
-          this.vy += 0.2;
+          this.vy += 0.18;
           if (this.vy >= 0) {
             this.exploded = true;
-            for (let i = 0; i < 30; i++) {
-              const angle = (2 * Math.PI / 30) * i;
+            for (let i = 0; i < 36; i++) {
+              const angle = (2 * Math.PI / 36) * i;
               this.particles.push({
                 x: this.x,
                 y: this.y,
-                vx: Math.cos(angle) * (3 + Math.random() * 3),
-                vy: Math.sin(angle) * (3 + Math.random() * 3),
+                vx: Math.cos(angle) * (4 + Math.random() * 4),
+                vy: Math.sin(angle) * (4 + Math.random() * 4),
                 alpha: 1,
-                color: this.color
+                color: this.color,
+                size: 1.5 + Math.random() * 2.5,
               });
             }
           }
@@ -917,8 +1119,9 @@
           this.particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
-            p.vy += 0.05;
-            p.alpha -= 0.02;
+            p.vy += 0.06;
+            p.alpha -= 0.018;
+            p.vx *= 0.988;
           });
           this.particles = this.particles.filter(p => p.alpha > 0);
         }
@@ -926,15 +1129,25 @@
       
       draw(ctx) {
         if (!this.exploded) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
           ctx.fillStyle = this.color;
-          ctx.fillRect(this.x, this.y, 3, 3);
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = this.color;
+          ctx.fill();
+          ctx.shadowBlur = 0;
         } else {
           this.particles.forEach(p => {
             ctx.globalAlpha = p.alpha;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
             ctx.fillStyle = p.color;
-            ctx.fillRect(p.x, p.y, 2, 2);
+            ctx.shadowBlur = 6;
+            ctx.shadowColor = p.color;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
           });
-          ctx.globalAlpha = 1;
         }
       }
     }
@@ -944,8 +1157,8 @@
       fireworksCanvas.height = window.innerHeight;
       fireworks = [];
       fireworksAnimation = setInterval(() => {
-        if (fireworks.length < 20) fireworks.push(new Firework());
-      }, 200);
+        if (fireworks.length < 45) fireworks.push(new Firework());
+      }, 140);
       renderFireworks();
       fireworksCanvas.style.display = 'block';
     }
@@ -977,13 +1190,22 @@
     
     // Initialize game
     window.onload = () => {
+      console.log('Initializing treasure box game...'); // Debug log
       createBoxes();
+      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
+      
+      hiddenTracker.logEvent('page_loaded', {
+        timestamp: new Date().toISOString()
+      });
     };
     
-    // Console commands for tracking
-    console.log('🎮 Bandeali Treasure Game Loaded!');
-    console.log('📊 Check stats: tracker.getStats()');
-    console.log('🔍 Monitor: window.tracker');
+    // Force create boxes if onload doesn't work
+    setTimeout(() => {
+      if (boxes.length === 0) {
+        console.log('Force creating boxes...'); // Debug log
+        createBoxes();
+      }
+    }, 1000);
   </script>
 </body>
 </html>
