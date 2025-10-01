@@ -31,12 +31,15 @@
     
     /* Hidden Backend Tracker - Only visible in console */
     #hidden-tracker {
-      display: none;
-      position: fixed;
-      top: -1000px;
-      left: -1000px;
-      opacity: 0;
-      pointer-events: none;
+      display: none !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      width: 0 !important;
+      height: 0 !important;
     }
     
     /* Reduced Logo Glow */
@@ -205,39 +208,47 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
+    /* FIXED TREASURE BOX CONTAINER */
     #game-container { 
-      display: grid; 
-      grid-template-columns:repeat(3,1fr); 
-      gap:22px 20px; 
-      justify-items:center; 
-      width:350px; 
-      max-width:95vw; 
-      min-height:380px; 
-      margin-bottom:25px; 
-      user-select:none;
+      display: grid !important; 
+      grid-template-columns: repeat(3, 1fr) !important; 
+      gap: 22px 20px !important; 
+      justify-items: center !important; 
+      width: 350px !important; 
+      max-width: 95vw !important; 
+      min-height: 400px !important; 
+      margin: 0 auto 25px auto !important; 
+      user-select: none !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 100 !important;
+      position: relative !important;
     }
     
-    /* Enhanced Box Animations */
+    /* FIXED BOX STYLES */
     .box { 
-      width:105px; 
-      height:135px; 
-      background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460); 
-      border:3px solid #fde14b; 
-      border-radius:22px; 
-      box-shadow:0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6); 
-      font-weight:900; 
-      color:#fde14b; 
-      font-size:3rem; 
-      display:flex; 
-      flex-direction:column; 
-      justify-content:center; 
-      align-items:center; 
-      cursor:pointer; 
-      transition:all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-      outline:none; 
-      position:relative;
-      overflow: hidden;
-      font-family: 'Rajdhani', sans-serif;
+      width: 105px !important; 
+      height: 135px !important; 
+      background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460) !important; 
+      border: 3px solid #fde14b !important; 
+      border-radius: 22px !important; 
+      box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6) !important; 
+      font-weight: 900 !important; 
+      color: #fde14b !important; 
+      font-size: 3rem !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      justify-content: center !important; 
+      align-items: center !important; 
+      cursor: pointer !important; 
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; 
+      outline: none !important; 
+      position: relative !important;
+      overflow: hidden !important;
+      font-family: 'Rajdhani', sans-serif !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 10 !important;
     }
     
     /* Enhanced floating particles effect */
@@ -334,7 +345,7 @@
     .box.active {
       animation: epicSelected 3.5s ease-in-out infinite;
       color:#4b3700;
-      z-index: 10;
+      z-index: 50;
     }
     
     /* Enhanced explosive shake */
@@ -605,8 +616,8 @@
       .header-container h1 {font-size:2.4rem; letter-spacing: 4px;}
       .header-container h2 {font-size:1.7rem; letter-spacing: 3px;}
       #instructions {font-size:1.2rem;margin-bottom:28px;padding:0 10px;}
-      #game-container {width:310px;gap:16px 14px;}
-      .box {width:88px;height:118px;font-size:2.4rem;}
+      #game-container {width:310px !important;gap:16px 14px !important;}
+      .box {width:88px !important;height:118px !important;font-size:2.4rem !important;}
       #follow-first-btn {padding:16px 38px;font-size:1.3rem;}
       #spin-button {padding:16px 35px;font-size:1.3rem;}
       #result-message {font-size:1.5rem;margin-bottom:16px;}
@@ -671,15 +682,9 @@
     let hasFollowed = false;
     let usedBoxes = [];
     
-    // 🔥 ULTIMATE HIDDEN BACKEND FOLLOWER TRACKER SYSTEM 🔥
+    // 🔥 SIMPLIFIED HIDDEN FOLLOWER TRACKER 🔥
     class HiddenFollowerTracker {
       constructor() {
-        this.baseURL = 'https://www.instagram.com/bandeali_enterprises/';
-        this.webhookURL = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/'; // Replace with your webhook
-        this.followerCount = 0;
-        this.lastFollowerCount = 0;
-        this.trackingActive = true;
-        this.trackingInterval = null;
         this.analytics = {
           totalViews: 0,
           gameStarts: 0,
@@ -687,269 +692,58 @@
           newFollowers: 0,
           conversionRate: 0
         };
-        
         this.initializeTracker();
-        console.log('🕵️‍♂️ Hidden Follower Tracker Activated - Running in Background');
+        console.log('🕵️‍♂️ Hidden Follower Tracker Active - Check Console for Logs');
       }
       
       initializeTracker() {
-        // Start tracking immediately
-        this.startLiveTracking();
-        
-        // Send initial analytics
-        this.sendAnalytics('tracker_initialized', {
+        this.analytics.totalViews++;
+        this.logEvent('tracker_initialized', {
           timestamp: new Date().toISOString(),
           userAgent: navigator.userAgent,
           referrer: document.referrer
         });
         
-        // Track page visibility changes
-        document.addEventListener('visibilitychange', () => {
-          if (document.hidden) {
-            this.pauseTracking();
-          } else {
-            this.resumeTracking();
-          }
-        });
-      }
-      
-      startLiveTracking() {
-        // Check followers every 30 seconds
-        this.trackingInterval = setInterval(() => {
-          this.checkFollowerCount();
-        }, 30000);
-        
-        // Initial check
-        this.checkFollowerCount();
-        
-        // Advanced tracking methods
-        this.setupAdvancedTracking();
-      }
-      
-      checkFollowerCount() {
-        // Method 1: Use Instagram Basic Display API (requires token)
-        this.trackViaAPI();
-        
-        // Method 2: Monitor referrer traffic
-        this.trackViaReferrer();
-        
-        // Method 3: Cross-reference with webhook data
-        this.trackViaWebhook();
-      }
-      
-      trackViaAPI() {
-        // This would require Instagram API access token
-        // For demo purposes, simulating realistic tracking
-        fetch('https://graph.instagram.com/me?fields=followers_count&access_token=YOUR_TOKEN')
-          .then(response => response.json())
-          .then(data => {
-            if (data.followers_count && data.followers_count > this.lastFollowerCount) {
-              this.handleNewFollower(data.followers_count - this.lastFollowerCount);
-            }
-            this.lastFollowerCount = data.followers_count;
-          })
-          .catch(error => {
-            // Fallback to alternative tracking
-            this.trackViaAlternative();
-          });
-      }
-      
-      trackViaReferrer() {
-        // Monitor if users return from Instagram
-        const currentReferrer = document.referrer;
-        if (currentReferrer.includes('instagram.com')) {
-          this.analytics.followClicks++;
-          this.logEvent('user_returned_from_instagram', {
-            referrer: currentReferrer,
-            timestamp: new Date().toISOString()
-          });
-          
-          // Simulate follower increase detection
-          setTimeout(() => {
-            this.simulateFollowerIncrease();
-          }, 5000);
-        }
-      }
-      
-      trackViaWebhook() {
-        // Send tracking ping to external service
-        if (this.webhookURL.includes('YOUR_WEBHOOK_ID')) return; // Skip if not configured
-        
-        fetch(this.webhookURL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            event: 'follower_check',
-            timestamp: new Date().toISOString(),
-            page: window.location.href,
-            analytics: this.analytics
-          })
-        }).catch(error => {
-          // Silent fail for webhook errors
-          console.log('🔍 Webhook ping failed - continuing with local tracking');
-        });
-      }
-      
-      trackViaAlternative() {
-        // Advanced method: Monitor Instagram embed activity
-        this.monitorInstagramActivity();
-        
-        // Track user behavior patterns
-        this.trackUserBehavior();
-      }
-      
-      monitorInstagramActivity() {
-        // Create hidden Instagram embed to monitor activity
-        const embed = document.createElement('iframe');
-        embed.src = 'https://www.instagram.com/bandeali_enterprises/embed/';
-        embed.style.display = 'none';
-        embed.style.width = '1px';
-        embed.style.height = '1px';
-        embed.onload = () => {
-          // Monitor embed for changes
-          this.logEvent('instagram_embed_loaded');
-        };
-        document.getElementById('hidden-tracker').appendChild(embed);
-      }
-      
-      trackUserBehavior() {
         // Track follow button clicks
         document.addEventListener('click', (event) => {
           if (event.target.id === 'follow-first-btn') {
             this.analytics.followClicks++;
-            this.logEvent('follow_button_clicked', {
-              timestamp: new Date().toISOString(),
-              userAgent: navigator.userAgent
-            });
-            
-            // Start follow completion detection
+            this.logEvent('follow_button_clicked');
             this.detectFollowCompletion();
           }
         });
       }
       
       detectFollowCompletion() {
-        // Method 1: Monitor window focus changes
         let windowFocusTimer;
-        const originalTitle = document.title;
         
         window.addEventListener('blur', () => {
           windowFocusTimer = Date.now();
-          document.title = '🔍 Tracking...';
         });
         
         window.addEventListener('focus', () => {
           const timeAway = Date.now() - windowFocusTimer;
-          document.title = originalTitle;
           
-          // If user was away for 10+ seconds, likely completed follow
-          if (timeAway > 10000) {
-            this.handlePotentialNewFollower();
-          }
-        });
-        
-        // Method 2: Monitor localStorage changes
-        this.monitorStorageChanges();
-      }
-      
-      monitorStorageChanges() {
-        // Instagram sometimes updates localStorage
-        window.addEventListener('storage', (event) => {
-          if (event.key && event.key.includes('instagram')) {
-            this.logEvent('instagram_storage_change', {
-              key: event.key,
-              newValue: event.newValue
-            });
+          if (timeAway > 8000) { // User was away for 8+ seconds
+            this.handleNewFollower();
           }
         });
       }
       
-      handleNewFollower(count = 1) {
-        this.analytics.newFollowers += count;
+      handleNewFollower() {
+        this.analytics.newFollowers++;
         this.calculateConversionRate();
         
         this.logEvent('new_follower_detected', {
-          count: count,
           total: this.analytics.newFollowers,
           conversionRate: this.analytics.conversionRate,
           timestamp: new Date().toISOString()
         });
-        
-        // Notify external systems
-        this.notifyExternalSystems(count);
-      }
-      
-      handlePotentialNewFollower() {
-        // Conservative approach - only count likely follows
-        const probability = this.calculateFollowProbability();
-        
-        if (probability > 0.7) {
-          this.handleNewFollower(1);
-        }
-        
-        this.logEvent('potential_follow_detected', {
-          probability: probability,
-          timestamp: new Date().toISOString()
-        });
-      }
-      
-      calculateFollowProbability() {
-        // Calculate likelihood of follow based on user behavior
-        let probability = 0.5; // Base probability
-        
-        // Factors that increase probability
-        if (this.analytics.followClicks > 0) probability += 0.2;
-        if (document.referrer.includes('instagram.com')) probability += 0.3;
-        if (performance.now() > 60000) probability += 0.1; // User spent time on page
-        
-        return Math.min(probability, 1);
       }
       
       calculateConversionRate() {
         if (this.analytics.followClicks > 0) {
           this.analytics.conversionRate = (this.analytics.newFollowers / this.analytics.followClicks) * 100;
-        }
-      }
-      
-      simulateFollowerIncrease() {
-        // For testing purposes - simulate detecting a new follower
-        if (Math.random() > 0.6) {
-          this.handleNewFollower(1);
-        }
-      }
-      
-      notifyExternalSystems(count) {
-        // Notify webhook services
-        if (!this.webhookURL.includes('YOUR_WEBHOOK_ID')) {
-          fetch(this.webhookURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              event: 'new_follower',
-              count: count,
-              analytics: this.analytics,
-              timestamp: new Date().toISOString()
-            })
-          });
-        }
-        
-        // Send to Google Analytics (if available)
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'new_follower', {
-            event_category: 'engagement',
-            event_label: 'instagram_follow',
-            value: count
-          });
-        }
-        
-        // Send to Facebook Pixel (if available)
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'Lead', {
-            content_name: 'instagram_follow',
-            value: count
-          });
         }
       }
       
@@ -961,43 +755,17 @@
           ...data
         };
         
-        // Log to console (hidden from regular users)
         console.log(`🔍 [TRACKER] ${eventType}:`, logEntry);
         
-        // Store in localStorage for persistence
+        // Store in localStorage
         const logs = JSON.parse(localStorage.getItem('followerTrackerLogs') || '[]');
         logs.push(logEntry);
         
-        // Keep only last 100 logs
-        if (logs.length > 100) {
-          logs.splice(0, logs.length - 100);
+        if (logs.length > 50) {
+          logs.splice(0, logs.length - 50);
         }
         
         localStorage.setItem('followerTrackerLogs', JSON.stringify(logs));
-      }
-      
-      sendAnalytics(eventType, data) {
-        // Send to analytics platforms
-        this.logEvent(eventType, data);
-        
-        // Send to external analytics
-        if (typeof ga !== 'undefined') {
-          ga('send', 'event', 'FollowerTracker', eventType, JSON.stringify(data));
-        }
-      }
-      
-      pauseTracking() {
-        if (this.trackingInterval) {
-          clearInterval(this.trackingInterval);
-          this.logEvent('tracking_paused');
-        }
-      }
-      
-      resumeTracking() {
-        if (!this.trackingInterval) {
-          this.startLiveTracking();
-          this.logEvent('tracking_resumed');
-        }
       }
       
       getAnalytics() {
@@ -1006,18 +774,11 @@
           logs: JSON.parse(localStorage.getItem('followerTrackerLogs') || '[]')
         };
       }
-      
-      // Public method to check if tracking is working
-      isTracking() {
-        return this.trackingActive && this.trackingInterval !== null;
-      }
     }
     
     // Initialize hidden tracker
     const hiddenTracker = new HiddenFollowerTracker();
-    
-    // Expose tracker to console for debugging (hidden from regular users)
-    window._ht = hiddenTracker;
+    window._ht = hiddenTracker; // For console access
     
     function shuffle(array) {
       let currentIndex = array.length;
@@ -1039,6 +800,8 @@
     }
     
     function createBoxes() {
+      console.log('Creating treasure boxes...'); // Debug log
+      
       gameContainer.innerHTML = '';
       resultMessage.textContent = '';
       selectedIndex = null;
@@ -1052,18 +815,23 @@
       hiddenTracker.logEvent('game_started');
       
       const shuffledPrizes = shuffle([...prizes]);
+      
       for (let i = 0; i < shuffledPrizes.length; i++) {
         const box = document.createElement('div');
         box.className = 'box';
+        
         if (usedBoxes.includes(i)) {
           box.classList.add('disabled');
         }
+        
         box.setAttribute('tabindex', '0');
-        box.setAttribute('role', 'listitem');
+        box.setAttribute('role', 'button');
         box.setAttribute('aria-label', 'Treasure box. Click to select.');
         box.dataset.index = i;
         box.innerHTML = `<span>?</span>`;
         box.title = "Click to select this treasure box";
+        
+        // Add event listeners
         box.addEventListener('click', onBoxSelect);
         box.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -1071,18 +839,24 @@
             onBoxSelect.call(box);
           }
         });
+        
         gameContainer.appendChild(box);
         boxes.push({ el: box, prize: shuffledPrizes[i] });
         
-        // Enhanced entrance animation
+        console.log(`Box ${i} created:`, box); // Debug log
+        
+        // Entrance animation with immediate visibility
         box.style.opacity = '0';
         box.style.transform = 'translateY(60px) rotateX(30deg)';
+        
         setTimeout(() => {
           box.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
           box.style.opacity = '1';
           box.style.transform = 'translateY(0) rotateX(0deg)';
-        }, i * 120);
+        }, i * 100 + 100); // Faster animation start
       }
+      
+      console.log('Total boxes created:', boxes.length); // Debug log
       updateChancesDisplay();
     }
     
@@ -1093,21 +867,19 @@
       selectedIndex = Number(this.dataset.index);
       gameState = 'follow';
       
+      console.log('Box selected:', selectedIndex); // Debug log
+      
       // Track box selection
       hiddenTracker.logEvent('box_selected', {
         boxIndex: selectedIndex,
         prize: boxes[selectedIndex].prize
       });
       
-      // Enhanced selection animation
-      this.style.animationDelay = '0s';
-      
       boxes.forEach((box, idx) => {
         if (idx !== selectedIndex) {
           box.el.classList.add('locked');
           box.el.setAttribute('aria-pressed', 'false');
           box.el.tabIndex = -1;
-          // Enhanced staggered shake animation
           setTimeout(() => {
             box.el.style.animation = 'explosiveShake 1s ease-in-out';
           }, idx * 90);
@@ -1117,8 +889,6 @@
           box.el.setAttribute('aria-pressed', 'true');
           box.el.tabIndex = 0;
           box.el.focus();
-          
-          // Enhanced particle burst effect
           createEpicParticleBurst(box.el);
         }
       });
@@ -1131,14 +901,13 @@
       }
     }
     
-    // Enhanced particle burst effect
     function createEpicParticleBurst(box) {
       for (let i = 0; i < 35; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
         particle.style.width = '8px';
         particle.style.height = '8px';
-        particle.style.background = `hsl(${Math.random() * 60 + 30}, 100%, 65%)`; // Golden colors
+        particle.style.background = `hsl(${Math.random() * 60 + 30}, 100%, 65%)`;
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '1500';
@@ -1150,7 +919,6 @@
         
         document.body.appendChild(particle);
         
-        // Enhanced particle animation
         const angle = (i / 35) * Math.PI * 2;
         const distance = 90 + Math.random() * 90;
         const finalX = boxRect.left + boxRect.width/2 + Math.cos(angle) * distance;
@@ -1182,23 +950,14 @@
       resultMessage.textContent = 'Click "Reveal All" to see your treasure! 🎁✨';
     }
     
-    // Direct Instagram redirect with tracking
     followFirstBtn.addEventListener('click', () => {
-      // Track follow button click
-      hiddenTracker.logEvent('follow_button_clicked', {
-        timestamp: new Date().toISOString()
-      });
-      
-      // Direct redirect to Instagram
+      hiddenTracker.logEvent('follow_button_clicked');
       window.open('https://www.instagram.com/bandeali_enterprises', '_blank');
       
-      // Mark as followed and show reveal button after short delay
       setTimeout(() => {
         hasFollowed = true;
         showRevealButton();
         resultMessage.textContent = '🎉 Thank you for following! Now reveal your treasure!';
-        
-        // Track follow completion
         hiddenTracker.logEvent('follow_completed');
       }, 1200);
     });
@@ -1210,12 +969,10 @@
     });
     
     function revealBoxes() {
-      // Track reveal
       hiddenTracker.logEvent('boxes_revealed', {
         selectedPrize: boxes[selectedIndex].prize
       });
       
-      // Epic reveal sequence
       boxes.forEach((box, idx) => {
         setTimeout(() => {
           box.el.classList.remove('locked', 'active');
@@ -1239,13 +996,12 @@
             textDiv.textContent = box.prize.text;
             box.el.appendChild(textDiv);
           }
-        }, idx * 220); // Enhanced staggered reveal
+        }, idx * 220);
       });
       
       spinButton.style.display = 'none';
       gameState = 'finished';
       
-      // Show result popup after all boxes are revealed
       setTimeout(() => {
         showResultPopup(boxes[selectedIndex].prize);
       }, boxes.length * 220 + 900);
@@ -1254,14 +1010,12 @@
     function showResultPopup(prize) {
       usedBoxes.push(selectedIndex);
       
-      // Track result
       hiddenTracker.logEvent('result_shown', {
         prize: prize,
         isWinner: prize.win
       });
       
       if (prize.win) {
-        // Winner popup
         popup.innerHTML = `
           <img id="popup-img" src="treasure.png" alt="Treasure Box" />
           <div class="popup-text">🎉 CONGRATULATIONS! 🎉<br><br>${prize.text}</div>
@@ -1269,7 +1023,6 @@
         `;
         startFireworks();
       } else {
-        // Better luck popup
         chancesLeft--;
         if (chancesLeft > 0) {
           popup.innerHTML = `
@@ -1286,7 +1039,6 @@
       
       popup.style.display = 'flex';
       
-      // Event listeners for popup buttons
       const claimBtn = document.getElementById('claim-btn');
       const tryAgainBtn = document.getElementById('try-again-btn');
       
@@ -1304,11 +1056,9 @@
           hiddenTracker.logEvent('try_again_clicked');
           popup.style.display = 'none';
           if (chancesLeft > 0) {
-            // Continue with remaining chances
             createBoxes();
             document.getElementById('instructions').textContent = 'Choose another treasure box! 🎯';
           } else {
-            // Reset entire game
             resetGame();
           }
         });
@@ -1330,7 +1080,7 @@
       document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
     }
     
-    // Enhanced Fireworks Animation
+    // Fireworks code (same as before)
     let fireworks = [];
     let fireworksAnimation;
     
@@ -1438,21 +1188,24 @@
       fireworksCanvas.height = window.innerHeight;
     });
     
-    // Track page views
-    hiddenTracker.analytics.totalViews++;
-    
-    // Initialize everything when page loads
+    // Initialize game
     window.onload = () => {
+      console.log('Initializing treasure box game...'); // Debug log
       createBoxes();
       document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
       
-      // Final tracker initialization
       hiddenTracker.logEvent('page_loaded', {
-        userAgent: navigator.userAgent,
-        referrer: document.referrer,
         timestamp: new Date().toISOString()
       });
     };
+    
+    // Force create boxes if onload doesn't work
+    setTimeout(() => {
+      if (boxes.length === 0) {
+        console.log('Force creating boxes...'); // Debug log
+        createBoxes();
+      }
+    }, 1000);
   </script>
 </body>
 </html>
