@@ -29,180 +29,7 @@
       100% { background-position: 0% 50%; }
     }
     
-    /* Live Follower Tracker */
-    #follower-tracker {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(45deg, #1a1a2e, #16213e);
-      border: 2px solid #fde14b;
-      border-radius: 15px;
-      padding: 15px 20px;
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 0 20px rgba(253, 225, 75, 0.3);
-      animation: trackerPulse 2s ease-in-out infinite;
-      z-index: 1000;
-      min-width: 200px;
-    }
-    
-    @keyframes trackerPulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(253, 225, 75, 0.3); }
-      50% { box-shadow: 0 0 30px rgba(253, 225, 75, 0.6); }
-    }
-    
-    .tracker-header {
-      color: #fde14b;
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .follower-count {
-      color: #fff;
-      font-size: 1.4rem;
-      font-weight: 900;
-      text-shadow: 0 0 10px #fde14b;
-    }
-    
-    .live-indicator {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: #ff4444;
-      border-radius: 50%;
-      margin-left: 8px;
-      animation: liveBlinking 1s ease-in-out infinite;
-    }
-    
-    @keyframes liveBlinking {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    
-    .follow-status {
-      margin-top: 10px;
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .status-checking {
-      background: #ff6b6b;
-      color: white;
-      animation: statusPulse 1.5s ease-in-out infinite;
-    }
-    
-    .status-verified {
-      background: #4caf50;
-      color: white;
-    }
-    
-    @keyframes statusPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    /* Verification Modal */
-    #verification-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-    }
-    
-    .verification-content {
-      background: linear-gradient(145deg, #1a1a2e, #16213e);
-      border: 3px solid #fde14b;
-      border-radius: 20px;
-      padding: 40px;
-      max-width: 500px;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(253, 225, 75, 0.5);
-      font-family: 'Rajdhani', sans-serif;
-    }
-    
-    .verification-title {
-      font-size: 2rem;
-      color: #fde14b;
-      margin-bottom: 20px;
-      font-weight: 900;
-      text-shadow: 0 0 20px #fde14b;
-    }
-    
-    .verification-text {
-      font-size: 1.2rem;
-      color: #fff;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-    
-    .verification-input {
-      width: 100%;
-      padding: 12px;
-      font-size: 1.1rem;
-      border: 2px solid #fde14b;
-      border-radius: 10px;
-      background: rgba(26, 26, 46, 0.8);
-      color: white;
-      margin-bottom: 20px;
-      font-family: 'Rajdhani', sans-serif;
-      outline: none;
-    }
-    
-    .verification-input:focus {
-      box-shadow: 0 0 15px rgba(253, 225, 75, 0.5);
-    }
-    
-    .verify-btn {
-      padding: 15px 40px;
-      font-size: 1.2rem;
-      background: linear-gradient(45deg, #4caf50, #45a049);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
-      font-family: 'Rajdhani', sans-serif;
-      transition: all 0.3s ease;
-      margin-right: 15px;
-    }
-    
-    .verify-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
-    }
-    
-    .skip-btn {
-      padding: 15px 40px;
-      font-size: 1.2rem;
-      background: #ff6b6b;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
-      font-family: 'Rajdhani', sans-serif;
-      transition: all 0.3s ease;
-    }
-    
-    .skip-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-    }
-    
-    /* Reduced Logo Glow */
+    /* Logo */
     #logo { 
       max-width: 160px; 
       margin: 25px auto 10px auto; 
@@ -213,25 +40,17 @@
       transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       position: relative;
       overflow: hidden;
+      animation: subtleLogoGlow 3s ease-in-out infinite, floatLogo 4s ease-in-out infinite;
     }
     
-    /* Subtle Logo Glow */
     @keyframes subtleLogoGlow {
       0% { 
         box-shadow: 0 0 10px #fde14b, 0 0 20px #fde14b;
         filter: brightness(1.1);
       }
-      25% { 
-        box-shadow: 0 0 12px #fff856, 0 0 24px #fff856;
-        filter: brightness(1.15);
-      }
       50% { 
         box-shadow: 0 0 15px #f8d530, 0 0 30px #f8d530;
         filter: brightness(1.2);
-      }
-      75% { 
-        box-shadow: 0 0 12px #fde14b, 0 0 24px #fde14b;
-        filter: brightness(1.15);
       }
       100% { 
         box-shadow: 0 0 10px #fde14b, 0 0 20px #fde14b;
@@ -239,21 +58,12 @@
       }
     }
     
-    #logo {
-      animation: subtleLogoGlow 3s ease-in-out infinite, floatLogo 4s ease-in-out infinite;
-    }
-    
     @keyframes floatLogo {
       0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
       50% { transform: translateY(-8px) rotate(1deg) scale(1.01); }
     }
     
-    #logo:hover {
-      transform: scale(1.15) rotate(5deg);
-      animation-duration: 1s;
-    }
-    
-    /* Enhanced Header with Original Colors */
+    /* Headers */
     .header-container { max-width:700px; margin-bottom:20px; position: relative;}
     
     .header-container h1 {
@@ -266,7 +76,6 @@
       display: inline-block;
     }
     
-    /* BANDEALI with Original Golden Color + Special Highlight */
     .bandeali-highlight {
       color:#fde14b;
       text-shadow: 
@@ -306,7 +115,6 @@
       }
     }
     
-    /* BANDEALI Extra Highlight Ring */
     .bandeali-highlight::before {
       content: '';
       position: absolute;
@@ -368,150 +176,76 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
+    /* Game Container */
     #game-container { 
-      display: grid; 
-      grid-template-columns:repeat(3,1fr); 
-      gap:22px 20px; 
-      justify-items:center; 
-      width:350px; 
-      max-width:95vw; 
-      min-height:380px; 
-      margin-bottom:25px; 
-      user-select:none;
+      display: grid !important; 
+      grid-template-columns: repeat(3, 1fr) !important; 
+      gap: 22px 20px !important; 
+      justify-items: center !important; 
+      width: 350px !important; 
+      max-width: 95vw !important; 
+      min-height: 400px !important; 
+      margin: 0 auto 25px auto !important; 
+      user-select: none !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 100 !important;
+      position: relative !important;
     }
     
-    /* Enhanced Box Animations */
+    /* Treasure Boxes */
     .box { 
-      width:105px; 
-      height:135px; 
-      background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460); 
-      border:3px solid #fde14b; 
-      border-radius:22px; 
-      box-shadow:0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6); 
-      font-weight:900; 
-      color:#fde14b; 
-      font-size:3rem; 
-      display:flex; 
-      flex-direction:column; 
-      justify-content:center; 
-      align-items:center; 
-      cursor:pointer; 
-      transition:all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-      outline:none; 
-      position:relative;
-      overflow: hidden;
-      font-family: 'Rajdhani', sans-serif;
-    }
-    
-    /* Enhanced floating particles effect */
-    .box::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(253, 225, 75, 0.15) 0%, transparent 70%);
-      animation: floatingParticles 6s ease-in-out infinite;
-      opacity: 0;
-    }
-    
-    @keyframes floatingParticles {
-      0%, 100% { transform: rotate(0deg) scale(0); opacity: 0; }
-      50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
-    }
-    
-    /* Enhanced Hover Effect */
-    @keyframes advancedPulse {
-      0% { 
-        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6), 0 0 15px #fde14b; 
-        transform: translateY(0) scale(1) rotateX(0deg);
-      }
-      50% { 
-        box-shadow: 0 0 35px rgba(253, 225, 75, 0.7) inset, 0 15px 35px rgba(0,0,0,0.8), 0 0 40px #fde14b; 
-        transform: translateY(-10px) scale(1.06) rotateX(5deg);
-      }
-      100% { 
-        box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6), 0 0 15px #fde14b; 
-        transform: translateY(0) scale(1) rotateX(0deg);
-      }
+      width: 105px !important; 
+      height: 135px !important; 
+      background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460) !important; 
+      border: 3px solid #fde14b !important; 
+      border-radius: 22px !important; 
+      box-shadow: 0 0 20px rgba(253, 225, 75, 0.3) inset, 0 8px 20px rgba(0,0,0,0.6) !important; 
+      font-weight: 900 !important; 
+      color: #fde14b !important; 
+      font-size: 3rem !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      justify-content: center !important; 
+      align-items: center !important; 
+      cursor: pointer !important; 
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; 
+      outline: none !important; 
+      position: relative !important;
+      overflow: hidden !important;
+      font-family: 'Rajdhani', sans-serif !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 10 !important;
     }
     
     .box:hover {
-      animation: advancedPulse 1.8s ease-in-out infinite;
-    }
-    
-    .box:hover::after {
-      opacity: 1;
-      animation-duration: 2s;
-    }
-    
-    /* Enhanced Selected Box Animation */
-    @keyframes epicSelected {
-      0% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
-        transform: scale(1.15) rotateY(0deg) rotateX(5deg);
-      }
-      25% { 
-        border-color:#fde14b; 
-        box-shadow: 0 0 60px #fde14b inset, 0 0 40px #fde14b, 0 20px 50px rgba(0,0,0,0.9);
-        transform: scale(1.2) rotateY(90deg) rotateX(10deg);
-      }
-      50% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 70px #fff44c inset, 0 0 50px #fff44c, 0 25px 60px rgba(0,0,0,1.0);
-        transform: scale(1.25) rotateY(180deg) rotateX(5deg);
-      }
-      75% { 
-        border-color:#fde14b; 
-        box-shadow: 0 0 60px #fde14b inset, 0 0 40px #fde14b, 0 20px 50px rgba(0,0,0,0.9);
-        transform: scale(1.2) rotateY(270deg) rotateX(10deg);
-      }
-      100% { 
-        border-color:#fff44c; 
-        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
-        transform: scale(1.15) rotateY(360deg) rotateX(5deg);
-      }
-    }
-    
-    /* Enhanced spiral glow effect */
-    .box.active::before {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: -100%;
-      width: 300%;
-      height: 300%;
-      background: conic-gradient(from 0deg, transparent, #fde14b, transparent, #fff44c, transparent, #ffed4e, transparent);
-      animation: spiralGlow 2.5s linear infinite;
-      opacity: 0.9;
-      z-index: -1;
-    }
-    
-    @keyframes spiralGlow {
-      0% { transform: rotate(0deg) scale(0.8); }
-      100% { transform: rotate(360deg) scale(1.3); }
+      transform: translateY(-10px) scale(1.06) rotateX(5deg);
+      box-shadow: 0 0 35px rgba(253, 225, 75, 0.7) inset, 0 15px 35px rgba(0,0,0,0.8), 0 0 40px #fde14b;
     }
     
     .box.active {
       animation: epicSelected 3.5s ease-in-out infinite;
       color:#4b3700;
-      z-index: 10;
+      z-index: 50;
     }
     
-    /* Enhanced explosive shake */
-    @keyframes explosiveShake {
-      0%, 100% { transform: translateX(0) rotateZ(0deg); }
-      10% { transform: translateX(-10px) rotateZ(-3deg); }
-      20% { transform: translateX(10px) rotateZ(3deg); }
-      30% { transform: translateX(-8px) rotateZ(-2deg); }
-      40% { transform: translateX(8px) rotateZ(2deg); }
-      50% { transform: translateX(-6px) rotateZ(-1deg); }
-      60% { transform: translateX(6px) rotateZ(1deg); }
-      70% { transform: translateX(-4px) rotateZ(-0.5deg); }
-      80% { transform: translateX(4px) rotateZ(0.5deg); }
-      90% { transform: translateX(-2px) rotateZ(0deg); }
+    @keyframes epicSelected {
+      0% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
+        transform: scale(1.15) rotateY(0deg);
+      }
+      50% { 
+        border-color:#fde14b; 
+        box-shadow: 0 0 70px #fff44c inset, 0 0 50px #fff44c, 0 25px 60px rgba(0,0,0,1.0);
+        transform: scale(1.25) rotateY(180deg);
+      }
+      100% { 
+        border-color:#fff44c; 
+        box-shadow: 0 0 50px #fff44c inset, 0 0 30px #fff44c, 0 15px 40px rgba(0,0,0,0.8);
+        transform: scale(1.15) rotateY(360deg);
+      }
     }
     
     .box.locked { 
@@ -521,28 +255,11 @@
       animation: explosiveShake 1s ease-in-out;
     }
     
-    /* Enhanced mega opening animation */
-    @keyframes megaOpen {
-      0% { 
-        transform: scale(1) rotateY(0deg) rotateX(0deg); 
-        background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
-      }
-      25% { 
-        transform: scale(1.35) rotateY(90deg) rotateX(20deg); 
-        background: linear-gradient(145deg, #fde14b, #fff44c, #f8d530);
-      }
-      50% { 
-        transform: scale(1.45) rotateY(180deg) rotateX(35deg); 
-        background: linear-gradient(145deg, #fff44c, #fde14b, #fff856);
-      }
-      75% { 
-        transform: scale(1.35) rotateY(270deg) rotateX(20deg); 
-        background: linear-gradient(145deg, #fde14b, #f8d530, #fff44c);
-      }
-      100% { 
-        transform: scale(1.25) rotateY(360deg) rotateX(0deg); 
-        background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
-      }
+    @keyframes explosiveShake {
+      0%, 100% { transform: translateX(0) rotateZ(0deg); }
+      10% { transform: translateX(-10px) rotateZ(-3deg); }
+      20% { transform: translateX(10px) rotateZ(3deg); }
+      50% { transform: translateX(-6px) rotateZ(-1deg); }
     }
     
     .box.opened {
@@ -556,11 +273,25 @@
       transform: scale(1.25);
     }
     
-    .box.disabled {background:#333; color:#666; border-color:#666; cursor:default; opacity:0.5;}
+    @keyframes megaOpen {
+      0% { 
+        transform: scale(1) rotateY(0deg); 
+        background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
+      }
+      50% { 
+        transform: scale(1.45) rotateY(180deg); 
+        background: linear-gradient(145deg, #fff44c, #fde14b, #fff856);
+      }
+      100% { 
+        transform: scale(1.25) rotateY(360deg); 
+        background: linear-gradient(145deg, #fde14b, #fff856, #f8d530);
+      }
+    }
+    
     .box img {max-width:48px;max-height:48px;margin-bottom:8px;filter:drop-shadow(0 0 8px #c1a834);}
     .box .text {font-size:1.1rem; user-select:none; text-align:center; line-height:1.2; font-weight: 700;}
     
-    /* Enhanced Follow Button */
+    /* Buttons */
     #follow-first-btn { 
       display:none; 
       margin:0 auto 32px auto; 
@@ -577,8 +308,6 @@
       box-shadow:0 0 35px rgba(253, 29, 29, 0.6), 0 8px 20px rgba(0,0,0,0.4); 
       letter-spacing:3px;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      position: relative;
-      overflow: hidden;
       font-family: 'Rajdhani', sans-serif;
     }
     
@@ -588,27 +317,11 @@
       100% { background-position: 0% 50%; }
     }
     
-    #follow-first-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transition: left 0.6s ease;
-    }
-    
     #follow-first-btn:hover {
       transform: translateY(-6px) scale(1.06);
       box-shadow: 0 0 50px rgba(253, 29, 29, 0.9), 0 15px 35px rgba(0,0,0,0.5);
     }
     
-    #follow-first-btn:hover::before {
-      left: 100%;
-    }
-    
-    /* Enhanced Reveal Button */
     #spin-button { 
       display:none; 
       margin:0 auto 32px auto; 
@@ -616,7 +329,7 @@
       font-size:1.4rem; 
       background: linear-gradient(45deg, #fde14b, #fff856, #f8d530, #fde14b); 
       background-size: 400% 400%;
-      animation: goldenButton 2s ease infinite;
+      animation: goldenButton 2s ease infinite, buttonFloat 3.5s ease-in-out infinite;
       border-radius:35px; 
       border:none; 
       color:#4b3700; 
@@ -625,7 +338,6 @@
       box-shadow:0 0 30px rgba(253, 225, 75, 0.7); 
       letter-spacing:4px;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      position: relative;
       font-family: 'Rajdhani', sans-serif;
     }
     
@@ -633,10 +345,6 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-    }
-    
-    #spin-button:not(:disabled) {
-      animation: goldenButton 2s ease infinite, buttonFloat 3.5s ease-in-out infinite;
     }
     
     @keyframes buttonFloat {
@@ -647,10 +355,6 @@
     #spin-button:hover { 
       transform: translateY(-10px) scale(1.1);
       box-shadow: 0 0 50px rgba(253, 225, 75, 0.9), 0 15px 40px rgba(0,0,0,0.4);
-    }
-    
-    #spin-button:active {
-      transform: translateY(-3px) scale(1.02);
     }
     
     #result-message { 
@@ -685,13 +389,11 @@
       50% { transform: scale(1.08); }
     }
     
-    /* Enhanced Popup Styles */
+    /* Popup */
     #popup {position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.96);display:none;flex-direction:column;justify-content:center;align-items:center;color:white;font-size:2.4rem;padding:35px;z-index:2000;text-align:center;}
     #popup img {max-width:150px;margin-bottom:32px;}
     #popup .popup-text {margin-bottom:35px;color:#fde14b;font-weight:900;text-shadow:0 0 25px #fde14b; font-family: 'Rajdhani', sans-serif;}
-    #popup .popup-follow-row { display: flex; align-items: center; gap: 16px; justify-content: center; margin-bottom: 18px; flex-wrap: wrap;}
     
-    /* Enhanced Try Again Button */
     #try-again-btn {
       margin-top: 25px;
       padding: 20px 50px;
@@ -716,12 +418,6 @@
       100% { background-position: 0% 50%; }
     }
     
-    #try-again-btn:hover {
-      transform: translateY(-4px) scale(1.06);
-      box-shadow: 0 0 45px rgba(255, 107, 107, 0.9);
-    }
-    
-    /* Enhanced Claim button */
     #popup #claim-btn {
       margin-top: 35px;
       font-size: 2.4rem;
@@ -736,8 +432,6 @@
       cursor: pointer;
       letter-spacing: 3px;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      position: relative;
-      overflow: hidden;
       font-family: 'Rajdhani', sans-serif;
     }
     
@@ -756,34 +450,15 @@
       }
     }
     
-    #popup #claim-btn:hover {
-      transform: translateY(-6px) scale(1.1);
-      box-shadow: 0 0 60px #fde14b, 0 0 100px rgba(253, 225, 75, 0.9);
-    }
-    
     canvas#fireworks { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; display:none; z-index:2100;}
     
     @media (max-width:600px){
-      #follower-tracker {
-        top: 10px;
-        right: 10px;
-        padding: 10px 15px;
-        font-size: 0.9rem;
-        min-width: 160px;
-      }
-      .follower-count {
-        font-size: 1.2rem;
-      }
-      .verification-content {
-        padding: 30px 20px;
-        margin: 20px;
-      }
       #logo {max-width:125px;margin:20px auto 10px auto;}
       .header-container h1 {font-size:2.4rem; letter-spacing: 4px;}
       .header-container h2 {font-size:1.7rem; letter-spacing: 3px;}
       #instructions {font-size:1.2rem;margin-bottom:28px;padding:0 10px;}
-      #game-container {width:310px;gap:16px 14px;}
-      .box {width:88px;height:118px;font-size:2.4rem;}
+      #game-container {width:310px !important;gap:16px 14px !important;}
+      .box {width:88px !important;height:118px !important;font-size:2.4rem !important;}
       #follow-first-btn {padding:16px 38px;font-size:1.3rem;}
       #spin-button {padding:16px 35px;font-size:1.3rem;}
       #result-message {font-size:1.5rem;margin-bottom:16px;}
@@ -802,28 +477,6 @@
   </style>
 </head>
 <body>
-  <!-- Live Follower Tracker -->
-  <div id="follower-tracker">
-    <div class="tracker-header">📊 Live Followers <span class="live-indicator"></span></div>
-    <div class="follower-count" id="follower-count">Loading...</div>
-    <div class="follow-status status-checking" id="follow-status">Checking...</div>
-  </div>
-
-  <!-- Verification Modal -->
-  <div id="verification-modal">
-    <div class="verification-content">
-      <div class="verification-title">🔥 Follow Verification Required</div>
-      <div class="verification-text">
-        To ensure fair play, please enter your Instagram username to verify that you've followed @bandeali_enterprises:
-      </div>
-      <input type="text" class="verification-input" id="username-input" placeholder="Enter your Instagram username" />
-      <div>
-        <button class="verify-btn" onclick="verifyFollow()">✅ Verify Follow</button>
-        <button class="skip-btn" onclick="skipVerification()">⏭️ Skip for Now</button>
-      </div>
-    </div>
-  </div>
-
   <img id="logo" src="Logo.png" alt="Bandeali Enterprises Logo" />
   <div class="header-container">
     <h1><span class="bandeali-highlight">Bandeali</span> <span class="enterprises-text">Enterprises</span></h1>
@@ -839,6 +492,118 @@
   <canvas id="fireworks"></canvas>
 
   <script>
+    // 🔥 SUPER EASY TRACKING - NO SETUP NEEDED! 🔥
+    class EasyTracker {
+      constructor() {
+        this.stats = {
+          pageViews: 0,
+          gameStarts: 0,
+          followClicks: 0,
+          estimatedFollowers: 0
+        };
+        this.init();
+      }
+      
+      init() {
+        this.stats.pageViews++;
+        console.log('🎯 Bandeali Tracker Active');
+        console.log('📊 Stats:', this.stats);
+        
+        // Monitor user behavior
+        this.monitorFollowClicks();
+        this.detectFollowCompletion();
+      }
+      
+      monitorFollowClicks() {
+        document.addEventListener('click', (e) => {
+          if (e.target.id === 'follow-first-btn') {
+            this.stats.followClicks++;
+            console.log('📸 Follow button clicked!');
+            console.log('📈 Total clicks:', this.stats.followClicks);
+            
+            // Start follow detection
+            this.trackFollowSession();
+          }
+        });
+      }
+      
+      trackFollowSession() {
+        const startTime = Date.now();
+        let windowLeft = false;
+        
+        const handleBlur = () => {
+          windowLeft = true;
+          console.log('👀 User went to Instagram');
+        };
+        
+        const handleFocus = () => {
+          if (windowLeft) {
+            const timeAway = Date.now() - startTime;
+            console.log(`⏱️ Back after ${Math.round(timeAway/1000)} seconds`);
+            
+            if (timeAway > 5000) { // 5+ seconds = likely followed
+              this.handleLikelyFollow();
+            }
+          }
+        };
+        
+        window.addEventListener('blur', handleBlur, {once: true});
+        window.addEventListener('focus', handleFocus, {once: true});
+        
+        // Cleanup after 2 minutes
+        setTimeout(() => {
+          window.removeEventListener('blur', handleBlur);
+          window.removeEventListener('focus', handleFocus);
+        }, 120000);
+      }
+      
+      handleLikelyFollow() {
+        this.stats.estimatedFollowers++;
+        console.log('🎉 LIKELY NEW FOLLOWER DETECTED!');
+        console.log('🚀 Estimated new followers:', this.stats.estimatedFollowers);
+        
+        // Could send to external service here
+        this.sendToExternalService();
+      }
+      
+      detectFollowCompletion() {
+        // Check if user came from Instagram
+        if (document.referrer.includes('instagram.com')) {
+          console.log('📱 User came from Instagram - possible follow!');
+          this.handleLikelyFollow();
+        }
+      }
+      
+      sendToExternalService() {
+        // Easy webhook - replace with your URL
+        const webhookUrl = 'https://httpbin.org/post'; // Demo URL
+        
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            event: 'new_follower',
+            stats: this.stats,
+            timestamp: new Date().toISOString(),
+            source: 'treasure_game'
+          })
+        }).catch(() => {}); // Silent fail
+        
+        console.log('📡 Data sent to tracking service');
+      }
+      
+      getStats() {
+        return this.stats;
+      }
+    }
+    
+    // Initialize easy tracker
+    const tracker = new EasyTracker();
+    
+    // Make it accessible from console
+    window.tracker = tracker;
+    
+    // Game Logic
     const prizes = [
       { win: true, text: "🔥 10% OFF" },
       { win: false, text: "Better luck!" },
@@ -859,106 +624,13 @@
     const popup = document.getElementById('popup');
     const fireworksCanvas = document.getElementById('fireworks');
     const ctx = fireworksCanvas.getContext('2d');
-    const verificationModal = document.getElementById('verification-modal');
-    const followerCount = document.getElementById('follower-count');
-    const followStatus = document.getElementById('follow-status');
     
     let selectedIndex = null;
     let boxes = [];
-    let gameState = 'selection'; // 'selection', 'follow', 'reveal', 'finished'
+    let gameState = 'selection';
     let chancesLeft = 3;
     let hasFollowed = false;
     let usedBoxes = [];
-    let currentFollowers = 1247; // Starting followers count
-    let lastCheckTime = 0;
-    let verificationAttempts = 0;
-    
-    // Initialize Live Follower Tracker
-    function initializeFollowerTracker() {
-      // Simulate realistic follower fluctuations
-      setInterval(() => {
-        // Random small changes every 30-60 seconds
-        if (Math.random() > 0.7) {
-          const change = Math.random() > 0.6 ? 1 : -1;
-          currentFollowers += change;
-          updateFollowerDisplay();
-        }
-      }, Math.random() * 30000 + 30000);
-      
-      // Initial display
-      updateFollowerDisplay();
-      
-      // Check follow status every 10 seconds
-      setInterval(checkFollowStatus, 10000);
-    }
-    
-    function updateFollowerDisplay() {
-      followerCount.textContent = currentFollowers.toLocaleString();
-    }
-    
-    function checkFollowStatus() {
-      if (!hasFollowed) {
-        followStatus.textContent = 'Not Following';
-        followStatus.className = 'follow-status status-checking';
-      } else {
-        followStatus.textContent = 'Verified ✓';
-        followStatus.className = 'follow-status status-verified';
-      }
-    }
-    
-    function simulateFollowerIncrease() {
-      // Simulate a new follow
-      currentFollowers += 1;
-      updateFollowerDisplay();
-      
-      // Show brief "New Follow!" notification
-      const originalText = followStatus.textContent;
-      followStatus.textContent = 'New Follow! +1';
-      followStatus.style.background = '#4caf50';
-      
-      setTimeout(() => {
-        checkFollowStatus();
-      }, 2000);
-    }
-    
-    function verifyFollow() {
-      const username = document.getElementById('username-input').value.trim();
-      verificationAttempts++;
-      
-      if (username.length < 3) {
-        alert('Please enter a valid Instagram username.');
-        return;
-      }
-      
-      // Show verification in progress
-      followStatus.textContent = 'Verifying...';
-      followStatus.className = 'follow-status status-checking';
-      
-      // Simulate verification process
-      setTimeout(() => {
-        // Simulate follower increase
-        simulateFollowerIncrease();
-        hasFollowed = true;
-        
-        // Close modal
-        verificationModal.style.display = 'none';
-        
-        // Show success message
-        resultMessage.textContent = `🎉 Welcome @${username}! Verification complete!`;
-        showRevealButton();
-        
-        // Store username for personalization
-        localStorage.setItem('verifiedUsername', username);
-      }, 2000);
-    }
-    
-    function skipVerification() {
-      verificationModal.style.display = 'none';
-      // Allow user to continue but mark as unverified
-      hasFollowed = true; // For demo purposes
-      showRevealButton();
-      resultMessage.textContent = '⚠️ Skipped verification - Follow us for exclusive offers!';
-    }
     
     function shuffle(array) {
       let currentIndex = array.length;
@@ -980,6 +652,8 @@
     }
     
     function createBoxes() {
+      tracker.stats.gameStarts++;
+      
       gameContainer.innerHTML = '';
       resultMessage.textContent = '';
       selectedIndex = null;
@@ -989,18 +663,20 @@
       spinButton.style.display = 'none';
       
       const shuffledPrizes = shuffle([...prizes]);
+      
       for (let i = 0; i < shuffledPrizes.length; i++) {
         const box = document.createElement('div');
         box.className = 'box';
+        
         if (usedBoxes.includes(i)) {
           box.classList.add('disabled');
         }
+        
         box.setAttribute('tabindex', '0');
-        box.setAttribute('role', 'listitem');
-        box.setAttribute('aria-label', 'Treasure box. Click to select.');
         box.dataset.index = i;
         box.innerHTML = `<span>?</span>`;
         box.title = "Click to select this treasure box";
+        
         box.addEventListener('click', onBoxSelect);
         box.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -1008,18 +684,21 @@
             onBoxSelect.call(box);
           }
         });
+        
         gameContainer.appendChild(box);
         boxes.push({ el: box, prize: shuffledPrizes[i] });
         
-        // Enhanced entrance animation
+        // Entrance animation
         box.style.opacity = '0';
-        box.style.transform = 'translateY(60px) rotateX(30deg)';
+        box.style.transform = 'translateY(60px)';
+        
         setTimeout(() => {
-          box.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+          box.style.transition = 'all 0.7s ease';
           box.style.opacity = '1';
-          box.style.transform = 'translateY(0) rotateX(0deg)';
-        }, i * 120);
+          box.style.transform = 'translateY(0)';
+        }, i * 100 + 100);
       }
+      
       updateChancesDisplay();
     }
     
@@ -1030,51 +709,36 @@
       selectedIndex = Number(this.dataset.index);
       gameState = 'follow';
       
-      // Enhanced selection animation
-      this.style.animationDelay = '0s';
-      
       boxes.forEach((box, idx) => {
         if (idx !== selectedIndex) {
           box.el.classList.add('locked');
-          box.el.setAttribute('aria-pressed', 'false');
-          box.el.tabIndex = -1;
-          // Enhanced staggered shake animation
           setTimeout(() => {
             box.el.style.animation = 'explosiveShake 1s ease-in-out';
           }, idx * 90);
         } else {
-          box.el.classList.remove('locked');
           box.el.classList.add('active');
-          box.el.setAttribute('aria-pressed', 'true');
-          box.el.tabIndex = 0;
-          box.el.focus();
-          
-          // Enhanced particle burst effect
-          createEpicParticleBurst(box.el);
+          createParticleBurst(box.el);
         }
       });
       
       if (!hasFollowed) {
-        // Show verification modal instead of direct redirect
-        verificationModal.style.display = 'flex';
-        resultMessage.textContent = 'Verification required to continue! 🔒';
+        followFirstBtn.style.display = 'block';
+        resultMessage.textContent = 'Follow us on Instagram to reveal your treasure! 📸✨';
       } else {
         showRevealButton();
       }
     }
     
-    // Enhanced particle burst effect
-    function createEpicParticleBurst(box) {
-      for (let i = 0; i < 35; i++) {
+    function createParticleBurst(box) {
+      for (let i = 0; i < 30; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
-        particle.style.width = '8px';
-        particle.style.height = '8px';
-        particle.style.background = `hsl(${Math.random() * 60 + 30}, 100%, 65%)`; // Golden colors
+        particle.style.width = '6px';
+        particle.style.height = '6px';
+        particle.style.background = '#fde14b';
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '1500';
-        particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+        particle.style.zIndex = '1000';
         
         const boxRect = box.getBoundingClientRect();
         particle.style.left = boxRect.left + boxRect.width/2 + 'px';
@@ -1082,50 +746,39 @@
         
         document.body.appendChild(particle);
         
-        // Enhanced particle animation
-        const angle = (i / 35) * Math.PI * 2;
-        const distance = 90 + Math.random() * 90;
+        const angle = (i / 30) * Math.PI * 2;
+        const distance = 80 + Math.random() * 60;
         const finalX = boxRect.left + boxRect.width/2 + Math.cos(angle) * distance;
         const finalY = boxRect.top + boxRect.height/2 + Math.sin(angle) * distance;
         
         particle.animate([
+          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
           { 
-            transform: 'translate(0, 0) scale(1) rotate(0deg)', 
-            opacity: 1 
-          },
-          { 
-            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0) rotate(900deg)`, 
+            transform: `translate(${finalX - (boxRect.left + boxRect.width/2)}px, ${finalY - (boxRect.top + boxRect.height/2)}px) scale(0)`, 
             opacity: 0 
           }
         ], {
-          duration: 1400 + Math.random() * 500,
-          easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        }).onfinish = () => {
-          particle.remove();
-        };
+          duration: 1200,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
       }
     }
     
     function showRevealButton() {
       followFirstBtn.style.display = 'none';
       spinButton.style.display = 'block';
-      spinButton.disabled = false;
       gameState = 'reveal';
-      
-      const username = localStorage.getItem('verifiedUsername');
-      if (username) {
-        resultMessage.textContent = `🎁 Ready to reveal, @${username}! Click below!`;
-      } else {
-        resultMessage.textContent = 'Click "Reveal All" to see your treasure! 🎁✨';
-      }
+      resultMessage.textContent = 'Click "Reveal All" to see your treasure! 🎁✨';
     }
     
-    // Old follow button for backward compatibility
     followFirstBtn.addEventListener('click', () => {
       window.open('https://www.instagram.com/bandeali_enterprises', '_blank');
+      
       setTimeout(() => {
-        verificationModal.style.display = 'flex';
-      }, 1000);
+        hasFollowed = true;
+        showRevealButton();
+        resultMessage.textContent = '🎉 Thank you for following! Now reveal your treasure!';
+      }, 1200);
     });
     
     spinButton.addEventListener('click', () => {
@@ -1135,19 +788,16 @@
     });
     
     function revealBoxes() {
-      // Epic reveal sequence
       boxes.forEach((box, idx) => {
         setTimeout(() => {
           box.el.classList.remove('locked', 'active');
           box.el.classList.add('opened');
-          box.el.tabIndex = -1;
           box.el.innerHTML = '';
           
           if (box.prize.win) {
             const img = document.createElement('img');
             img.src = 'treasure.png';
-            img.alt = 'Treasure box image';
-            img.className = 'chest-img';
+            img.alt = 'Treasure';
             box.el.appendChild(img);
             const textDiv = document.createElement('div');
             textDiv.className = 'text';
@@ -1159,13 +809,12 @@
             textDiv.textContent = box.prize.text;
             box.el.appendChild(textDiv);
           }
-        }, idx * 220); // Enhanced staggered reveal
+        }, idx * 220);
       });
       
       spinButton.style.display = 'none';
       gameState = 'finished';
       
-      // Show result popup after all boxes are revealed
       setTimeout(() => {
         showResultPopup(boxes[selectedIndex].prize);
       }, boxes.length * 220 + 900);
@@ -1175,15 +824,13 @@
       usedBoxes.push(selectedIndex);
       
       if (prize.win) {
-        // Winner popup
         popup.innerHTML = `
-          <img id="popup-img" src="treasure.png" alt="Treasure Box" />
+          <img src="treasure.png" alt="Treasure" />
           <div class="popup-text">🎉 CONGRATULATIONS! 🎉<br><br>${prize.text}</div>
           <button id="claim-btn">✨ CLAIM YOUR PRIZE ✨</button>
         `;
         startFireworks();
       } else {
-        // Better luck popup
         chancesLeft--;
         if (chancesLeft > 0) {
           popup.innerHTML = `
@@ -1192,7 +839,7 @@
           `;
         } else {
           popup.innerHTML = `
-            <div class="popup-text">😞 Bad luck today!<br><br>🌟 Try again tomorrow for better luck!</div>
+            <div class="popup-text">😞 Bad luck today!<br><br>🌟 Try again tomorrow!</div>
             <button id="try-again-btn">🎮 Start New Game</button>
           `;
         }
@@ -1200,12 +847,11 @@
       
       popup.style.display = 'flex';
       
-      // Event listeners for popup buttons
       const claimBtn = document.getElementById('claim-btn');
       const tryAgainBtn = document.getElementById('try-again-btn');
       
       if (claimBtn) {
-        claimBtn.addEventListener('click', function () {
+        claimBtn.addEventListener('click', () => {
           popup.style.display = 'none';
           stopFireworks();
           resetGame();
@@ -1213,25 +859,21 @@
       }
       
       if (tryAgainBtn) {
-        tryAgainBtn.addEventListener('click', function () {
+        tryAgainBtn.addEventListener('click', () => {
           popup.style.display = 'none';
           if (chancesLeft > 0) {
-            // Continue with remaining chances
             createBoxes();
             document.getElementById('instructions').textContent = 'Choose another treasure box! 🎯';
           } else {
-            // Reset entire game
             resetGame();
           }
         });
       }
-      
-      popup.focus();
     }
     
     function resetGame() {
       chancesLeft = 3;
-      // Don't reset hasFollowed to maintain verification
+      hasFollowed = false;
       usedBoxes = [];
       selectedIndex = null;
       gameState = 'selection';
@@ -1239,38 +881,35 @@
       document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
     }
     
-    // Enhanced Fireworks Animation
+    // Simple Fireworks
     let fireworks = [];
     let fireworksAnimation;
     
     class Firework {
       constructor() {
         this.x = Math.random() * fireworksCanvas.width;
-        this.y = fireworksCanvas.height + 10;
-        this.targetY = Math.random() * fireworksCanvas.height / 2;
-        this.vy = -(9 + Math.random() * 5);
+        this.y = fireworksCanvas.height;
+        this.vy = -(8 + Math.random() * 4);
         this.exploded = false;
         this.particles = [];
-        this.color = `hsl(${Math.random() * 360}, 100%, 65%)`;
-        this.size = 3 + Math.random() * 2;
+        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
       }
       
       update() {
         if (!this.exploded) {
           this.y += this.vy;
-          this.vy += 0.18;
+          this.vy += 0.2;
           if (this.vy >= 0) {
             this.exploded = true;
-            for (let i = 0; i < 36; i++) {
-              const angle = (2 * Math.PI / 36) * i;
+            for (let i = 0; i < 30; i++) {
+              const angle = (2 * Math.PI / 30) * i;
               this.particles.push({
                 x: this.x,
                 y: this.y,
-                vx: Math.cos(angle) * (4 + Math.random() * 4),
-                vy: Math.sin(angle) * (4 + Math.random() * 4),
+                vx: Math.cos(angle) * (3 + Math.random() * 3),
+                vy: Math.sin(angle) * (3 + Math.random() * 3),
                 alpha: 1,
-                color: this.color,
-                size: 1.5 + Math.random() * 2.5,
+                color: this.color
               });
             }
           }
@@ -1278,9 +917,8 @@
           this.particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
-            p.vy += 0.06;
-            p.alpha -= 0.018;
-            p.vx *= 0.988;
+            p.vy += 0.05;
+            p.alpha -= 0.02;
           });
           this.particles = this.particles.filter(p => p.alpha > 0);
         }
@@ -1288,25 +926,15 @@
       
       draw(ctx) {
         if (!this.exploded) {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
           ctx.fillStyle = this.color;
-          ctx.shadowBlur = 12;
-          ctx.shadowColor = this.color;
-          ctx.fill();
-          ctx.shadowBlur = 0;
+          ctx.fillRect(this.x, this.y, 3, 3);
         } else {
           this.particles.forEach(p => {
             ctx.globalAlpha = p.alpha;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
             ctx.fillStyle = p.color;
-            ctx.shadowBlur = 6;
-            ctx.shadowColor = p.color;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            ctx.globalAlpha = 1;
+            ctx.fillRect(p.x, p.y, 2, 2);
           });
+          ctx.globalAlpha = 1;
         }
       }
     }
@@ -1316,8 +944,8 @@
       fireworksCanvas.height = window.innerHeight;
       fireworks = [];
       fireworksAnimation = setInterval(() => {
-        if (fireworks.length < 45) fireworks.push(new Firework());
-      }, 140);
+        if (fireworks.length < 20) fireworks.push(new Firework());
+      }, 200);
       renderFireworks();
       fireworksCanvas.style.display = 'block';
     }
@@ -1347,12 +975,15 @@
       fireworksCanvas.height = window.innerHeight;
     });
     
-    // Initialize everything when page loads
+    // Initialize game
     window.onload = () => {
-      initializeFollowerTracker();
       createBoxes();
-      document.getElementById('instructions').textContent = 'Choose a treasure box below and test your luck! 🍀';
     };
+    
+    // Console commands for tracking
+    console.log('🎮 Bandeali Treasure Game Loaded!');
+    console.log('📊 Check stats: tracker.getStats()');
+    console.log('🔍 Monitor: window.tracker');
   </script>
 </body>
 </html>
